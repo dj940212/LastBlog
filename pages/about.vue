@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
 .title
 {
   margin-top: 50px;

@@ -65,209 +65,24 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
 /***/ function(module, exports) {
 
-module.exports = {
-  /*
-  ** Headers of the page
-  */
-  head: {
-    title: 'starter',
-    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'Nuxt.js project' }],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
-  },
-  /*
-  ** Global CSS
-  */
-  css: ['~assets/css/main.css'],
-  /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#3B8070' }
-};
+module.exports = require("mongoose");
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__ = __webpack_require__(17);
+module.exports = __webpack_require__(21);
 
-
-
-
-
-
-/* harmony default export */ exports["a"] = function () {
-   var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
-
-   // article
-   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].add);
-   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].list);
-   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].update);
-   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].delete);
-   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].findOne);
-   router.post('/article/update/title', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateTitle);
-   router.post('/article/update/desc', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateDesc);
-
-   // babel
-   router.get('/babel/list', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].list);
-   router.post('/babel/add', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].add);
-   router.post('/babel/delete', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].delete);
-
-   // activity
-   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].all);
-   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].oneDay);
-
-   // user
-   router.post('/user/register', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].register);
-   router.post('/user/login', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].login);
-
-   return router;
-};
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-module.exports = require("koa");
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-bodyparser");
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-cors");
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-logger");
-
-/***/ },
-/* 6 */
-/***/ function(module, exports) {
-
-module.exports = require("koa-session");
-
-/***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-module.exports = require("mongoose");
-
-/***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-module.exports = require("nuxt");
-
-/***/ },
-/* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_koa_logger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_session__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_cors__);
-
-
-
-
-
-
-
-
-// import config from './config'
-
-var app = new __WEBPACK_IMPORTED_MODULE_0_koa___default.a();
-var host = process.env.HOST || '127.0.0.1';
-var port = process.env.PORT || 3000;
-
-// Import and Set Nuxt.js options
-var config = __webpack_require__(0);
-config.dev = !(app.env === 'production');
-
-// Instantiate nuxt.js
-var nuxt = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Nuxt"](config);
-
-// Build in development
-if (config.dev) {
-  var builder = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Builder"](nuxt);
-  builder.build().catch(function (e) {
-    console.error(e); // eslint-disable-line no-console
-    process.exit(1);
-  });
-}
-
-app.use(function (ctx) {
-  ctx.status = 200; // koa defaults to 404 when it sees that status is unset
-
-  return new Promise(function (resolve, reject) {
-    ctx.res.on('close', resolve);
-    ctx.res.on('finish', resolve);
-    nuxt.render(ctx.req, ctx.res, function (promise) {
-      // nuxt.render passes a rejected promise into callback on error.
-      promise.then(resolve).catch(reject);
-    });
-  });
-});
-
-__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog');
-__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connection.on("connected", function () {
-  console.log('连接数据库成功');
-});
-
-var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
-
-app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
-app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
-app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
-app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
-app.use(router.routes());
-app.use(router.allowedMethods());
-
-app.listen(port, host);
-console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
-
-/***/ },
-/* 10 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(22);
-
-
-/***/ },
-/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -290,13 +105,13 @@ var formatTime = function formatTime(date) {
 /* harmony default export */ exports["a"] = formatTime;
 
 /***/ },
-/* 12 */
+/* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(2);
 
 
 
@@ -333,21 +148,125 @@ ActivitySchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Activity', ActivitySchema);
 
 /***/ },
-/* 13 */
+/* 4 */
 /***/ function(module, exports) {
 
 module.exports = require("uuid");
 
 /***/ },
-/* 14 */
+/* 5 */
+/***/ function(module, exports) {
+
+module.exports = {
+  /*
+  ** Headers of the page
+  */
+  head: {
+    title: 'starter',
+    meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'Nuxt.js project' }],
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+  },
+  /*
+  ** Global CSS
+  */
+  css: ['./static/less/base.less'],
+  /*
+  ** Customize the progress-bar color
+  */
+  loading: { color: '#3B8070' }
+};
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__ = __webpack_require__(16);
+
+
+
+
+
+
+/* harmony default export */ exports["a"] = function () {
+   var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
+
+   // article
+   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].add);
+   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].list);
+   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].update);
+   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].delete);
+   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].findOne);
+   router.post('/article/update/title', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateTitle);
+   router.post('/article/update/desc', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateDesc);
+
+   // babel
+   router.get('/babel/list', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].list);
+   router.post('/babel/add', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].add);
+   router.post('/babel/delete', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].delete);
+
+   // activity
+   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].all);
+   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].oneDay);
+
+   // user
+   router.post('/user/register', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].register);
+   router.post('/user/login', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].login);
+
+   return router;
+};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+module.exports = require("koa");
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-bodyparser");
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-cors");
+
+/***/ },
+/* 10 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-logger");
+
+/***/ },
+/* 11 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-session");
+
+/***/ },
+/* 12 */
+/***/ function(module, exports) {
+
+module.exports = require("nuxt");
+
+/***/ },
+/* 13 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity_js__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity_js__ = __webpack_require__(3);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -443,19 +362,19 @@ var Activity = function () {
 /* harmony default export */ exports["a"] = new Activity();
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_article__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_activity__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_article__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_activity__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_uuid__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_formatTime__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_formatTime__ = __webpack_require__(2);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -945,15 +864,15 @@ var Article = function () {
 /* harmony default export */ exports["a"] = new Article();
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_babel__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_babel__ = __webpack_require__(18);
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1120,16 +1039,16 @@ var Babel = function () {
 /* harmony default export */ exports["a"] = new Babel();
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_user__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_user__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 
 
@@ -1246,13 +1165,13 @@ var User = function () {
 /* harmony default export */ exports["a"] = new User();
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(2);
 
 
 
@@ -1288,11 +1207,11 @@ ArticleSchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Article', ArticleSchema);
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 
 
@@ -1310,11 +1229,11 @@ var BabelSchema = new Schema({
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Babel', BabelSchema);
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 
 
@@ -1326,16 +1245,97 @@ var UserSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema);
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 module.exports = require("regenerator-runtime");
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_koa_logger__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_session__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_cors__);
+
+
+
+
+
+
+
+
+// import config from './config'
+
+var app = new __WEBPACK_IMPORTED_MODULE_0_koa___default.a();
+var host = process.env.HOST || '127.0.0.1';
+var port = process.env.PORT || 3000;
+
+// Import and Set Nuxt.js options
+var config = __webpack_require__(5);
+config.dev = !(app.env === 'production');
+
+// Instantiate nuxt.js
+var nuxt = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Nuxt"](config);
+
+// Build in development
+if (config.dev) {
+  var builder = new __WEBPACK_IMPORTED_MODULE_1_nuxt__["Builder"](nuxt);
+  builder.build().catch(function (e) {
+    console.error(e); // eslint-disable-line no-console
+    process.exit(1);
+  });
+}
+
+app.use(function (ctx) {
+  ctx.status = 200; // koa defaults to 404 when it sees that status is unset
+
+  return new Promise(function (resolve, reject) {
+    ctx.res.on('close', resolve);
+    ctx.res.on('finish', resolve);
+    nuxt.render(ctx.req, ctx.res, function (promise) {
+      // nuxt.render passes a rejected promise into callback on error.
+      promise.then(resolve).catch(reject);
+    });
+  });
+});
+
+__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog');
+__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connection.on("connected", function () {
+  console.log('连接数据库成功');
+});
+
+var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
+
+app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
+app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
+app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
+app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+app.listen(port, host);
+console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
 
 /***/ }
 /******/ ]);

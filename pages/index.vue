@@ -54,9 +54,10 @@ export default {
             this.setArticleMode('read')
             this.setCurrentIndex(index)
             this.setArticleId(this.popularArticle[index]._id)
-            this.$router.push({ name: 'article', params: { _id: this.popularArticle[index]._id}})
+            const _id = this.popularArticle[index]._id
+            this.$router.push({path: `article/${_id}`})
 
-            console.log(index,this.popularArticle[index]._id)
+            console.log(index,this._id)
         },
         async getList() {
           const res = await axios.get(config.api.articleListUrl)
@@ -109,7 +110,7 @@ export default {
                         cursor: pointer;
                         color: @title-color;
                         // letter-spacing: 1px;
-                        font-size: 18px;
+                        font-size: 16px;
                     }
                     .description {
                         font-size: 12px;

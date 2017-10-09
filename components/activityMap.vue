@@ -120,7 +120,9 @@ export default {
 		margin-top: 20px;
 
 		.title {
-
+			font-size: 16px;
+            margin: 0;
+            color: #333;
 		}
 		.map-inner {
 			width: @content-width;

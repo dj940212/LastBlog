@@ -5,7 +5,7 @@
                 <h5 @click="toReadArticle(index)">{{article.title}}</h5>
                 <p class="desc">{{article.description}}</p>
                 <div class="footer">
-                    <Babel v-for="babel in article.babel" :title="babel" :color="getColor"></Babel>
+                    <Babel v-for="babel in article.babel" :key="item.id" :title="babel" :color="getColor"></Babel>
                     <span class="createTime">{{article.meta.createAt}}</span>
                 </div>
             </li>

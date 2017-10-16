@@ -13,8 +13,6 @@ export default () => {
     router.post('/article/update', Article.update)
     router.post('/article/delete', Article.delete)
     router.get('/article/read', Article.findOne)
-    router.post('/article/update/title', Article.updateTitle)
-    router.post('/article/update/desc', Article.updateDesc)
 
     // babel
     router.get('/babel/list', Babel.list)

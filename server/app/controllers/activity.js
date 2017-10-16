@@ -5,9 +5,9 @@ class Activity {
     constructor() {}
 
     async all(ctx) {
-    	const count = ctx.request.body.count || 10
-        const skipNum = ctx.request.body.skipNum || 0
-        const sort = ctx.request.body.sort || -1
+    	const count = ctx.request.query.count || 360
+        const skipNum = ctx.request.query.skipNum || 0
+        const sort = ctx.request.query.sort || -1
 
         const data = await ActivityMod.find({},'date logLen').sort({'date': sort})
         .skip(parseInt(skipNum)).limit(parseInt(count))

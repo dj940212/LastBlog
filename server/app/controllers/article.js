@@ -73,11 +73,12 @@ class Article {
     }
 
     async update(ctx) {
+        console.log(ctx.request)
         const body = ctx.request.body
-        const content = body.content
-        const description = body.description
-        const title = body.title
-        const _id  = body._id
+        const content = ctx.request.body.content
+        const description = ctx.request.body.description
+        const title = ctx.request.body.title
+        const _id  = ctx.request.body._id
 
         let article = await ArticleMod.findOne({_id:_id})
         if(title && content && description) {
@@ -182,29 +183,6 @@ class Article {
         }
     }
 
-    async updateTitle(ctx) {
-        const body = ctx.request.body
-        const title = body.title || '[无标题]'
-        const _id  = body._id
-
-        title && await ArticleMod.update({_id: _id},{$set: {title: title}})
-
-        ctx.body = {
-            message: 'success'
-        }
-    }
-
-    async updateDesc(ctx) {
-        const body = ctx.request.body
-        const description = body.description
-        const _id  = body._id
-
-        description && await ArticleMod.update({_id: _id},{$set: {description: description}})
-
-        ctx.body = {
-            message: 'success'
-        }
-    }
 }
 
 export default new Article()

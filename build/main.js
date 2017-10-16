@@ -194,31 +194,29 @@ module.exports = {
 
 
 /* harmony default export */ exports["a"] = function () {
-    var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
+   var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
 
-    // article
-    router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].add);
-    router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].list);
-    router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].update);
-    router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].delete);
-    router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].findOne);
-    router.post('/article/update/title', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateTitle);
-    router.post('/article/update/desc', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].updateDesc);
+   // article
+   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].add);
+   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].list);
+   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].update);
+   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].delete);
+   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].findOne);
 
-    // babel
-    router.get('/babel/list', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].list);
-    router.post('/babel/add', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].add);
-    router.post('/babel/delete', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].delete);
+   // babel
+   router.get('/babel/list', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].list);
+   router.post('/babel/add', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].add);
+   router.post('/babel/delete', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].delete);
 
-    // activity
-    router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].all);
-    router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].oneDay);
+   // activity
+   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].all);
+   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].oneDay);
 
-    // user
-    router.post('/user/register', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].register);
-    router.post('/user/login', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].login);
+   // user
+   router.post('/user/register', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].register);
+   router.post('/user/login', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].login);
 
-    return router;
+   return router;
 };
 
 /***/ },
@@ -262,8 +260,8 @@ module.exports = require("nuxt");
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity_js__ = __webpack_require__(3);
@@ -286,15 +284,15 @@ var Activity = function () {
     _createClass(Activity, [{
         key: 'all',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
                 var count, skipNum, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
-                                count = ctx.request.body.count || 10;
-                                skipNum = ctx.request.body.skipNum || 0;
-                                sort = ctx.request.body.sort || -1;
+                                count = ctx.request.query.count || 360;
+                                skipNum = ctx.request.query.skipNum || 0;
+                                sort = ctx.request.query.sort || -1;
                                 _context.next = 5;
                                 return __WEBPACK_IMPORTED_MODULE_2__models_activity_js__["a" /* default */].find({}, 'date logLen').sort({ 'date': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
 
@@ -326,9 +324,9 @@ var Activity = function () {
     }, {
         key: 'oneDay',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
                 var date, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
@@ -366,8 +364,8 @@ var Activity = function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_article__ = __webpack_require__(17);
@@ -397,9 +395,9 @@ var Article = function () {
     _createClass(Article, [{
         key: 'add',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
                 var key, title, content, description, babel, article, date, activity, log, newActivity;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
@@ -496,9 +494,9 @@ var Article = function () {
     }, {
         key: 'list',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
                 var count, skipNum, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
@@ -534,48 +532,49 @@ var Article = function () {
     }, {
         key: 'update',
         value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
                 var body, content, description, title, _id, article, date, activity, log, newActivity;
 
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
+                                console.log(ctx.request);
                                 body = ctx.request.body;
-                                content = body.content;
-                                description = body.description;
-                                title = body.title;
-                                _id = body._id;
-                                _context3.next = 7;
+                                content = ctx.request.body.content;
+                                description = ctx.request.body.description;
+                                title = ctx.request.body.title;
+                                _id = ctx.request.body._id;
+                                _context3.next = 8;
                                 return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].findOne({ _id: _id });
 
-                            case 7:
+                            case 8:
                                 article = _context3.sent;
 
                                 if (!(title && content && description)) {
-                                    _context3.next = 14;
+                                    _context3.next = 15;
                                     break;
                                 }
 
                                 article.title = title;
                                 article.content = content;
                                 article.description = description;
-                                _context3.next = 14;
+                                _context3.next = 15;
                                 return article.save();
 
-                            case 14:
-                                _context3.prev = 14;
+                            case 15:
+                                _context3.prev = 15;
 
                                 // article = await ArticleMod.findOne({_id: _id})
                                 date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context3.next = 18;
+                                _context3.next = 19;
                                 return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
 
-                            case 18:
+                            case 19:
                                 activity = _context3.sent;
 
                                 if (!activity) {
-                                    _context3.next = 27;
+                                    _context3.next = 28;
                                     break;
                                 }
 
@@ -587,14 +586,14 @@ var Article = function () {
                                 };
 
                                 activity.log.push(log);
-                                _context3.next = 25;
+                                _context3.next = 26;
                                 return activity.save();
 
-                            case 25:
-                                _context3.next = 31;
+                            case 26:
+                                _context3.next = 32;
                                 break;
 
-                            case 27:
+                            case 28:
                                 console.log("当天没有日志");
                                 newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
                                     log: [{
@@ -603,34 +602,34 @@ var Article = function () {
                                         operationType: 'updated'
                                     }]
                                 });
-                                _context3.next = 31;
+                                _context3.next = 32;
                                 return newActivity.save();
 
-                            case 31:
-                                _context3.next = 36;
+                            case 32:
+                                _context3.next = 37;
                                 break;
 
-                            case 33:
-                                _context3.prev = 33;
-                                _context3.t0 = _context3['catch'](14);
+                            case 34:
+                                _context3.prev = 34;
+                                _context3.t0 = _context3['catch'](15);
 
                                 ctx.body = {
                                     message: '更新失败'
                                 };
 
-                            case 36:
+                            case 37:
 
                                 ctx.body = {
                                     message: '保存成功',
                                     data: article
                                 };
 
-                            case 37:
+                            case 38:
                             case 'end':
                                 return _context3.stop();
                         }
                     }
-                }, _callee3, this, [[14, 33]]);
+                }, _callee3, this, [[15, 34]]);
             }));
 
             function update(_x3) {
@@ -642,10 +641,10 @@ var Article = function () {
     }, {
         key: 'delete',
         value: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee4(ctx) {
+            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee4(ctx) {
                 var _id, article, date, activity, log, newActivity;
 
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
                     while (1) {
                         switch (_context4.prev = _context4.next) {
                             case 0:
@@ -730,10 +729,10 @@ var Article = function () {
     }, {
         key: 'findOne',
         value: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee5(ctx) {
+            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee5(ctx) {
                 var _id, data;
 
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
                     while (1) {
                         switch (_context5.prev = _context5.next) {
                             case 0:
@@ -770,92 +769,6 @@ var Article = function () {
 
             return findOne;
         }()
-    }, {
-        key: 'updateTitle',
-        value: function () {
-            var _ref6 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee6(ctx) {
-                var body, title, _id;
-
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
-                    while (1) {
-                        switch (_context6.prev = _context6.next) {
-                            case 0:
-                                body = ctx.request.body;
-                                title = body.title || '[无标题]';
-                                _id = body._id;
-                                _context6.t0 = title;
-
-                                if (!_context6.t0) {
-                                    _context6.next = 7;
-                                    break;
-                                }
-
-                                _context6.next = 7;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].update({ _id: _id }, { $set: { title: title } });
-
-                            case 7:
-
-                                ctx.body = {
-                                    message: 'success'
-                                };
-
-                            case 8:
-                            case 'end':
-                                return _context6.stop();
-                        }
-                    }
-                }, _callee6, this);
-            }));
-
-            function updateTitle(_x6) {
-                return _ref6.apply(this, arguments);
-            }
-
-            return updateTitle;
-        }()
-    }, {
-        key: 'updateDesc',
-        value: function () {
-            var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee7(ctx) {
-                var body, description, _id;
-
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
-                    while (1) {
-                        switch (_context7.prev = _context7.next) {
-                            case 0:
-                                body = ctx.request.body;
-                                description = body.description;
-                                _id = body._id;
-                                _context7.t0 = description;
-
-                                if (!_context7.t0) {
-                                    _context7.next = 7;
-                                    break;
-                                }
-
-                                _context7.next = 7;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].update({ _id: _id }, { $set: { description: description } });
-
-                            case 7:
-
-                                ctx.body = {
-                                    message: 'success'
-                                };
-
-                            case 8:
-                            case 'end':
-                                return _context7.stop();
-                        }
-                    }
-                }, _callee7, this);
-            }));
-
-            function updateDesc(_x7) {
-                return _ref7.apply(this, arguments);
-            }
-
-            return updateDesc;
-        }()
     }]);
 
     return Article;
@@ -868,8 +781,8 @@ var Article = function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_babel__ = __webpack_require__(18);
@@ -893,9 +806,9 @@ var Babel = function () {
     _createClass(Babel, [{
         key: 'add',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
                 var newBabel, babel;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
@@ -937,10 +850,10 @@ var Babel = function () {
     }, {
         key: 'delete',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
                 var _id;
 
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
@@ -985,9 +898,9 @@ var Babel = function () {
     }, {
         key: 'list',
         value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
                 var allBabel;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
@@ -1043,8 +956,8 @@ var Babel = function () {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_user__ = __webpack_require__(19);
@@ -1070,9 +983,9 @@ var User = function () {
     _createClass(User, [{
         key: 'register',
         value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
+            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
                 var username, password, user;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
@@ -1108,9 +1021,9 @@ var User = function () {
     }, {
         key: 'login',
         value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
+            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
                 var username, password, user;
-                return __WEBPACK_IMPORTED_MODULE_0_D_GitHub_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
                     while (1) {
                         switch (_context2.prev = _context2.next) {
                             case 0:
@@ -1291,6 +1204,15 @@ var app = new __WEBPACK_IMPORTED_MODULE_0_koa___default.a();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
+var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
+app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
+app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
+app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
+
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
 config.dev = !(app.env === 'production');
@@ -1324,15 +1246,6 @@ __WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connect('mongodb://blog_runner:
 __WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connection.on("connected", function () {
   console.log('连接数据库成功');
 });
-
-var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
-
-app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
-app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
-app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
-app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
-app.use(router.routes());
-app.use(router.allowedMethods());
 
 app.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console

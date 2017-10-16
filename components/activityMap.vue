@@ -58,7 +58,7 @@ export default {
 		},
 		async getActivity() {
 			let res = await axios.get(config.api.getAllActivityUrl,{params:{
-				limit: this.dayNum
+				count: this.dayNum
 			}})
 			console.log(res.data.data)
 			this.activity =res.data.data
@@ -224,5 +224,4 @@ export default {
 			}
 		}
 	}
-	
 </style>

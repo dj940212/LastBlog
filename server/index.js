@@ -12,6 +12,15 @@ const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
+const router = Router()
+
+app.use(router.routes())
+app.use(router.allowedMethods())
+app.use(logger())
+app.use(cors({"Access-Control-Allow-Credentials": true}))
+app.use(session(app))
+app.use(bodyParser())
+
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')
@@ -46,14 +55,10 @@ mongoose.connection.on("connected",() => {
     console.log('连接数据库成功')
 })
 
-const router = Router()
 
-app.use(cors({"Access-Control-Allow-Credentials": true}))
-app.use(logger())
-app.use(session(app))
-app.use(bodyParser())
-app.use(router.routes())
-app.use(router.allowedMethods())
+
+
+
 
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

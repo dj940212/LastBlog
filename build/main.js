@@ -396,18 +396,17 @@ var Article = function () {
         key: 'add',
         value: function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-                var key, title, content, description, babel, article, date, activity, log, newActivity;
+                var key, _ctx$request$body, title, content, description, babel, article, date, activity, log, newActivity;
+
                 return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
                     while (1) {
                         switch (_context.prev = _context.next) {
                             case 0:
                                 key = __WEBPACK_IMPORTED_MODULE_4_uuid___default.a.v4();
-                                title = ctx.request.body.title;
-                                content = ctx.request.body.content;
-                                description = ctx.request.body.description;
+                                _ctx$request$body = ctx.request.body, title = _ctx$request$body.title, content = _ctx$request$body.content, description = _ctx$request$body.description;
                                 babel = ctx.request.body.babel.split(',');
                                 article = void 0;
-                                _context.prev = 6;
+                                _context.prev = 4;
 
                                 article = new __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */]({
                                     title: title,
@@ -415,20 +414,20 @@ var Article = function () {
                                     babel: babel,
                                     description: description
                                 });
-                                _context.next = 10;
+                                _context.next = 8;
                                 return article.save();
 
-                            case 10:
+                            case 8:
                                 article = _context.sent;
                                 date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context.next = 14;
+                                _context.next = 12;
                                 return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
 
-                            case 14:
+                            case 12:
                                 activity = _context.sent;
 
                                 if (!activity) {
-                                    _context.next = 22;
+                                    _context.next = 20;
                                     break;
                                 }
 
@@ -440,14 +439,14 @@ var Article = function () {
 
 
                                 activity.log.push(log);
-                                _context.next = 20;
+                                _context.next = 18;
                                 return activity.save();
 
-                            case 20:
-                                _context.next = 25;
+                            case 18:
+                                _context.next = 23;
                                 break;
 
-                            case 22:
+                            case 20:
                                 newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
                                     log: [{
                                         article_id: article._id,
@@ -455,34 +454,39 @@ var Article = function () {
                                         operationType: 'created'
                                     }]
                                 });
-                                _context.next = 25;
+                                _context.next = 23;
                                 return newActivity.save();
 
-                            case 25:
-                                _context.next = 30;
+                            case 23:
+                                _context.next = 28;
                                 break;
 
-                            case 27:
-                                _context.prev = 27;
-                                _context.t0 = _context['catch'](6);
+                            case 25:
+                                _context.prev = 25;
+                                _context.t0 = _context['catch'](4);
 
                                 ctx.body = {
                                     message: '保存失败'
                                 };
 
-                            case 30:
+                            case 28:
 
                                 ctx.body = {
+                                    success: 'true',
                                     message: '保存成功',
-                                    data: article
+                                    data: {
+                                        _id: article._id,
+                                        title: article.title,
+                                        desc: article.description
+                                    }
                                 };
 
-                            case 31:
+                            case 29:
                             case 'end':
                                 return _context.stop();
                         }
                     }
-                }, _callee, this, [[6, 27]]);
+                }, _callee, this, [[4, 25]]);
             }));
 
             function add(_x) {
@@ -1205,13 +1209,12 @@ var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
-
+app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
 app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
 app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
-app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
 
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);

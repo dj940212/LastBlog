@@ -9,9 +9,7 @@ class Article {
 
     async add(ctx) {
         const key = uuid.v4()
-        const title = ctx.request.body.title
-        const content = ctx.request.body.content
-        const description = ctx.request.body.description
+        const {title, content, description} = ctx.request.body
         const babel  = ctx.request.body.babel.split(',')
         let article
 
@@ -54,8 +52,13 @@ class Article {
         }
 
         ctx.body = {
+            success: 'true',
             message: '保存成功',
-            data: article
+            data: {
+                _id: article._id, 
+                title: article.title, 
+                desc: article.description
+            }
         }
     }
 

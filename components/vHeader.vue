@@ -41,8 +41,7 @@ export default {
             setIsLogin: 'SET_IS_LOGIN'
         }),
         toWriteArticle() {
-            this.setArticleMode('write')
-            this.$router.push({ name: 'write'})
+            this.$router.push('/article/add')
         },
         login() {
             this.$router.push('/login')

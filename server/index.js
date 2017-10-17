@@ -13,13 +13,13 @@ const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
 const router = Router()
-
+app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.use(logger())
 app.use(cors({"Access-Control-Allow-Credentials": true}))
 app.use(session(app))
-app.use(bodyParser())
+
 
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')

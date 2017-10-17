@@ -54,7 +54,7 @@ export default {
             this.setCurrentIndex(index)
             this.setArticleId(this.popularArticle[index]._id)
             const _id = this.popularArticle[index]._id
-            this.$router.push({path: `article/${_id}`})
+            this.$router.push({path: '/article',query:{_id:_id}})
 
             console.log(index,this._id)
         },

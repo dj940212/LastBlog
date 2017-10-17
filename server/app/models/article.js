@@ -21,7 +21,7 @@ const ArticleSchema = new Schema({
 
 ArticleSchema.pre('save', function(next) {
   if (this.isNew) {
-    this.meta.createAt = formatTime(new Date())
+    this.meta.createAt = this.meta.updateAt = new Date()
     console.log("创建时间",this.meta.createAt)
   }else {
     this.meta.updateAt = new Date()

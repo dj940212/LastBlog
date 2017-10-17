@@ -10,7 +10,7 @@
                 </div>
             </li>
         </ul>
-        <div class="loading">Loading...</div>
+        <div class="loading" @click="getList">more...</div>
     </div>
 </template>
 <script>
@@ -20,14 +20,12 @@ import {mapGetters, mapMutations} from 'vuex'
 import config from '../../config'
 export default {
     mounted(){
-        if (!this.articleList.length) {
-            this.getList()
-        }
-        this.scrollHandle()
+        this.getList()
     },
     data() {
         return {
-            babelColor: ["#e99695","#f9d0c4","#fef2c0","#c2e0c6","#bfdadc","#c5def5","#bfd4f2","#d4c5f9"]
+            babelColor: ["#e99695","#f9d0c4","#fef2c0","#c2e0c6","#bfdadc","#c5def5","#bfd4f2","#d4c5f9"],
+            articleList: []
         }
     },
     components: {
@@ -35,7 +33,7 @@ export default {
     },
     computed: {
         ...mapGetters([
-            'articleList',
+            // 'articleList',
         ]),
         getColor() {
             let index = Math.round(Math.random()*7)
@@ -49,12 +47,11 @@ export default {
             setCurrentIndex: 'SET_CURRENT_INDEX',
             setArticleId: 'SET_ARTICLE_ID'
         }),
-        async getList(skipNum = 0) {
-          const res = await axios.get(config.api.articleListUrl, {params: {skipNum: skipNum}})
-          this.setArticleList(res.data.data)
-          console.log("文章列表",res.data.data.length)
-
-          return res.data.data
+        async getList() {
+            const skipNum = this.articleList.length
+            const res = await axios.get(config.api.articleListUrl, {params: {skipNum: skipNum}})
+            this.articleList = this.articleList.concat(res.data.data)
+            console.log("文章列表",this.articleList)
         },
         toReadArticle(index) {
             this.setArticleMode('read')
@@ -66,20 +63,6 @@ export default {
 
             console.log(index,this.articleList[index]._id)
         },
-        scrollHandle() {
-        	let list = document.getElementById('list')
-            window.addEventListener('scroll', () => {
-	           	const scrollTop = window.pageYOffset || document.documentElement.scrollTop 
-	           	|| document.body.scrollTop
-
-	           	const winHeight = window.innerHeight
-	  			// console.log(scrollTop)
-				
-				if (winHeight+ scrollTop > 1440) {
-					this.getList(10)
-				}
-            }, false)
-        }
     }
 }
 </script>
@@ -120,6 +103,7 @@ export default {
             height: 50px;
             line-height: 50px;
             text-align: center;
+            cursor: pointer;
         }
     }
 </style>

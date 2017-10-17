@@ -23,11 +23,11 @@ import {formatTimeAll} from '../static/js/utils'
 import config from '../config'
 export default {
     mounted() {
-        if (!this.articleList.length) {
-            return  this.getList()
-        }
-
-        this.popularArticle = this.articleList.slice(0,6)
+        // if (!this.articleList.length) {
+            // return  this.getList()
+        // }
+        this.getList()
+        // this.popularArticle = this.articleList.slice(0,6)
     },
     data() {
         return {
@@ -58,10 +58,9 @@ export default {
             console.log(index,this._id)
         },
         async getList() {
-          const res = await axios.get(config.api.articleListUrl)
-          this.setArticleList(res.data.data)
-          this.popularArticle = this.articleList.slice(0,6)
-          console.log("文章列表",res.data.data)
+          const res = await axios.get(config.api.articleListUrl,{params: {count: 6}})
+          this.popularArticle = res.data.data
+          console.log("热门文章",res.data.data)
         },
         format(time) {
            return formatTimeAll(time)

@@ -140,7 +140,7 @@ export default {
                 .avatar {
                     height: 20px;
                     width: 20px;
-                    background: url(https://avatars0.githubusercontent.com/u/15308542?v=4&s=40);
+                    background: url(http://ovs5x36k4.bkt.clouddn.com/06.jpg);
                     background-size: 20px 20px;
                     border-radius: 3px;
                     cursor: pointer;

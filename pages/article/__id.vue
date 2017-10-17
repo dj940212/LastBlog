@@ -193,15 +193,6 @@ export default {
                 this.setArticleMode('read')
                 this.article = res.data.data
                 this.$refs.pen.innerHTML = this.article.content
-
-                // 更新本地列表
-                if (this.articleList.length) {
-                    let newArticleList = this.articleList.slice(0)
-                    newArticleList.splice(this.currentIndex,1)
-                    newArticleList.unshift(res.data.data)
-                    this.setArticleList(newArticleList) 
-                }
-                
             }else{
                 console.log('信息不完整')
             }
@@ -209,15 +200,7 @@ export default {
         // 删除文章
         async deleteArt() {
             const res = await axios.post(config.api.articleDeleteUrl,{_id: this._id })
-            this.$router.push({name:'list'})
-
-            //更新本地数据 
-            if (this.articleList.length) {
-                let newArticleList = this.articleList.slice(0)
-                newArticleList.splice(this.currentIndex, 1)
-                this.setArticleList(newArticleList)
-            }
-            
+            this.$router.push('/article/list')
         },
         // 获取文章
         async getArticle(_id) {

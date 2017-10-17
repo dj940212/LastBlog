@@ -7,7 +7,6 @@
                     <h5 class="title" @click="toReadArticle(index)">{{item.title}}</h5>
                     <div class="description">{{item.description}}</div>
                     <div class="marker">
-                        <!-- <span class="babel" v-for="babel in item.babel">{{babel}}</span> -->
                         <span class="time">{{item.meta.updateAt}}</span>
                     </div>
                 </li>
@@ -61,7 +60,6 @@ export default {
         async getList() {
           const res = await axios.get(config.api.articleListUrl)
           this.setArticleList(res.data.data)
-          // this.articleList = res.data.data
           this.popularArticle = this.articleList.slice(0,6)
           console.log("文章列表",res.data.data)
         },
@@ -108,7 +106,6 @@ export default {
                         font-weight: 600;
                         cursor: pointer;
                         color: @title-color;
-                        // letter-spacing: 1px;
                         font-size: 16px;
                     }
                     .description {

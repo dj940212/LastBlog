@@ -6,13 +6,12 @@ import logger from 'koa-logger'
 import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 import cors from 'koa-cors'
-// import config from './config'
 
 const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
-
 const router = Router()
+
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
@@ -54,11 +53,6 @@ mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
 mongoose.connection.on("connected",() => {
     console.log('连接数据库成功')
 })
-
-
-
-
-
 
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

@@ -11,7 +11,7 @@
                 <div class="header-menu">
                     <ul>
                         <li class="menu-item"><router-link to="/">Overview</router-link></li>
-                        <li class="menu-item"><router-link to="/list">All Articles</router-link></li>
+                        <li class="menu-item"><router-link to="/article/list">All Articles</router-link></li>
                         <li class="menu-item">Operation Log</li>
                         <li class="menu-item">About</li>
                     </ul>

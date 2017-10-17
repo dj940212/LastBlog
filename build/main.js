@@ -537,48 +537,41 @@ var Article = function () {
         key: 'update',
         value: function () {
             var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
-                var body, content, description, title, _id, article, date, activity, log, newActivity;
+                var _ctx$request$body2, content, description, title, _id, babel, article, date, activity, log, newActivity;
 
                 return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_gitnote_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
                     while (1) {
                         switch (_context3.prev = _context3.next) {
                             case 0:
-                                console.log(ctx.request);
-                                body = ctx.request.body;
-                                content = ctx.request.body.content;
-                                description = ctx.request.body.description;
-                                title = ctx.request.body.title;
-                                _id = ctx.request.body._id;
-                                _context3.next = 8;
+                                _ctx$request$body2 = ctx.request.body, content = _ctx$request$body2.content, description = _ctx$request$body2.description, title = _ctx$request$body2.title, _id = _ctx$request$body2._id, babel = _ctx$request$body2.babel;
+                                _context3.next = 3;
                                 return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].findOne({ _id: _id });
 
-                            case 8:
+                            case 3:
                                 article = _context3.sent;
 
                                 if (!(title && content && description)) {
-                                    _context3.next = 15;
+                                    _context3.next = 10;
                                     break;
                                 }
 
                                 article.title = title;
                                 article.content = content;
                                 article.description = description;
-                                _context3.next = 15;
+                                _context3.next = 10;
                                 return article.save();
 
-                            case 15:
-                                _context3.prev = 15;
-
-                                // article = await ArticleMod.findOne({_id: _id})
+                            case 10:
+                                _context3.prev = 10;
                                 date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context3.next = 19;
+                                _context3.next = 14;
                                 return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
 
-                            case 19:
+                            case 14:
                                 activity = _context3.sent;
 
                                 if (!activity) {
-                                    _context3.next = 28;
+                                    _context3.next = 23;
                                     break;
                                 }
 
@@ -590,14 +583,14 @@ var Article = function () {
                                 };
 
                                 activity.log.push(log);
-                                _context3.next = 26;
+                                _context3.next = 21;
                                 return activity.save();
 
-                            case 26:
-                                _context3.next = 32;
+                            case 21:
+                                _context3.next = 27;
                                 break;
 
-                            case 28:
+                            case 23:
                                 console.log("当天没有日志");
                                 newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
                                     log: [{
@@ -606,34 +599,34 @@ var Article = function () {
                                         operationType: 'updated'
                                     }]
                                 });
-                                _context3.next = 32;
+                                _context3.next = 27;
                                 return newActivity.save();
 
-                            case 32:
-                                _context3.next = 37;
+                            case 27:
+                                _context3.next = 32;
                                 break;
 
-                            case 34:
-                                _context3.prev = 34;
-                                _context3.t0 = _context3['catch'](15);
+                            case 29:
+                                _context3.prev = 29;
+                                _context3.t0 = _context3['catch'](10);
 
                                 ctx.body = {
                                     message: '更新失败'
                                 };
 
-                            case 37:
+                            case 32:
 
                                 ctx.body = {
                                     message: '保存成功',
                                     data: article
                                 };
 
-                            case 38:
+                            case 33:
                             case 'end':
                                 return _context3.stop();
                         }
                     }
-                }, _callee3, this, [[15, 34]]);
+                }, _callee3, this, [[10, 29]]);
             }));
 
             function update(_x3) {
@@ -1202,13 +1195,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 
 
 
-// import config from './config'
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_koa___default.a();
 var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
-
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
+
 app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
 app.use(router.routes());
 app.use(router.allowedMethods());

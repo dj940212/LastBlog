@@ -21,7 +21,7 @@
 </template>
 <script>
     import {mapMutations, mapGetters} from 'vuex'
-    import config from '../config'
+    import config from '../../config'
     import axios from 'axios'
     export default {
         data() {
@@ -71,7 +71,6 @@
                     background-color: #666;
                     margin: 0 auto;
                     border-radius: 50%;
-                    // background-image: url(https://avatars0.githubusercontent.com/u/15308542?v=4&s=40)
                 }
             }
             .title {

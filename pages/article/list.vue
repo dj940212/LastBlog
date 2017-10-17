@@ -1,11 +1,11 @@
 <template>
-    <div class="articleList" ref="articleList" @scroll="scrollHandle">
+    <div id="list" class="articleList" ref="articleList">
         <ul class="articleUl">
             <li v-for="(article, index) in articleList">
                 <h5 @click="toReadArticle(index)">{{article.title}}</h5>
                 <p class="desc">{{article.description}}</p>
                 <div class="footer">
-                    <Babel v-for="babel in article.babel" :key="item.id" :title="babel" :color="getColor"></Babel>
+                    <Babel v-for="babel in article.babel" :key="babel.id" :title="babel" :color="getColor"></Babel>
                     <span class="createTime">{{article.meta.createAt}}</span>
                 </div>
             </li>
@@ -15,14 +15,15 @@
 </template>
 <script>
 import axios from 'axios'
-import Babel from '../components/babel'
+import Babel from '../../components/babel'
 import {mapGetters, mapMutations} from 'vuex'
-import config from '../config'
+import config from '../../config'
 export default {
     mounted(){
         if (!this.articleList.length) {
             this.getList()
         }
+        this.scrollHandle()
     },
     data() {
         return {
@@ -48,10 +49,12 @@ export default {
             setCurrentIndex: 'SET_CURRENT_INDEX',
             setArticleId: 'SET_ARTICLE_ID'
         }),
-        async getList() {
-          const res = await axios.get(config.api.articleListUrl)
+        async getList(skipNum = 0) {
+          const res = await axios.get(config.api.articleListUrl, {params: {skipNum: skipNum}})
           this.setArticleList(res.data.data)
-          console.log("文章列表",res.data.data)
+          console.log("文章列表",res.data.data.length)
+
+          return res.data.data
         },
         toReadArticle(index) {
             this.setArticleMode('read')
@@ -59,19 +62,30 @@ export default {
             this.setArticleId(this.articleList[index]._id)
             
             const _id = this.articleList[index]._id
-            this.$router.push({path: `article/${_id}`})
+            this.$router.push({path: '/article', query:{_id: _id}})
 
             console.log(index,this.articleList[index]._id)
         },
-        scrollHandle(event) {
-            console.log("scrilll",event)
+        scrollHandle() {
+        	let list = document.getElementById('list')
+            window.addEventListener('scroll', () => {
+	           	const scrollTop = window.pageYOffset || document.documentElement.scrollTop 
+	           	|| document.body.scrollTop
+
+	           	const winHeight = window.innerHeight
+	  			// console.log(scrollTop)
+				
+				if (winHeight+ scrollTop > 1440) {
+					this.getList(10)
+				}
+            }, false)
         }
     }
 }
 </script>
 
 <style lang="less">
-    @import '../static/less/variable.less';
+    @import '../../static/less/variable.less';
     .articleList {
         width: @content-width;
         margin: 0 auto;

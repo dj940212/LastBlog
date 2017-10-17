@@ -5,7 +5,7 @@ const mutations = {
         state.mode = mode
     },
     [types.SET_ARTICLE_LIST](state, list) {
-        state.articleList = list
+        state.articleList = state.articleList.concat(list)
     },
     [types.SET_CURRENT_INDEX](state, index) {
         state.currentIndex = index

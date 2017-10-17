@@ -76,12 +76,8 @@ class Article {
     }
 
     async update(ctx) {
-        console.log(ctx.request)
-        const body = ctx.request.body
-        const content = ctx.request.body.content
-        const description = ctx.request.body.description
-        const title = ctx.request.body.title
-        const _id  = ctx.request.body._id
+        
+        const {content, description, title, _id, babel} = ctx.request.body
 
         let article = await ArticleMod.findOne({_id:_id})
         if(title && content && description) {
@@ -90,18 +86,10 @@ class Article {
           article.description = description
           await article.save()
         }
-        // title && await ArticleMod.update({_id: _id},{$set: {title: title}})
-        // content && await ArticleMod.update({_id: _id},{$set: {content: content}})
-        // description && await ArticleMod.update({_id: _id},{$set: {description: description}})
-
         // 保存操作日志
-
-        // let article
         try {
-            // article = await ArticleMod.findOne({_id: _id})
             const date = formatTime(new Date())
             let activity = await ActivityMod.findOne({date: date})
-            // console.log(activity)
 
             if (activity) {
                 console.log("当天有日志")

@@ -11,8 +11,8 @@
                 <div class="header-menu">
                     <ul>
                         <li class="menu-item"><router-link to="/">Overview</router-link></li>
-                        <li class="menu-item"><router-link to="/article/list">All Articles</router-link></li>
-                        <li class="menu-item">Operation Log</li>
+                        <li class="menu-item"><router-link to="/article/list">Articles</router-link></li>
+                        <li class="menu-item" @click="toLabels">Labels</li>
                         <li class="menu-item">About</li>
                     </ul>
                 </div>
@@ -46,6 +46,9 @@ export default {
         login() {
             this.$router.push('/login')
             this.setIsLogin(true)
+        },
+        toLabels() {
+            this.$router.push('/labels')
         }
     },
     computed: {

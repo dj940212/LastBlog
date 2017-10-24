@@ -16,9 +16,19 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: ['./static/less/index.less'],
+  css: [
+    './static/less/index.less',
+    'element-ui/lib/theme-default/index.css'
+  ],
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#3B8070' }
+  loading: { color: '#3B8070' },
+  plugins: [
+    '~plugins/element-ui'
+  ],
+  build: {
+    analyze: false,
+    vendor: ['element-ui']
+  },
 }

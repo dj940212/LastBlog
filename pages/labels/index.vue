@@ -12,6 +12,7 @@
                         <div class="label-action">
                             <button class="edit-label">edit</button>
                             <button class="delete-label">delete</button>
+                            <el-button>默认按钮</el-button>
                         </div>
                         <span class="label-desc">2 blogs</span>
                     </div>

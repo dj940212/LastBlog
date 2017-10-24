@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -76,13 +76,6 @@ module.exports = require("mongoose");
 
 /***/ },
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(21);
-
-
-/***/ },
-/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -105,13 +98,13 @@ var formatTime = function formatTime(date) {
 /* harmony default export */ exports["a"] = formatTime;
 
 /***/ },
-/* 3 */
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(1);
 
 
 
@@ -148,13 +141,13 @@ ActivitySchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Activity', ActivitySchema);
 
 /***/ },
-/* 4 */
+/* 3 */
 /***/ function(module, exports) {
 
 module.exports = require("uuid");
 
 /***/ },
-/* 5 */
+/* 4 */
 /***/ function(module, exports) {
 
 module.exports = {
@@ -162,7 +155,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'starter',
+    title: 'Last Blog',
     meta: [{ charset: 'utf-8' }, { name: 'viewport', content: 'width=device-width, initial-scale=1' }, { hid: 'description', name: 'description', content: 'Nuxt.js project' }],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
@@ -182,16 +175,16 @@ module.exports = {
 };
 
 /***/ },
-/* 6 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__ = __webpack_require__(15);
 
 
 
@@ -225,56 +218,50 @@ module.exports = {
 };
 
 /***/ },
-/* 7 */
+/* 6 */
 /***/ function(module, exports) {
 
 module.exports = require("koa");
 
 /***/ },
-/* 8 */
+/* 7 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ },
-/* 9 */
+/* 8 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-cors");
 
 /***/ },
-/* 10 */
+/* 9 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-logger");
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-session");
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity_js__ = __webpack_require__(3);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_activity_js__ = __webpack_require__(2);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -288,75 +275,28 @@ var Activity = function () {
 
     _createClass(Activity, [{
         key: 'all',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-                var count, skipNum, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                count = ctx.request.query.count || 360;
-                                skipNum = ctx.request.query.skipNum || 0;
-                                sort = ctx.request.query.sort || -1;
-                                _context.next = 5;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_activity_js__["a" /* default */].find({}, 'date logLen').sort({ 'date': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
+        value: async function all(ctx) {
+            var count = ctx.request.query.count || 360;
+            var skipNum = ctx.request.query.skipNum || 0;
+            var sort = ctx.request.query.sort || -1;
 
-                            case 5:
-                                data = _context.sent;
+            var data = await __WEBPACK_IMPORTED_MODULE_1__models_activity_js__["a" /* default */].find({}, 'date logLen').sort({ 'date': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
 
-
-                                ctx.body = {
-                                    message: 'success',
-                                    data: data
-                                };
-
-                            case 7:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function all(_x) {
-                return _ref.apply(this, arguments);
-            }
-
-            return all;
-        }()
+            ctx.body = {
+                message: 'success',
+                data: data
+            };
+        }
         // 一天的操作记录
 
     }, {
         key: 'oneDay',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
-                var date, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                date = ctx.request.query.date;
-                                sort = ctx.request.query.sort || -1;
-                                _context2.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_activity_js__["a" /* default */].find({ date: date }).sort({ 'date': sort });
+        value: async function oneDay(ctx) {
+            var date = ctx.request.query.date;
+            var sort = ctx.request.query.sort || -1;
 
-                            case 4:
-                                data = _context2.sent;
-
-                            case 5:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function oneDay(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return oneDay;
-        }()
+            var data = await __WEBPACK_IMPORTED_MODULE_1__models_activity_js__["a" /* default */].find({ date: date }).sort({ 'date': sort });
+        }
     }]);
 
     return Activity;
@@ -365,24 +305,18 @@ var Activity = function () {
 /* harmony default export */ exports["a"] = new Activity();
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_article__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__models_activity__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_uuid__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__utils_formatTime__ = __webpack_require__(2);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(1);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -399,378 +333,183 @@ var Article = function () {
 
     _createClass(Article, [{
         key: 'add',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-                var key, _ctx$request$body, title, content, description, babel, article, date, activity, log, newActivity;
+        value: async function add(ctx) {
+            var key = __WEBPACK_IMPORTED_MODULE_3_uuid___default.a.v4();
+            var _ctx$request$body = ctx.request.body,
+                title = _ctx$request$body.title,
+                content = _ctx$request$body.content,
+                description = _ctx$request$body.description;
 
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                key = __WEBPACK_IMPORTED_MODULE_4_uuid___default.a.v4();
-                                _ctx$request$body = ctx.request.body, title = _ctx$request$body.title, content = _ctx$request$body.content, description = _ctx$request$body.description;
-                                babel = ctx.request.body.babel.split(',');
-                                article = void 0;
-                                _context.prev = 4;
+            var babel = ctx.request.body.babel.split(',');
+            var article = void 0;
 
-                                article = new __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */]({
-                                    title: title,
-                                    content: content,
-                                    babel: babel,
-                                    description: description
-                                });
-                                _context.next = 8;
-                                return article.save();
+            try {
+                article = new __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */]({
+                    title: title,
+                    content: content,
+                    babel: babel,
+                    description: description
+                });
+                article = await article.save();
 
-                            case 8:
-                                article = _context.sent;
-                                date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context.next = 12;
-                                return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
+                var date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_formatTime__["a" /* default */])(new Date());
+                var activity = await __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */].findOne({ date: date });
 
-                            case 12:
-                                activity = _context.sent;
+                if (activity) {
+                    var log = {
+                        article_id: article._id,
+                        article_title: article.title,
+                        operationType: 'created'
+                    };
 
-                                if (!activity) {
-                                    _context.next = 20;
-                                    break;
-                                }
-
-                                log = {
-                                    article_id: article._id,
-                                    article_title: article.title,
-                                    operationType: 'created'
-                                };
-
-
-                                activity.log.push(log);
-                                _context.next = 18;
-                                return activity.save();
-
-                            case 18:
-                                _context.next = 23;
-                                break;
-
-                            case 20:
-                                newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
-                                    log: [{
-                                        article_id: article._id,
-                                        article_title: article.title,
-                                        operationType: 'created'
-                                    }]
-                                });
-                                _context.next = 23;
-                                return newActivity.save();
-
-                            case 23:
-                                _context.next = 28;
-                                break;
-
-                            case 25:
-                                _context.prev = 25;
-                                _context.t0 = _context['catch'](4);
-
-                                ctx.body = {
-                                    message: '保存失败'
-                                };
-
-                            case 28:
-
-                                ctx.body = {
-                                    success: 'true',
-                                    message: '保存成功',
-                                    data: {
-                                        _id: article._id,
-                                        title: article.title,
-                                        desc: article.description
-                                    }
-                                };
-
-                            case 29:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this, [[4, 25]]);
-            }));
-
-            function add(_x) {
-                return _ref.apply(this, arguments);
+                    activity.log.push(log);
+                    await activity.save();
+                } else {
+                    var newActivity = new __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */]({
+                        log: [{
+                            article_id: article._id,
+                            article_title: article.title,
+                            operationType: 'created'
+                        }]
+                    });
+                    await newActivity.save();
+                }
+            } catch (e) {
+                ctx.body = {
+                    message: '保存失败'
+                };
             }
 
-            return add;
-        }()
+            ctx.body = {
+                success: 'true',
+                message: '保存成功',
+                data: {
+                    _id: article._id,
+                    title: article.title,
+                    desc: article.description
+                }
+            };
+        }
     }, {
         key: 'list',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
-                var count, skipNum, sort, data;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                count = ctx.request.query.count || 10;
-                                skipNum = ctx.request.query.skipNum || 0;
-                                sort = ctx.request.query.sort || -1;
-                                _context2.next = 5;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].find({}, ['title', 'description', 'babel', 'meta', 'comment']).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
+        value: async function list(ctx) {
+            var count = ctx.request.query.count || 10;
+            var skipNum = ctx.request.query.skipNum || 0;
+            var sort = ctx.request.query.sort || -1;
 
-                            case 5:
-                                data = _context2.sent;
+            var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].find({}, ['title', 'description', 'babel', 'meta', 'comment']).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
 
-
-                                ctx.body = {
-                                    message: 'success',
-                                    data: data
-                                };
-
-                            case 7:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function list(_x2) {
-                return _ref2.apply(this, arguments);
-            }
-
-            return list;
-        }()
+            ctx.body = {
+                message: 'success',
+                data: data
+            };
+        }
     }, {
         key: 'update',
-        value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
-                var _ctx$request$body2, content, description, title, _id, babel, article, date, activity, log, newActivity;
+        value: async function update(ctx) {
+            var _ctx$request$body2 = ctx.request.body,
+                content = _ctx$request$body2.content,
+                description = _ctx$request$body2.description,
+                title = _ctx$request$body2.title,
+                _id = _ctx$request$body2._id,
+                babel = _ctx$request$body2.babel;
 
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                _ctx$request$body2 = ctx.request.body, content = _ctx$request$body2.content, description = _ctx$request$body2.description, title = _ctx$request$body2.title, _id = _ctx$request$body2._id, babel = _ctx$request$body2.babel;
-                                _context3.next = 3;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].findOne({ _id: _id });
 
-                            case 3:
-                                article = _context3.sent;
+            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: _id });
+            if (title && content && description) {
+                article.title = title;
+                article.content = content;
+                article.description = description;
+                await article.save();
+            }
+            // 保存操作日志
+            try {
+                var date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_formatTime__["a" /* default */])(new Date());
+                var activity = await __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */].findOne({ date: date });
 
-                                if (!(title && content && description)) {
-                                    _context3.next = 10;
-                                    break;
-                                }
-
-                                article.title = title;
-                                article.content = content;
-                                article.description = description;
-                                _context3.next = 10;
-                                return article.save();
-
-                            case 10:
-                                _context3.prev = 10;
-                                date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context3.next = 14;
-                                return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
-
-                            case 14:
-                                activity = _context3.sent;
-
-                                if (!activity) {
-                                    _context3.next = 23;
-                                    break;
-                                }
-
-                                console.log("当天有日志");
-                                log = {
-                                    article_id: article._id,
-                                    article_title: article.title,
-                                    operationType: 'updated'
-                                };
-
-                                activity.log.push(log);
-                                _context3.next = 21;
-                                return activity.save();
-
-                            case 21:
-                                _context3.next = 27;
-                                break;
-
-                            case 23:
-                                console.log("当天没有日志");
-                                newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
-                                    log: [{
-                                        article_id: article._id,
-                                        article_title: article.title,
-                                        operationType: 'updated'
-                                    }]
-                                });
-                                _context3.next = 27;
-                                return newActivity.save();
-
-                            case 27:
-                                _context3.next = 32;
-                                break;
-
-                            case 29:
-                                _context3.prev = 29;
-                                _context3.t0 = _context3['catch'](10);
-
-                                ctx.body = {
-                                    message: '更新失败'
-                                };
-
-                            case 32:
-
-                                ctx.body = {
-                                    message: '保存成功',
-                                    data: article
-                                };
-
-                            case 33:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this, [[10, 29]]);
-            }));
-
-            function update(_x3) {
-                return _ref3.apply(this, arguments);
+                if (activity) {
+                    console.log("当天有日志");
+                    var log = {
+                        article_id: article._id,
+                        article_title: article.title,
+                        operationType: 'updated'
+                    };
+                    activity.log.push(log);
+                    await activity.save();
+                } else {
+                    console.log("当天没有日志");
+                    var newActivity = new __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */]({
+                        log: [{
+                            article_id: article._id,
+                            article_title: article.title,
+                            operationType: 'updated'
+                        }]
+                    });
+                    await newActivity.save();
+                }
+            } catch (e) {
+                ctx.body = {
+                    message: '更新失败'
+                };
             }
 
-            return update;
-        }()
+            ctx.body = {
+                message: '保存成功',
+                data: article
+            };
+        }
     }, {
         key: 'delete',
-        value: function () {
-            var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee4(ctx) {
-                var _id, article, date, activity, log, newActivity;
+        value: async function _delete(ctx) {
+            var _id = ctx.request.body._id;
+            try {
+                // 保存日志
+                var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: _id });
+                var date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__utils_formatTime__["a" /* default */])(new Date());
+                var activity = await __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */].findOne({ date: date });
 
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
-                    while (1) {
-                        switch (_context4.prev = _context4.next) {
-                            case 0:
-                                _id = ctx.request.body._id;
-                                _context4.prev = 1;
-                                _context4.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].findOne({ _id: _id });
-
-                            case 4:
-                                article = _context4.sent;
-                                date = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_5__utils_formatTime__["a" /* default */])(new Date());
-                                _context4.next = 8;
-                                return __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */].findOne({ date: date });
-
-                            case 8:
-                                activity = _context4.sent;
-
-                                if (!activity) {
-                                    _context4.next = 16;
-                                    break;
-                                }
-
-                                log = {
-                                    article_id: article._id,
-                                    article_title: article.title,
-                                    operationType: 'deleted'
-                                };
-
-                                activity.log.push(log);
-                                _context4.next = 14;
-                                return activity.save();
-
-                            case 14:
-                                _context4.next = 19;
-                                break;
-
-                            case 16:
-                                newActivity = new __WEBPACK_IMPORTED_MODULE_3__models_activity__["a" /* default */]({
-                                    article_id: article._id,
-                                    article_title: article.title,
-                                    operationType: 'deleted'
-                                });
-                                _context4.next = 19;
-                                return newActivity.save();
-
-                            case 19:
-                                _context4.next = 21;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].remove({ _id: _id });
-
-                            case 21:
-                                _context4.next = 26;
-                                break;
-
-                            case 23:
-                                _context4.prev = 23;
-                                _context4.t0 = _context4['catch'](1);
-
-                                ctx.body = {
-                                    message: 'failed'
-                                };
-
-                            case 26:
-
-                                ctx.body = {
-                                    message: 'success'
-                                };
-
-                            case 27:
-                            case 'end':
-                                return _context4.stop();
-                        }
-                    }
-                }, _callee4, this, [[1, 23]]);
-            }));
-
-            function _delete(_x4) {
-                return _ref4.apply(this, arguments);
+                if (activity) {
+                    var log = {
+                        article_id: article._id,
+                        article_title: article.title,
+                        operationType: 'deleted'
+                    };
+                    activity.log.push(log);
+                    await activity.save();
+                } else {
+                    var newActivity = new __WEBPACK_IMPORTED_MODULE_2__models_activity__["a" /* default */]({
+                        article_id: article._id,
+                        article_title: article.title,
+                        operationType: 'deleted'
+                    });
+                    await newActivity.save();
+                }
+                // 删除文章
+                await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].remove({ _id: _id });
+            } catch (e) {
+                ctx.body = {
+                    message: 'failed'
+                };
             }
 
-            return _delete;
-        }()
+            ctx.body = {
+                message: 'success'
+            };
+        }
     }, {
         key: 'findOne',
-        value: function () {
-            var _ref5 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee5(ctx) {
-                var _id, data;
+        value: async function findOne(ctx) {
+            var _id = ctx.request.query._id;
 
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
-                    while (1) {
-                        switch (_context5.prev = _context5.next) {
-                            case 0:
-                                _id = ctx.request.query._id;
+            if (_id) {
+                var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: _id });
 
-                                if (!_id) {
-                                    _context5.next = 6;
-                                    break;
-                                }
-
-                                _context5.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_article__["a" /* default */].findOne({ _id: _id });
-
-                            case 4:
-                                data = _context5.sent;
-
-
-                                ctx.body = {
-                                    message: 'success',
-                                    data: data
-                                };
-
-                            case 6:
-                            case 'end':
-                                return _context5.stop();
-                        }
-                    }
-                }, _callee5, this);
-            }));
-
-            function findOne(_x5) {
-                return _ref5.apply(this, arguments);
+                ctx.body = {
+                    message: 'success',
+                    data: data
+                };
             }
-
-            return findOne;
-        }()
+        }
     }]);
 
     return Article;
@@ -779,20 +518,14 @@ var Article = function () {
 /* harmony default export */ exports["a"] = new Article();
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_babel__ = __webpack_require__(18);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_babel__ = __webpack_require__(17);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -807,145 +540,59 @@ var Babel = function () {
 
     _createClass(Babel, [{
         key: 'add',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-                var newBabel, babel;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                newBabel = ctx.request.body.babel;
-                                _context.next = 3;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_babel__["a" /* default */].find({ babel: newBabel });
-
-                            case 3:
-                                babel = _context.sent;
-
-                                console.log(babel.length);
-                                if (!babel.length) {
-                                    new __WEBPACK_IMPORTED_MODULE_2__models_babel__["a" /* default */]({ babel: newBabel }).save();
-                                    // const allBabel = await BabelMod().find({})
-                                    ctx.body = {
-                                        message: 'success'
-                                        // data: allBabel
-                                    };
-                                } else {
-                                    ctx.body = {
-                                        message: 'babel已存在'
-                                    };
-                                }
-
-                            case 6:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function add(_x) {
-                return _ref.apply(this, arguments);
+        value: async function add(ctx) {
+            var newBabel = ctx.request.body.babel;
+            var babel = await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].find({ babel: newBabel });
+            console.log(babel.length);
+            if (!babel.length) {
+                new __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */]({ babel: newBabel }).save();
+                // const allBabel = await BabelMod().find({})
+                ctx.body = {
+                    message: 'success'
+                    // data: allBabel
+                };
+            } else {
+                ctx.body = {
+                    message: 'babel已存在'
+                };
             }
-
-            return add;
-        }()
+        }
     }, {
         key: 'delete',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
-                var _id;
+        value: async function _delete(ctx) {
+            var _id = ctx.request.body._id;
 
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                _id = ctx.request.body._id;
-                                _context2.prev = 1;
-                                _context2.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_babel__["a" /* default */].remove({ _id: _id });
-
-                            case 4:
-                                _context2.next = 9;
-                                break;
-
-                            case 6:
-                                _context2.prev = 6;
-                                _context2.t0 = _context2['catch'](1);
-
-                                ctx.body = {
-                                    message: 'fail',
-                                    data: _context2.t0
-                                };
-
-                            case 9:
-
-                                ctx.body = {
-                                    message: 'success'
-                                };
-
-                            case 10:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this, [[1, 6]]);
-            }));
-
-            function _delete(_x2) {
-                return _ref2.apply(this, arguments);
+            try {
+                await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].remove({ _id: _id });
+            } catch (e) {
+                ctx.body = {
+                    message: 'fail',
+                    data: e
+                };
             }
 
-            return _delete;
-        }()
+            ctx.body = {
+                message: 'success'
+            };
+        }
     }, {
         key: 'list',
-        value: function () {
-            var _ref3 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee3(ctx) {
-                var allBabel;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
-                    while (1) {
-                        switch (_context3.prev = _context3.next) {
-                            case 0:
-                                allBabel = void 0;
-                                _context3.prev = 1;
-                                _context3.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_babel__["a" /* default */].find({});
-
-                            case 4:
-                                allBabel = _context3.sent;
-                                _context3.next = 10;
-                                break;
-
-                            case 7:
-                                _context3.prev = 7;
-                                _context3.t0 = _context3['catch'](1);
-
-                                ctx.body = {
-                                    message: 'fail',
-                                    data: _context3.t0
-                                };
-
-                            case 10:
-
-                                ctx.body = {
-                                    message: 'success',
-                                    data: allBabel
-                                };
-
-                            case 11:
-                            case 'end':
-                                return _context3.stop();
-                        }
-                    }
-                }, _callee3, this, [[1, 7]]);
-            }));
-
-            function list(_x3) {
-                return _ref3.apply(this, arguments);
+        value: async function list(ctx) {
+            var allBabel = void 0;
+            try {
+                allBabel = await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].find({});
+            } catch (e) {
+                ctx.body = {
+                    message: 'fail',
+                    data: e
+                };
             }
 
-            return list;
-        }()
+            ctx.body = {
+                message: 'success',
+                data: allBabel
+            };
+        }
     }]);
 
     return Babel;
@@ -954,22 +601,16 @@ var Babel = function () {
 /* harmony default export */ exports["a"] = new Babel();
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_user__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
-
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_uuid__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -984,94 +625,50 @@ var User = function () {
 
     _createClass(User, [{
         key: 'register',
-        value: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee(ctx) {
-                var username, password, user;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                username = ctx.request.body.username;
-                                password = ctx.request.body.password;
-                                user = new __WEBPACK_IMPORTED_MODULE_2__models_user__["a" /* default */]({
-                                    username: username,
-                                    password: password
-                                });
+        value: async function register(ctx) {
+            var username = ctx.request.body.username;
+            var password = ctx.request.body.password;
 
+            var user = new __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */]({
+                username: username,
+                password: password
+            });
 
-                                user.save();
+            user.save();
 
-                                ctx.body = {
-                                    message: 'success',
-                                    username: username
-                                };
-
-                            case 5:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function register(_x) {
-                return _ref.apply(this, arguments);
-            }
-
-            return register;
-        }()
+            ctx.body = {
+                message: 'success',
+                username: username
+            };
+        }
     }, {
         key: 'login',
-        value: function () {
-            var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.mark(function _callee2(ctx) {
-                var username, password, user;
-                return __WEBPACK_IMPORTED_MODULE_0__Users_ding_Projects_last_blog_node_modules_babel_runtime_6_26_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
-                    while (1) {
-                        switch (_context2.prev = _context2.next) {
-                            case 0:
-                                username = ctx.request.body.username;
-                                password = ctx.request.body.password;
-                                _context2.next = 4;
-                                return __WEBPACK_IMPORTED_MODULE_2__models_user__["a" /* default */].findOne({ username: username, password: password });
+        value: async function login(ctx) {
+            var username = ctx.request.body.username;
+            var password = ctx.request.body.password;
 
-                            case 4:
-                                user = _context2.sent;
+            var user = await __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */].findOne({ username: username, password: password });
+            console.log(user);
+            if (user) {
+                ctx.cookies.set('userId', "2222222", {
+                    path: '/#/login',
+                    httpOnly: false,
+                    sameSite: 'strict',
+                    maxAge: 10 * 60 * 1000, // cookie有效时长
+                    expires: new Date('2017-11-15')
+                });
 
-                                console.log(user);
-                                if (user) {
-                                    ctx.cookies.set('userId', "2222222", {
-                                        path: '/#/login',
-                                        httpOnly: false,
-                                        sameSite: 'strict',
-                                        maxAge: 10 * 60 * 1000, // cookie有效时长
-                                        expires: new Date('2017-11-15')
-                                    });
+                console.log(ctx.cookies.get('userId'));
 
-                                    console.log(ctx.cookies.get('userId'));
-
-                                    ctx.body = {
-                                        message: 'success'
-                                    };
-                                } else {
-                                    ctx.body = {
-                                        message: 'fail'
-                                    };
-                                }
-
-                            case 7:
-                            case 'end':
-                                return _context2.stop();
-                        }
-                    }
-                }, _callee2, this);
-            }));
-
-            function login(_x2) {
-                return _ref2.apply(this, arguments);
+                ctx.body = {
+                    message: 'success'
+                };
+            } else {
+                ctx.body = {
+                    message: 'fail'
+                };
             }
-
-            return login;
-        }()
+        }
     }]);
 
     return User;
@@ -1080,13 +677,13 @@ var User = function () {
 /* harmony default export */ exports["a"] = new User();
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__utils_formatTime__ = __webpack_require__(1);
 
 
 
@@ -1122,7 +719,7 @@ ArticleSchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Article', ArticleSchema);
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1144,7 +741,7 @@ var BabelSchema = new Schema({
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Babel', BabelSchema);
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1160,37 +757,31 @@ var UserSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema);
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 21 */
-/***/ function(module, exports) {
-
-module.exports = require("regenerator-runtime");
-
-/***/ },
-/* 22 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_koa_logger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_session__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_cors__);
 
 
@@ -1214,7 +805,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow
 app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(5);
+var config = __webpack_require__(4);
 config.dev = !(app.env === 'production');
 
 // Instantiate nuxt.js

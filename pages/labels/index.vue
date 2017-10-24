@@ -3,18 +3,39 @@
         <div class="labels-inner">
             <header class="labels-header">
                 <span class="meta">12 labels</span>
-                <button class="new">new label</button>
+                <el-button type="success">new babel</el-button>
             </header>
             <ul class="label-list">
-                <li class="label-item">
+                <li class="label-item" v-for="item in 3">
                     <div class="item-inner">
-                        <!-- <div class="label-delete"></div> -->
-                        <div class="label-action">
-                            <button class="edit-label">edit</button>
-                            <button class="delete-label">delete</button>
-                            <el-button>默认按钮</el-button>
+                        <div class="normal" v-if="false">
+                            <v-button></v-button>
+                            <div class="babel-action">
+                                <span class="count">2 blog</span>
+                                <v-button background="#fff" fontSize="14px" icon="el-icon-edit">Edit</v-button>
+                                <v-button background="#fff" fontSize="14px" icon="el-icon-close">Delete</v-button>
+                            </div>
                         </div>
-                        <span class="label-desc">2 blogs</span>
+                        
+                        <div class="edit">
+                            <v-input v-model="username" width="400px"></v-input> 
+                            <div class="changeColor">
+                                <v-button></v-button>
+                                <v-input v-model="username" width="180px"></v-input> 
+                            </div>
+                            
+                            <div class="right">
+                                <v-button 
+                                    background="#f7f9fb" 
+                                    border="1px solid rgba(27,31,35,0.2)"
+                                >Cancel</v-button>
+                                <v-button 
+                                    background="#32c754" 
+                                    border="1px solid rgba(27,31,35,0.2)"
+                                >Save changes</v-button>
+                            </div>
+                            
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -23,12 +44,14 @@
 </template>
 <script>
     import {mapMutations, mapGetters} from 'vuex'
+    import vButton from '../../components/vButton'
+    import vInput from '../../components/vInput'
     import config from '../../config'
     import axios from 'axios'
     export default {
         data() {
             return {
-                username: '',
+                username: 'dingjian',
                 password: ''
             }
         },
@@ -52,6 +75,10 @@
             },
 
         },
+        components: {
+            vButton,
+            vInput
+        }
     }
 </script>
 <style lang="less" scoped>
@@ -62,7 +89,7 @@
             margin: 0 auto;
             margin-top: 20px;
             .labels-header {
-                height: 49px;
+                height: 52px;
                 background-color: #f6f8fa;
                 border: 1px solid @border-color;
                 padding-left: 16px;
@@ -71,27 +98,54 @@
                     display: inline-block;
                     padding-top: 13px;
                     padding-bottom: 13px;
+                    line-height: 26px;
                     color: #586069;
                 }
-                .new {
+                .el-button {
                     float: right;
-                    color: #fff;
-                    background-color: #28a745;
                     background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
-                    padding: 4px 12px;
-                    font-size: 14px;
-                    line-height: 20px;
-                    font-weight: 600;
-                    border-radius: 4px;
-                    border: 1px solid rgba(27,31,35,0.2);
-                    margin-top: 9px;
+                    margin-top: 7px;
                     margin-right: 16px;
                 }
             }
             .label-list {
                 .label-item {
                     list-style: none;
+                    .item-inner {
+                        padding: 8px 10px;
+                        font-size: 12px;
+                        // border-top: 1px solid #eaecef;
+                        // border-left: 1px solid #eaecef;
+                        // border-right: 1px solid #eaecef;
+                        border: 1px solid #eaecef;
+                        .normal {
+                            .babel-action {
+                                float: right;
+                                .count {
+                                    margin-right: 60px;
+                                    font-size: 14px;
+                                }
+                                button {
+                                    background: #fff !important;
+                                }
+                            }
+                        }
+                        .edit {
+                            .changeColor {
+                                display: inline-block;
+                                margin-left: 30px;
+                            }
+                            .right{
+                                float: right;
+                                .v-button {
+                                    margin-left: 5px;
+                                }
+                            }
+                        }
+                    }
+                    
                 }
+
             }
         }
     }

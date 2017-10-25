@@ -3,13 +3,13 @@
         <div class="labels-inner">
             <header class="labels-header">
                 <span class="meta">12 labels</span>
-                <el-button type="success">new babel</el-button>
+                <v-button background="" icon="" fontSize="16px">new babel</v-button>
             </header>
             <ul class="label-list">
                 <li class="label-item" v-for="item in 3">
                     <div class="item-inner">
                         <div class="normal" v-if="false">
-                            <v-button></v-button>
+                            <v-button icon="el-icon-edit"></v-button>
                             <div class="babel-action">
                                 <span class="count">2 blog</span>
                                 <v-button background="#fff" fontSize="14px" icon="el-icon-edit">Edit</v-button>
@@ -30,7 +30,6 @@
                                     border="1px solid rgba(27,31,35,0.2)"
                                 >Cancel</v-button>
                                 <v-button 
-                                    background="#32c754" 
                                     border="1px solid rgba(27,31,35,0.2)"
                                 >Save changes</v-button>
                             </div>
@@ -101,11 +100,15 @@
                     line-height: 26px;
                     color: #586069;
                 }
-                .el-button {
+                .v-button {
                     float: right;
-                    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
-                    margin-top: 7px;
+                    margin-top: 8px;
                     margin-right: 16px;
+                    button{
+                        background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+                        
+                    }
+                    
                 }
             }
             .label-list {

@@ -1,7 +1,12 @@
 <template>
 	<div class="v-input">
-		<input :class="className" :style="{height, width}" type="text" :placeholder="placeholder" :vModel="vModel">
-		</input>
+		<input 
+			:style="{height, width}" 
+			type="text" 
+			:placeholder="placeholder"
+			:value="something"
+  			@input="something = $event.target.value"
+  		></input>
 	</div>
 </template>
 <script>
@@ -19,7 +24,7 @@ export default {
 			type: String,
 			default: ''
 		},
-		vModel: {
+		value: {
 			type: String,
 			default: ''
 		},
@@ -29,6 +34,11 @@ export default {
 		}
 
 	},
+	data() {
+		return {
+			something: ''
+		}
+	}
 }
 </script>
 <style lang="less" scoped>

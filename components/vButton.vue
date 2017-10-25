@@ -11,7 +11,7 @@ export default {
 	props: {
 		background: {
 			type: String,
-			default: '#fef2c0'
+			default: '#66c656'
 		},
 		width: {
 			type: String,
@@ -41,7 +41,7 @@ export default {
 		display: inline-block;
 		button {
             background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
-            // border: 1px solid transparent;
+            border: 1px solid transparent;
             // box-shadow: inset 0 -1px 0 rgba(27,31,35,0.12);
             color: #333026;
             padding: 0 10px;
@@ -50,7 +50,7 @@ export default {
             line-height: 2;
             cursor: pointer;
             i {
-            	margin-right: 4px;
+            	// margin-right: 4px;
 
             }
 		}

@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -142,12 +142,125 @@ ActivitySchema.pre('save', function (next) {
 
 /***/ },
 /* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bcrypt__);
+
+
+
+var SALT_WORK_FACTOR = 10;
+var UserSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
+	username: String,
+	token: String,
+	password: String,
+	avatar: String,
+	lockUntil: Number,
+	loginAttempts: {
+		type: Number,
+		required: true,
+		default: 0
+	},
+	meta: {
+		createdAt: {
+			type: Date,
+			default: Date.now()
+		},
+		updatedAt: {
+			type: Date,
+			default: Date.now()
+		}
+	}
+
+});
+
+UserSchema.virtual('isLocked').get(function () {
+	return !!(this.lockUntil && this.lockUntil > Date.now());
+});
+
+UserSchema.pre('save', function (next) {
+	if (this.isNew) {
+		this.meta.createdAt = this.meta.updatedAt = Date.now();
+	} else {
+		this.meta.updatedAt = Date.now();
+	}
+
+	next();
+});
+
+UserSchema.pre('save', function (next) {
+	var user = this;
+
+	if (!user.isModified('password')) return next();
+
+	__WEBPACK_IMPORTED_MODULE_1_bcrypt___default.a.genSalt(SALT_WORK_FACTOR, function (error, salt) {
+		if (error) return next(error);
+		__WEBPACK_IMPORTED_MODULE_1_bcrypt___default.a.hash(user.password, salt, function (error, hash) {
+			if (error) return next(error);
+
+			user.password = hash;
+			next();
+		});
+	});
+});
+
+UserSchema.methods = {
+	comparePassword: function comparePassword(_password, password) {
+		return new Promise(function (resolve, reject) {
+			__WEBPACK_IMPORTED_MODULE_1_bcrypt___default.a.compare(_password, password, function (err, isMatch) {
+				if (!err) resolve(isMatch);else reject(err);
+			});
+		});
+	},
+	incLoginAttempts: function incLoginAttempts(user) {
+		var that = this;
+
+		return new Promise(function (resolve, reject) {
+			if (that.lockUntil && that.lockUntil < Date.now()) {
+				that.update({
+					$set: {
+						loginAttempts: 1
+					},
+					$unset: {
+						lockUntil: 1
+					}
+				}, function (err) {
+					if (!err) resolve(true);else reject(err);
+				});
+			} else {
+				var updates = {
+					$inc: {
+						loginAttempts: 1
+					}
+				};
+
+				if (that.loginAttempts + 1 >= MAX_LOGIN_ATTEMPTS && !that.isLocked) {
+					updates.$set = {
+						lockUntil: Date.now() + LOCK_TIME
+					};
+				}
+
+				that.update(updates, function (err) {
+					if (!err) resolve(true);else reject(err);
+				});
+			}
+		});
+	}
+};
+
+/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema);
+
+/***/ },
+/* 4 */
 /***/ function(module, exports) {
 
 module.exports = require("uuid");
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 module.exports = {
@@ -175,16 +288,56 @@ module.exports = {
 };
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_models_user__ = __webpack_require__(3);
+
+
+
+
+/* harmony default export */ exports["a"] = function () {
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.set('debug', true);
+
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].db);
+
+    // mongoose.connection.on('disconnected', () => {
+    //     mongoose.connect(config.db)
+    // })
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('error', function (err) {
+        console.log(err);
+    });
+
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('open', async function () {
+        console.log('Connected to MongoDB Success');
+
+        var user = await __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */].findOne({ email: '2902273280@qq.com' });
+
+        if (!user) {
+            new __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */]({
+                email: '2902273280@qq.com',
+                password: '2902273280'
+            }).save();
+            console.log("写入管理员数据");
+        }
+    });
+};
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(22);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__ = __webpack_require__(13);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__ = __webpack_require__(12);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__ = __webpack_require__(18);
 
 
 
@@ -195,66 +348,87 @@ module.exports = {
    var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
 
    // article
-   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].add);
-   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].list);
-   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].update);
-   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].delete);
-   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__app_controllers_article__["a" /* default */].findOne);
+   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].add);
+   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
+   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
+   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
+   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
 
-   // babel
-   router.get('/babel/list', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].list);
-   router.post('/babel/add', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].add);
-   router.post('/babel/delete', __WEBPACK_IMPORTED_MODULE_2__app_controllers_babel__["a" /* default */].delete);
+   // label
+   // router.get('/label/list', Babel.list)
+   // router.post('/label/add', Babel.add)
+   // router.post('/label/delete', Babel.delete)
 
    // activity
-   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].all);
-   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__app_controllers_activity__["a" /* default */].oneDay);
+   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
+   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].oneDay);
 
    // user
-   router.post('/user/register', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].register);
-   router.post('/user/login', __WEBPACK_IMPORTED_MODULE_4__app_controllers_user__["a" /* default */].login);
+   // router.post('/user/register', User.register)
+   // router.post('/user/login', User.login)
 
    return router;
 };
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 module.exports = require("koa");
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-cors");
 
 /***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-logger");
 
 /***/ },
-/* 10 */
+/* 12 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-session");
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ },
-/* 12 */
+/* 14 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ exports["a"] = {
+       db: 'mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog',
+       api: {
+              // article
+              'addArticleUrl': '/api/article/save',
+              'articleListUrl': '/api/article/list',
+              'articleUpdateUrl': '/api/article/update',
+              'articleDeleteUrl': '/api/article/delete',
+              'readArticleUrl': '/api/article/read',
+
+              // activity
+              'getAllActivityUrl': '/api/activity/all',
+              'getOneDayActivityUrl': '/api/activity/oneDay'
+       }
+};
+
+/***/ },
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -305,15 +479,15 @@ var Activity = function () {
 /* harmony default export */ exports["a"] = new Activity();
 
 /***/ },
-/* 13 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(1);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -518,13 +692,13 @@ var Article = function () {
 /* harmony default export */ exports["a"] = new Article();
 
 /***/ },
-/* 14 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_babel__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_label__ = __webpack_require__(20);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -533,27 +707,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 
 
-var Babel = function () {
-    function Babel() {
-        _classCallCheck(this, Babel);
+var Label = function () {
+    function Label() {
+        _classCallCheck(this, Label);
     }
 
-    _createClass(Babel, [{
-        key: 'add',
-        value: async function add(ctx) {
-            var newBabel = ctx.request.body.babel;
-            var babel = await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].find({ babel: newBabel });
-            console.log(babel.length);
-            if (!babel.length) {
-                new __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */]({ babel: newBabel }).save();
-                // const allBabel = await BabelMod().find({})
+    _createClass(Label, [{
+        key: 'new',
+        value: async function _new(ctx) {
+            var _ctx$request$body = ctx.request.body,
+                name = _ctx$request$body.name,
+                color = _ctx$request$body.color;
+
+            var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ name: name, color: color });
+
+            if (!label) {
+                var newLabel = await new __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */]({ name: name }).save();
                 ctx.body = {
-                    message: 'success'
-                    // data: allBabel
+                    success: true,
+                    message: "添加Label成功",
+                    data: newLabel
                 };
             } else {
                 ctx.body = {
-                    message: 'babel已存在'
+                    success: false,
+                    message: 'Label已存在'
                 };
             }
         }
@@ -563,52 +741,53 @@ var Babel = function () {
             var _id = ctx.request.body._id;
 
             try {
-                await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].remove({ _id: _id });
+                await BabelMod.remove({ _id: _id });
             } catch (e) {
                 ctx.body = {
-                    message: 'fail',
-                    data: e
+                    success: false,
+                    message: e
                 };
             }
 
             ctx.body = {
-                message: 'success'
+                success: true,
+                message: '删除成功'
             };
         }
     }, {
-        key: 'list',
-        value: async function list(ctx) {
-            var allBabel = void 0;
+        key: 'allLabels',
+        value: async function allLabels(ctx) {
+            var labels = void 0;
             try {
-                allBabel = await __WEBPACK_IMPORTED_MODULE_1__models_babel__["a" /* default */].find({});
+                labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({});
             } catch (e) {
                 ctx.body = {
-                    message: 'fail',
+                    success: false,
+                    message: '获取失败',
                     data: e
                 };
             }
-
             ctx.body = {
-                message: 'success',
-                data: allBabel
+                success: true,
+                data: labels
             };
         }
     }]);
 
-    return Babel;
+    return Label;
 }();
 
-/* harmony default export */ exports["a"] = new Babel();
+/* unused harmony default export */ var _unused_webpack_default_export = new Label();
 
 /***/ },
-/* 15 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_uuid__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -624,31 +803,16 @@ var User = function () {
     }
 
     _createClass(User, [{
-        key: 'register',
-        value: async function register(ctx) {
-            var username = ctx.request.body.username;
-            var password = ctx.request.body.password;
-
-            var user = new __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */]({
-                username: username,
-                password: password
-            });
-
-            user.save();
-
-            ctx.body = {
-                message: 'success',
-                username: username
-            };
-        }
-    }, {
         key: 'login',
         value: async function login(ctx) {
-            var username = ctx.request.body.username;
-            var password = ctx.request.body.password;
+            var _ctx$request$body = ctx.request.body,
+                username = _ctx$request$body.username,
+                password = _ctx$request$body.password;
+
+            var match = false;
 
             var user = await __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */].findOne({ username: username, password: password });
-            console.log(user);
+
             if (user) {
                 ctx.cookies.set('userId', "2222222", {
                     path: '/#/login',
@@ -674,10 +838,10 @@ var User = function () {
     return User;
 }();
 
-/* harmony default export */ exports["a"] = new User();
+/* unused harmony default export */ var _unused_webpack_default_export = new User();
 
 /***/ },
-/* 16 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -719,70 +883,65 @@ ArticleSchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Article', ArticleSchema);
 
 /***/ },
-/* 17 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
 
 var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
 
-var BabelSchema = new Schema({
-    babel: String,
-    num: {
+var LabelSchema = new Schema({
+    name: String,
+    color: {
+        default: '#000',
+        type: String
+    },
+    artCount: {
         default: 0,
         type: Number
     }
-
 });
 
-/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Babel', BabelSchema);
+/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Label', LabelSchema);
 
 /***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/* 21 */
+/***/ function(module, exports) {
 
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-
-var UserSchema = new __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema({
-    username: String,
-    password: String
-});
-
-/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema);
+module.exports = require("bcrypt");
 
 /***/ },
-/* 19 */
+/* 22 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 20 */
+/* 23 */,
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(8);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(11);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_koa_logger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session__ = __webpack_require__(12);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_session__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_cors__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__middlewares_database__ = __webpack_require__(6);
+
 
 
 
@@ -797,15 +956,16 @@ var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
 
+app.use(__WEBPACK_IMPORTED_MODULE_8__middlewares_database__["a" /* default */]);
 app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
-app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()({ "Access-Control-Allow-Credentials": true }));
+app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()());
 app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(4);
+var config = __webpack_require__(5);
 config.dev = !(app.env === 'production');
 
 // Instantiate nuxt.js
@@ -833,10 +993,10 @@ app.use(function (ctx) {
   });
 });
 
-__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog');
-__WEBPACK_IMPORTED_MODULE_3_mongoose___default.a.connection.on("connected", function () {
-  console.log('连接数据库成功');
-});
+// mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
+// mongoose.connection.on("connected",() => {
+//     console.log('连接数据库成功')
+// })
 
 app.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console

@@ -5,29 +5,12 @@ import uuid from 'uuid'
 class User {
     constructor() {}
 
-    async register(ctx) {
-        const username = ctx.request.body.username
-        const password = ctx.request.body.password
-
-        let user = new UserMod({
-            username: username,
-            password: password,
-        })
-
-        user.save()
-
-        ctx.body= {
-            message: 'success',
-            username: username
-        }
-    }
-
     async login(ctx) {
-        const username = ctx.request.body.username
-        const password = ctx.request.body.password
+        const {username, password} = ctx.request.body
+        let match = false
 
-        let user = await UserMod.findOne({username: username, password: password})
-        console.log(user)
+        const user = await UserMod.findOne({username: username, password: password})
+
         if (user) {
             ctx.cookies.set('userId', "2222222", {
                 path: '/#/login',

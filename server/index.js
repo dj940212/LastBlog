@@ -6,18 +6,21 @@ import logger from 'koa-logger'
 import session from 'koa-session'
 import bodyParser from 'koa-bodyparser'
 import cors from 'koa-cors'
+import Database from './middlewares/database'
 
 const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 const router = Router()
 
+app.use(Database)
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.use(logger())
-app.use(cors({"Access-Control-Allow-Credentials": true}))
+app.use(cors())
 app.use(session(app))
+
 
 
 // Import and Set Nuxt.js options
@@ -49,10 +52,10 @@ app.use(ctx => {
   })
 })
 
-mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
-mongoose.connection.on("connected",() => {
-    console.log('连接数据库成功')
-})
+// mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
+// mongoose.connection.on("connected",() => {
+//     console.log('连接数据库成功')
+// })
 
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

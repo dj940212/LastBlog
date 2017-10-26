@@ -1,8 +1,8 @@
 import Router from 'koa-router'
-import Article from '../app/controllers/article'
-import Babel from '../app/controllers/babel'
-import Activity from '../app/controllers/activity'
-import User from '../app/controllers/user'
+import Article from '../database/controllers/article'
+import Label from '../database/controllers/label'
+import Activity from '../database/controllers/activity'
+import User from '../database/controllers/user'
 
 export default () => {
 	const router = new Router({ prefix: '/api' })
@@ -14,18 +14,18 @@ export default () => {
     router.post('/article/delete', Article.delete)
     router.get('/article/read', Article.findOne)
 
-    // babel
-    router.get('/babel/list', Babel.list)
-    router.post('/babel/add', Babel.add)
-    router.post('/babel/delete', Babel.delete)
+    // label
+    // router.get('/label/list', Babel.list)
+    // router.post('/label/add', Babel.add)
+    // router.post('/label/delete', Babel.delete)
 
     // activity
     router.get('/activity/all', Activity.all)
     router.get('/activity/oneday', Activity.oneDay)
 
     // user
-    router.post('/user/register', User.register)
-    router.post('/user/login', User.login)
+    // router.post('/user/register', User.register)
+    // router.post('/user/login', User.login)
 
 	return router
 }

@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt": "^1.0.3",
     "cross-env": "^5.0.1",
     "element-ui": "^1.4.7",
     "highlight.js": "^9.12.0",

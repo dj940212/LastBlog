@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 29);
+/******/ 	return __webpack_require__(__webpack_require__.s = 30);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -183,7 +183,7 @@ ActivitySchema.pre('save', function (next) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bcrypt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__);
@@ -377,7 +377,7 @@ module.exports = {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_session__);
 
 var addSession = function addSession(app) {
@@ -436,7 +436,7 @@ var verifyToken = function verifyToken(ctx, next) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(22);
@@ -454,15 +454,16 @@ var verifyToken = function verifyToken(ctx, next) {
     var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
 
     // article
-    router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].add);
+    router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].new);
     router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
     router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
     router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
     router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
+    router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
 
     // label
     // router.get('/label/list', Babel.list)
-    // router.post('/label/add', Babel.add)
+    router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
     // router.post('/label/delete', Babel.delete)
 
     // activity
@@ -607,10 +608,12 @@ var Activity = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(30);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_label__ = __webpack_require__(25);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -625,8 +628,8 @@ var Article = function () {
     }
 
     _createClass(Article, [{
-        key: 'add',
-        value: async function add(ctx) {
+        key: 'new',
+        value: async function _new(ctx) {
             var key = __WEBPACK_IMPORTED_MODULE_3_uuid___default.a.v4();
             var _ctx$request$body = ctx.request.body,
                 title = _ctx$request$body.title,
@@ -690,7 +693,7 @@ var Article = function () {
             var skipNum = ctx.request.query.skipNum || 0;
             var sort = ctx.request.query.sort || -1;
 
-            var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].find({}, ['title', 'description', 'babel', 'meta', 'comment']).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
+            var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].find({}, ['title', 'description', 'meta']).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
 
             ctx.body = {
                 message: 'success',
@@ -809,17 +812,27 @@ var Article = function () {
                 label_id = _ctx$request$body3.label_id,
                 article_id = _ctx$request$body3.article_id;
 
-            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
-            var label = await __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */].findOne({ _id: label_id });
+            var labelMap = await __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */].findOne({ 'article': article_id, 'label': label_id });
 
-            var labelMap = new __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */]({
+            if (labelMap) {
+                ctx.body = {
+                    success: false,
+                    message: '该标签已存在'
+                };
+                return;
+            }
+
+            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
+            var label = await __WEBPACK_IMPORTED_MODULE_6__models_label__["a" /* default */].findOne({ _id: label_id });
+
+            labelMap = await new __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */]({
                 article: article,
                 label: label
-            });
-            labelMap.save();
+            }).save();
 
             ctx.body = {
-                success: true
+                success: true,
+                data: labelMap
             };
         }
     }]);
@@ -857,7 +870,7 @@ var Label = function () {
                 name = _ctx$request$body.name,
                 color = _ctx$request$body.color;
 
-            var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ name: name, color: color });
+            var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ name: name });
 
             if (!label) {
                 var newLabel = await new __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */]({ name: name }).save();
@@ -866,12 +879,14 @@ var Label = function () {
                     message: "添加Label成功",
                     data: newLabel
                 };
-            } else {
-                ctx.body = {
-                    success: false,
-                    message: 'Label已存在'
-                };
+
+                return;
             }
+
+            ctx.body = {
+                success: false,
+                message: 'Label已存在'
+            };
         }
     }, {
         key: 'delete',
@@ -942,7 +957,7 @@ var Label = function () {
     return Label;
 }();
 
-/* unused harmony default export */ var _unused_webpack_default_export = new Label();
+/* harmony default export */ exports["a"] = new Label();
 
 /***/ },
 /* 23 */
@@ -1078,10 +1093,6 @@ var LabelSchema = new Schema({
     color: {
         default: '#000',
         type: String
-    },
-    artCount: {
-        default: 0,
-        type: Number
     }
 });
 
@@ -1089,24 +1100,48 @@ var LabelSchema = new Schema({
 
 /***/ },
 /* 26 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-module.exports = require("bcrypt");
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
+var ObjectId = Schema.Types.ObjectId;
+
+var LabelMapSchema = new Schema({
+    label: {
+        type: ObjectId,
+        ref: 'Label'
+    },
+    article: {
+        type: ObjectId,
+        ref: 'Article'
+    }
+});
+
+/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
 
 /***/ },
 /* 27 */
 /***/ function(module, exports) {
 
-module.exports = require("koa-router");
+module.exports = require("bcrypt");
 
 /***/ },
 /* 28 */
 /***/ function(module, exports) {
 
-module.exports = require("koa-session");
+module.exports = require("koa-router");
 
 /***/ },
 /* 29 */
+/***/ function(module, exports) {
+
+module.exports = require("koa-session");
+
+/***/ },
+/* 30 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1190,30 +1225,6 @@ app.use(function (ctx) {
 
 app.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
-
-/***/ },
-/* 30 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
-var ObjectId = Schema.Types.ObjectId;
-
-var LabelMapSchema = new Schema({
-    label: {
-        type: ObjectId,
-        ref: 'Label'
-    },
-    article: {
-        type: ObjectId,
-        ref: 'Article'
-    }
-});
-
-/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
 
 /***/ }
 /******/ ]);

@@ -6,10 +6,6 @@ const LabelSchema = new Schema({
     color: {
 		default: '#000',
 		type: String
-    },
-    artCount: {
-    	default: 0,
-    	type: Number
     }
 })
 

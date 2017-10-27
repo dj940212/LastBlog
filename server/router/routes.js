@@ -9,15 +9,16 @@ export default () => {
 	const router = new Router({ prefix: '/api' })
 
     // article
-	router.post('/article/save', verifyToken, Article.add)
+	router.post('/article/save', verifyToken, Article.new)
     router.get('/article/list', Article.list)
     router.post('/article/update',verifyToken, Article.update)
     router.post('/article/delete',verifyToken, Article.delete)
     router.get('/article/read', Article.findOne)
+    router.post('/article/addLabel', Article.addLabel)
 
     // label
     // router.get('/label/list', Babel.list)
-    // router.post('/label/add', Babel.add)
+    router.post('/label/new', Label.new)
     // router.post('/label/delete', Babel.delete)
 
     // activity

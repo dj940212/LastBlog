@@ -9,7 +9,7 @@ class Label {
 
     async new( ctx ) {
         const {name,color} = ctx.request.body
-        let label = await LabelMod.findOne({name: name,color: color})
+        let label = await LabelMod.findOne({name: name})
 
         if (!label) {
             const newLabel = await new LabelMod({name:name}).save()
@@ -18,12 +18,15 @@ class Label {
                 message: "添加Label成功",
                 data: newLabel
             }
-        }else {
-            ctx.body = {
-                success: false,
-                message: 'Label已存在',
-            }
+
+            return
         }
+        
+        ctx.body = {
+            success: false,
+            message: 'Label已存在',
+        }
+        
     }
 
     async delete(ctx) {

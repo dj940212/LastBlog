@@ -4,11 +4,12 @@ import ActivityMod from '../models/activity'
 import uuid from 'uuid'
 import formatTime from '../../utils/formatTime'
 import LabelMapMod from '../models/labelMap'
+import LabelMod from '../models/label'
 
 class Article {
     constructor() {}
 
-    async add(ctx) {
+    async new(ctx) {
         const key = uuid.v4()
         const {title, content, description} = ctx.request.body
         // const label  = ctx.request.body.babel.split(',')
@@ -68,7 +69,10 @@ class Article {
         const skipNum = ctx.request.query.skipNum || 0
         const sort = ctx.request.query.sort || -1
 
-        const data = await ArticleMod.find({},['title', 'description', 'babel', 'meta', 'comment']).sort({'meta.updateAt': sort}).skip(parseInt(skipNum)).limit(parseInt(count))
+        const data = await ArticleMod.find({},['title', 'description', 'meta'])
+            .sort({'meta.updateAt': sort})
+            .skip(parseInt(skipNum))
+            .limit(parseInt(count))
         
         ctx.body = {
             message: 'success',
@@ -176,17 +180,27 @@ class Article {
 
     async addLabel(ctx) {
         const {label_id, article_id} = ctx.request.body
-        const article = await ArticleMod.findOne({_id: article_id})
-        const label = await LabelMapMod.findOne({_id: label_id})
+        let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
 
-        let labelMap = new LabelMapMod({
+        if (labelMap) {
+            ctx.body = {
+                success: false,
+                message: '该标签已存在'
+            }
+            return
+        }
+
+        const article = await ArticleMod.findOne({_id: article_id})
+        const label = await LabelMod.findOne({_id: label_id})
+
+        labelMap = await new LabelMapMod({
             article: article,
             label: label
-        })
-        labelMap.save()
+        }).save()
 
         ctx.body = {
             success: true,
+            data: labelMap
         }
     }
 

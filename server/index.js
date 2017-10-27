@@ -13,16 +13,22 @@ const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 const router = Router()
 
-app.use(Database)
+
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.use(logger())
 app.use(cors())
-app.use(session(app))
+app.use(session({
+  key: 'koa:sess',
+  maxAge: 86400000,
+  overwrite: true,
+  signed: true,
+  rolling: false
+},app))
 
-
-
+// 数据库
+Database()
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')
@@ -52,10 +58,6 @@ app.use(ctx => {
   })
 })
 
-// mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
-// mongoose.connection.on("connected",() => {
-//     console.log('连接数据库成功')
-// })
 
 app.listen(port, host)
 console.log('Server listening on ' + host + ':' + port) // eslint-disable-line no-console

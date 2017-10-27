@@ -8,9 +8,9 @@ export default () => {
 
     mongoose.connect(config.db)
 
-    // mongoose.connection.on('disconnected', () => {
-    //     mongoose.connect(config.db)
-    // })
+    mongoose.connection.on('disconnected', () => {
+        mongoose.connect(config.db)
+    })
     mongoose.connection.on('error', err => {
         console.log(err)
     })
@@ -18,13 +18,10 @@ export default () => {
     mongoose.connection.on('open', async ()=> {
         console.log('Connected to MongoDB Success')
 
-        let user = await User.findOne({email: '2902273280@qq.com'})
+        let user = await User.findOne({username: config.user.username})
 
         if (!user) {
-            new User({
-                email: '2902273280@qq.com',
-                password: '2902273280',
-            }).save()
+            new User(config.user).save()
             console.log("写入管理员数据")
         }
     })

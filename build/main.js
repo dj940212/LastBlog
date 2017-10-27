@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -305,9 +305,9 @@ module.exports = {
 
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].db);
 
-    // mongoose.connection.on('disconnected', () => {
-    //     mongoose.connect(config.db)
-    // })
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('disconnected', function () {
+        __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].db);
+    });
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('error', function (err) {
         console.log(err);
     });
@@ -315,13 +315,10 @@ module.exports = {
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('open', async function () {
         console.log('Connected to MongoDB Success');
 
-        var user = await __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */].findOne({ email: '2902273280@qq.com' });
+        var user = await __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */].findOne({ username: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].user.username });
 
         if (!user) {
-            new __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */]({
-                email: '2902273280@qq.com',
-                password: '2902273280'
-            }).save();
+            new __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */](__WEBPACK_IMPORTED_MODULE_1__config__["a" /* default */].user).save();
             console.log("写入管理员数据");
         }
     });
@@ -365,7 +362,7 @@ module.exports = {
 
    // user
    // router.post('/user/register', User.register)
-   // router.post('/user/login', User.login)
+   router.post('/login', __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].login);
 
    return router;
 };
@@ -412,19 +409,25 @@ module.exports = require("nuxt");
 
 "use strict";
 /* harmony default export */ exports["a"] = {
-       db: 'mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog',
-       api: {
-              // article
-              'addArticleUrl': '/api/article/save',
-              'articleListUrl': '/api/article/list',
-              'articleUpdateUrl': '/api/article/update',
-              'articleDeleteUrl': '/api/article/delete',
-              'readArticleUrl': '/api/article/read',
+    db: 'mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog',
+    user: {
+        username: '2902273280@qq.com',
+        password: '2902273280'
+    },
+    api: {
+        // article
+        'addArticleUrl': '/api/article/save',
+        'articleListUrl': '/api/article/list',
+        'articleUpdateUrl': '/api/article/update',
+        'articleDeleteUrl': '/api/article/delete',
+        'readArticleUrl': '/api/article/read',
 
-              // activity
-              'getAllActivityUrl': '/api/activity/all',
-              'getOneDayActivityUrl': '/api/activity/oneDay'
-       }
+        // activity
+        'getAllActivityUrl': '/api/activity/all',
+        'getOneDayActivityUrl': '/api/activity/oneDay',
+        // user
+        'loginUrl': '/api/login'
+    }
 };
 
 /***/ },
@@ -809,36 +812,35 @@ var User = function () {
                 username = _ctx$request$body.username,
                 password = _ctx$request$body.password;
 
+            var user = await __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */].findOne({ username: username });
+
             var match = false;
-
-            var user = await __WEBPACK_IMPORTED_MODULE_1__models_user__["a" /* default */].findOne({ username: username, password: password });
-
-            if (user) {
-                ctx.cookies.set('userId', "2222222", {
-                    path: '/#/login',
-                    httpOnly: false,
-                    sameSite: 'strict',
-                    maxAge: 10 * 60 * 1000, // cookie有效时长
-                    expires: new Date('2017-11-15')
-                });
-
-                console.log(ctx.cookies.get('userId'));
-
-                ctx.body = {
-                    message: 'success'
+            if (user) match = await user.comparePassword(password, user.password);
+            if (match) {
+                ctx.session.user = {
+                    username: user.username,
+                    _id: user._id
                 };
-            } else {
-                ctx.body = {
-                    message: 'fail'
+
+                return ctx.body = {
+                    success: true,
+                    data: {
+                        username: user.username
+                    }
                 };
             }
+
+            return ctx.body = {
+                success: false,
+                message: '密码错误'
+            };
         }
     }]);
 
     return User;
 }();
 
-/* unused harmony default export */ var _unused_webpack_default_export = new User();
+/* harmony default export */ exports["a"] = new User();
 
 /***/ },
 /* 19 */
@@ -919,8 +921,7 @@ module.exports = require("bcrypt");
 module.exports = require("koa-router");
 
 /***/ },
-/* 23 */,
-/* 24 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -956,14 +957,21 @@ var host = process.env.HOST || '127.0.0.1';
 var port = process.env.PORT || 3000;
 var router = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_2__router_routes__["a" /* default */])();
 
-app.use(__WEBPACK_IMPORTED_MODULE_8__middlewares_database__["a" /* default */]);
 app.use(__WEBPACK_IMPORTED_MODULE_6_koa_bodyparser___default()());
 app.use(router.routes());
 app.use(router.allowedMethods());
 app.use(__WEBPACK_IMPORTED_MODULE_4_koa_logger___default()());
 app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()());
-app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()(app));
+app.use(__WEBPACK_IMPORTED_MODULE_5_koa_session___default()({
+  key: 'koa:sess',
+  maxAge: 86400000,
+  overwrite: true,
+  signed: true,
+  rolling: false
+}, app));
 
+// 数据库
+__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_8__middlewares_database__["a" /* default */])();
 // Import and Set Nuxt.js options
 var config = __webpack_require__(5);
 config.dev = !(app.env === 'production');
@@ -992,11 +1000,6 @@ app.use(function (ctx) {
     });
   });
 });
-
-// mongoose.connect('mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog')
-// mongoose.connection.on("connected",() => {
-//     console.log('连接数据库成功')
-// })
 
 app.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console

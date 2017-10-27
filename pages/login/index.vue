@@ -38,7 +38,7 @@
                 try {
                     const res = await axios.post(config.api.loginUrl,{username: this.username, password: this.password,withCredentials: true})
                     console.log(res.data.message)
-                    if (res.data.message === "success") {
+                    if (res.data.success) {
                         this.$router.push('/')
                         this.setIsLogin(true)
                     }

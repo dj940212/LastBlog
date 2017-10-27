@@ -7,29 +7,30 @@ class User {
 
     async login(ctx) {
         const {username, password} = ctx.request.body
+        const user = await UserMod.findOne({ username: username })
+
         let match = false
-
-        const user = await UserMod.findOne({username: username, password: password})
-
-        if (user) {
-            ctx.cookies.set('userId', "2222222", {
-                path: '/#/login',
-                httpOnly: false,
-                sameSite: 'strict',
-                maxAge: 10 * 60 * 1000, // cookie有效时长
-                expires: new Date('2017-11-15')
-            });
-
-            console.log(ctx.cookies.get('userId')) 
-
-            ctx.body={
-                message: 'success',
+        if (user) match = await user.comparePassword(password, user.password)
+        if (match) {
+            ctx.session.user = {
+                username: user.username,
+                _id: user._id
             }
-        }else {
-            ctx.body = {
-                message: 'fail'
-            }
+
+            return (ctx.body = {
+                success: true,
+                data: {
+                    username: user.username
+                }
+            })
         }
+
+        return (ctx.body = {
+            success: false,
+            message: '密码错误'
+        })
+
+        
     }
 }
 

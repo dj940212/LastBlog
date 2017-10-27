@@ -25,7 +25,7 @@ export default () => {
 
     // user
     // router.post('/user/register', User.register)
-    // router.post('/user/login', User.login)
+    router.post('/login', User.login)
 
 	return router
 }

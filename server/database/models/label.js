@@ -10,7 +10,7 @@ const LabelSchema = new Schema({
     artCount: {
     	default: 0,
     	type: Number
-    },
+    }
 })
 
 export default mongoose.model('Label', LabelSchema)

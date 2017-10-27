@@ -110,7 +110,7 @@ export default {
                     title: this.writeTitle,
                     content: htmlContent,
                     description: this.writeDesc,
-                    babel: 'javascript,css,html'
+                    // babel: 'javascript,css,html'
                 },
                 headers: {'x-access-token': this.token}
         

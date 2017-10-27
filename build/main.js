@@ -451,29 +451,29 @@ var verifyToken = function verifyToken(ctx, next) {
 
 
 /* harmony default export */ exports["a"] = function () {
-   var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
+    var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
 
-   // article
-   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].add);
-   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
-   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
-   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
-   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
+    // article
+    router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].add);
+    router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
+    router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
+    router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
+    router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
 
-   // label
-   // router.get('/label/list', Babel.list)
-   // router.post('/label/add', Babel.add)
-   // router.post('/label/delete', Babel.delete)
+    // label
+    // router.get('/label/list', Babel.list)
+    // router.post('/label/add', Babel.add)
+    // router.post('/label/delete', Babel.delete)
 
-   // activity
-   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
-   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].oneDay);
+    // activity
+    router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
+    router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].oneDay);
 
-   // user
-   router.post('/login', __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].login);
-   router.post('/logout', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].logout);
+    // user
+    router.post('/login', __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].login);
+    router.post('/logout', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].logout);
 
-   return router;
+    return router;
 };
 
 /***/ },
@@ -607,9 +607,11 @@ var Activity = function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(30);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 
 
 
@@ -630,15 +632,15 @@ var Article = function () {
                 title = _ctx$request$body.title,
                 content = _ctx$request$body.content,
                 description = _ctx$request$body.description;
+            // const label  = ctx.request.body.babel.split(',')
 
-            var babel = ctx.request.body.babel.split(',');
             var article = void 0;
 
             try {
                 article = new __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */]({
                     title: title,
                     content: content,
-                    babel: babel,
+                    // babel: babel,
                     description: description
                 });
                 article = await article.save();
@@ -800,6 +802,26 @@ var Article = function () {
                 };
             }
         }
+    }, {
+        key: 'addLabel',
+        value: async function addLabel(ctx) {
+            var _ctx$request$body3 = ctx.request.body,
+                label_id = _ctx$request$body3.label_id,
+                article_id = _ctx$request$body3.article_id;
+
+            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
+            var label = await __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */].findOne({ _id: label_id });
+
+            var labelMap = new __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */]({
+                article: article,
+                label: label
+            });
+            labelMap.save();
+
+            ctx.body = {
+                success: true
+            };
+        }
     }]);
 
     return Article;
@@ -857,7 +879,7 @@ var Label = function () {
             var _id = ctx.request.body._id;
 
             try {
-                await BabelMod.remove({ _id: _id });
+                await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].remove({ _id: _id });
             } catch (e) {
                 ctx.body = {
                     success: false,
@@ -886,6 +908,33 @@ var Label = function () {
             ctx.body = {
                 success: true,
                 data: labels
+            };
+        }
+    }, {
+        key: 'update',
+        value: async function update(ctx) {
+            var _ctx$request$body2 = ctx.request.body,
+                name = _ctx$request$body2.name,
+                color = _ctx$request$body2.color,
+                _id = _ctx$request$body2._id;
+
+
+            var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ _id: _id });
+            label.name = name;
+            label.color = color;
+
+            try {
+                label = await label.save();
+            } catch (e) {
+                ctx.body = {
+                    success: false,
+                    data: e
+                };
+            }
+
+            ctx.body = {
+                success: true,
+                data: label
             };
         }
     }]);
@@ -989,7 +1038,6 @@ var ObjectId = Schema.Types.ObjectId;
 
 var ArticleSchema = new Schema({
   title: String,
-  babel: [String],
   content: String,
   comment: String,
   description: String,
@@ -1142,6 +1190,30 @@ app.use(function (ctx) {
 
 app.listen(port, host);
 console.log('Server listening on ' + host + ':' + port); // eslint-disable-line no-console
+
+/***/ },
+/* 30 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
+var ObjectId = Schema.Types.ObjectId;
+
+var LabelMapSchema = new Schema({
+    label: {
+        type: ObjectId,
+        ref: 'Label'
+    },
+    article: {
+        type: ObjectId,
+        ref: 'Article'
+    }
+});
+
+/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
 
 /***/ }
 /******/ ]);

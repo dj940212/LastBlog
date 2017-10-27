@@ -193,7 +193,6 @@ export default {
                     description: this.updateDesc,
                     content: htmlContent,
                     _id: this.$route.query._id,
-                    babel: 'javascript,css,html'
                 },
                 headers: {'x-access-token': this.token},
                 withCredentials: true

@@ -30,7 +30,7 @@ class Label {
         const _id = ctx.request.body._id
 
         try {
-            await BabelMod.remove({_id:_id})
+            await LabelMod.remove({_id:_id})
         }catch(e){
             ctx.body = {
                 success: false,
@@ -59,6 +59,30 @@ class Label {
             success: true,
             data: labels
         }
+    }
+
+    async update(ctx) {
+        const {name,color,_id} = ctx.request.body
+
+        let label = await LabelMod.findOne({_id:_id})
+        label.name = name
+        label.color = color
+
+        try {
+            label = await label.save()
+        }catch(e) {
+            ctx.body = {
+                success: false,
+                data: e
+            }
+        }
+        
+
+        ctx.body = {
+            success: true,
+            data: label
+        }
+
     }
 }
 

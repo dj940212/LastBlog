@@ -6,7 +6,6 @@ const ObjectId = Schema.Types.ObjectId
 
 const ArticleSchema = new Schema({
     title: String,
-    babel: [String],
     content: String,
     comment: String,
     description: String,

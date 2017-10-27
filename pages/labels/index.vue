@@ -8,7 +8,7 @@
             <ul class="label-list">
                 <li class="label-item" v-for="item in 3">
                     <div class="item-inner">
-                        <div class="normal" v-if="false">
+                        <div class="normal" v-if="true">
                             <v-button icon="el-icon-edit"></v-button>
                             <div class="babel-action">
                                 <span class="count">2 blog</span>
@@ -17,7 +17,7 @@
                             </div>
                         </div>
                         
-                        <div class="edit">
+                        <div v-if="false" class="edit">
                             <v-input v-model="username" width="400px"></v-input> 
                             <div class="changeColor">
                                 <v-button></v-button>
@@ -33,7 +33,6 @@
                                     border="1px solid rgba(27,31,35,0.2)"
                                 >Save changes</v-button>
                             </div>
-                            
                         </div>
                     </div>
                 </li>
@@ -70,7 +69,6 @@
                     console.log(e)
                 }
 
-                // this.$router.push('/')
             },
 
         },

@@ -3,6 +3,7 @@ import ArticleMod from '../models/article'
 import ActivityMod from '../models/activity'
 import uuid from 'uuid'
 import formatTime from '../../utils/formatTime'
+import LabelMapMod from '../models/labelMap'
 
 class Article {
     constructor() {}
@@ -10,14 +11,14 @@ class Article {
     async add(ctx) {
         const key = uuid.v4()
         const {title, content, description} = ctx.request.body
-        const babel  = ctx.request.body.babel.split(',')
+        // const label  = ctx.request.body.babel.split(',')
         let article
 
         try {
             article = new ArticleMod({
                 title: title,
                 content: content,
-                babel: babel,
+                // babel: babel,
                 description: description
             })
             article = await article.save()
@@ -170,6 +171,22 @@ class Article {
                 message: 'success',
                 data: data
             }
+        }
+    }
+
+    async addLabel(ctx) {
+        const {label_id, article_id} = ctx.request.body
+        const article = await ArticleMod.findOne({_id: article_id})
+        const label = await LabelMapMod.findOne({_id: label_id})
+
+        let labelMap = new LabelMapMod({
+            article: article,
+            label: label
+        })
+        labelMap.save()
+
+        ctx.body = {
+            success: true,
         }
     }
 

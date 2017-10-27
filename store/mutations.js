@@ -15,6 +15,12 @@ const mutations = {
     },
     [types.SET_IS_LOGIN](state, isLogin) {
         state.isLogin = isLogin
+    },
+    [types.SET_TOKEN](state, token) {
+        state.token = token
+    },
+    [types.SET_CUR_ROUTE](state, curRoute) {
+        state.curRoute = curRoute
     }
 }
 

@@ -23,11 +23,7 @@ import {formatTimeAll} from '../static/js/utils'
 import config from '../config'
 export default {
     mounted() {
-        // if (!this.articleList.length) {
-            // return  this.getList()
-        // }
         this.getList()
-        // this.popularArticle = this.articleList.slice(0,6)
     },
     data() {
         return {

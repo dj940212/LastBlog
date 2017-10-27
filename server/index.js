@@ -3,32 +3,30 @@ import { Nuxt, Builder } from 'nuxt'
 import Router from './router/routes'
 import mongoose from 'mongoose'
 import logger from 'koa-logger'
-import session from 'koa-session'
+
 import bodyParser from 'koa-bodyparser'
+import passport from 'passport'
 import cors from 'koa-cors'
 import Database from './middlewares/database'
+import VerifyToken from './middlewares/verifyToken'
+import one from './middlewares/test'
+import addSession from './middlewares/session'
 
 const app = new Koa()
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 const router = Router()
 
+// 数据库
+Database()
 
 app.use(bodyParser())
 app.use(router.routes())
 app.use(router.allowedMethods())
 app.use(logger())
 app.use(cors())
-app.use(session({
-  key: 'koa:sess',
-  maxAge: 86400000,
-  overwrite: true,
-  signed: true,
-  rolling: false
-},app))
+addSession(app)
 
-// 数据库
-Database()
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')

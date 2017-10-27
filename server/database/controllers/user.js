@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import UserMod from '../models/user'
+import jwt from 'jsonwebtoken'
+import config from '../../../config'
 import uuid from 'uuid'
 
 class User {
@@ -16,11 +18,16 @@ class User {
                 username: user.username,
                 _id: user._id
             }
+            
+            const token = user.getToken()
+            user.token = token
+            await user.save()
 
             return (ctx.body = {
                 success: true,
                 data: {
-                    username: user.username
+                    username: user.username,
+                    token: token
                 }
             })
         }
@@ -29,9 +36,15 @@ class User {
             success: false,
             message: '密码错误'
         })
-
-        
     }
+
+    async logout(ctx) {
+        ctx.body = {
+            success: true,
+            message: "登出"
+        }
+    }
+
 }
 
 export default new User()

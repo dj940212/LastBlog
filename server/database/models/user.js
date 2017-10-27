@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import config from '../../../config'
 
 const SALT_WORK_FACTOR = 10
 const UserSchema = new mongoose.Schema({
@@ -22,7 +24,7 @@ const UserSchema = new mongoose.Schema({
 	      type: Date,
 	      default: Date.now()
 	    }
-	 }
+	}
 
 })
 
@@ -49,12 +51,13 @@ UserSchema.pre('save', function (next) {
 		if (error) return next(error)
 		bcrypt.hash(user.password, salt, (error, hash) => {
 			if (error) return next(error)
-
+			
 			user.password = hash
 			next()	
 		})
 	})
 })
+
 
 UserSchema.methods = {
 	comparePassword: function (_password, password) {
@@ -100,6 +103,13 @@ UserSchema.methods = {
 	        })
 	      }
 	    })
+  	},
+  	getToken: function() {
+	  	const token = jwt.sign({name: this.username}, config.secret,{
+            expiresIn: 7200
+        })
+
+        return token
   	}
 }
 

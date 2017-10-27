@@ -33,23 +33,28 @@
         methods: {
             ...mapMutations({
                 setIsLogin: 'SET_IS_LOGIN',
+                setToken: 'SET_TOKEN'
             }),
             async signIn() {
                 try {
-                    const res = await axios.post(config.api.loginUrl,{username: this.username, password: this.password,withCredentials: true})
-                    console.log(res.data.message)
+                    const res = await axios.post(config.api.loginUrl,{username: this.username, password: this.password})
+                    console.log(res.data)
                     if (res.data.success) {
-                        this.$router.push('/')
+                        this.$router.push(this.curRoute)
                         this.setIsLogin(true)
+                        this.setToken(res.data.data.token)
                     }
                 }catch(e) {
                     console.log(e) 
                 }
-
-                // this.$router.push('/')
             },
 
         },
+        computed: {
+            ...mapGetters([
+                'curRoute'
+            ])
+        }
     }
 </script>
 <style lang="less" scoped>

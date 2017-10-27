@@ -100,26 +100,30 @@ export default {
             !this.writeTitle && this.$refs.writeTitle.focus()
             !htmlContent && this.$refs.pen.focus()
 
-            if (this.writeTitle && this.writeDesc && htmlContent) {
-                const res = await axios.post(config.api.addArticleUrl,{
+            if (!this.writeTitle && !this.writeDesc && !htmlContent) return alert('信息不完整')
+            if (!this.token) return alert('请登录')
+
+            const res = await axios({
+                url: config.api.addArticleUrl,
+                method: "POST",
+                data: {
                     title: this.writeTitle,
                     content: htmlContent,
                     description: this.writeDesc,
                     babel: 'javascript,css,html'
-                })
+                },
+                headers: {'x-access-token': this.token}
+        
+            })
 
-                this.$router.push({ path: '/article', query: { _id: res.data.data._id }})
+            this.$router.push({ path: '/article', query: { _id: res.data.data._id }})
                 
-                // 更新本地列表
-                if (this.articleList.length) {
-                    let newArticleList = this.articleList.slice(0)
-                    newArticleList.unshift(res.data.data)
-                    this.setArticleList(newArticleList)
-                    this.setCurrentIndex(0)
-                }
-
-            }else {
-                console.log('信息不完整')
+            // 更新本地列表
+            if (this.articleList.length) {
+                let newArticleList = this.articleList.slice(0)
+                newArticleList.unshift(res.data.data)
+                this.setArticleList(newArticleList)
+                this.setCurrentIndex(0)
             }
         },
         // 代码高亮
@@ -136,6 +140,7 @@ export default {
         ...mapGetters([
             'articleList',
             'currentIndex',
+            'token'
         ])
     },
 }

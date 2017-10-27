@@ -3,7 +3,9 @@ export default {
     user: {
         username: '2902273280@qq.com',
         password: '2902273280',
+        avatar: 'http://ovs5x36k4.bkt.clouddn.com/06.jpg'
     },
+    secret: 'dingjianblog', // used when we create and verify JSON Web Tokens
 	api: {
         // article
         'addArticleUrl': '/api/article/save',

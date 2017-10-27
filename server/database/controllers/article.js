@@ -68,7 +68,7 @@ class Article {
         const sort = ctx.request.query.sort || -1
 
         const data = await ArticleMod.find({},['title', 'description', 'babel', 'meta', 'comment']).sort({'meta.updateAt': sort}).skip(parseInt(skipNum)).limit(parseInt(count))
-
+        
         ctx.body = {
             message: 'success',
             data: data
@@ -166,7 +166,6 @@ class Article {
 
         if (_id) {
             const data = await ArticleMod.findOne({_id:_id})
-
             ctx.body = {
                 message: 'success',
                 data: data

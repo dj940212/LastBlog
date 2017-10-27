@@ -38,14 +38,15 @@ export default {
     methods: {
         ...mapMutations({
             setArticleMode: 'SET_ARTICLE_MODE',
-            setIsLogin: 'SET_IS_LOGIN'
+            setIsLogin: 'SET_IS_LOGIN',
+            setCurRoute: 'SET_CUR_ROUTE'
         }),
         toWriteArticle() {
             this.$router.push('/article/add')
         },
         login() {
             this.$router.push('/login')
-            this.setIsLogin(true)
+            this.setCurRoute(this.$route.fullPath)
         },
         toLabels() {
             this.$router.push('/labels')

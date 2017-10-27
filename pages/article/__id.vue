@@ -83,7 +83,8 @@ export default {
             'articleList',
             'mode',
             'currentIndex',
-            '_id'
+            '_id',
+            'token'
         ])
     },
     componets: {
@@ -180,26 +181,38 @@ export default {
             !this.updateDesc && this.$refs.updateDesc.focus();
             !this.updateTitle && this.$refs.updateTitle.focus()
             !htmlContent && this.$refs.pen.focus()
-            if (this.updateDesc && this.updateTitle && htmlContent) {
-                const res = await axios.post(config.api.articleUpdateUrl,{
+
+            if (!this.updateDesc || !this.updateTitle || !htmlContent) return alert('信息不完整')
+            if (!this.token) return alert("请登录") 
+
+            const res = await axios({
+                url: config.api.articleUpdateUrl,
+                method: 'POST',
+                data: {
                     title: this.updateTitle,
                     description: this.updateDesc,
                     content: htmlContent,
                     _id: this.$route.query._id,
                     babel: 'javascript,css,html'
-                })
-                
-                // 绑定到变量
-                this.setArticleMode('read')
-                this.article = res.data.data
-                this.$refs.pen.innerHTML = this.article.content
-            }else{
-                console.log('信息不完整')
-            }
+                },
+                headers: {'x-access-token': this.token},
+                withCredentials: true
+            })
+            
+            // 绑定到变量
+            this.setArticleMode('read')
+            this.article = res.data.data
+            this.$refs.pen.innerHTML = this.article.content
         },
         // 删除文章
         async deleteArt() {
-            const res = await axios.post(config.api.articleDeleteUrl,{_id: this._id })
+            if (!this.token) return alert("请登录!")
+            const res = await axios({
+                url: config.api.articleDeleteUrl,
+                method: 'POST',
+                data: {_id: this._id},
+                headers: {'x-access-token': this.token}
+            })
             this.$router.push('/article/list')
         },
         // 获取文章

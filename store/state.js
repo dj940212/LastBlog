@@ -3,7 +3,9 @@ const state = {
     articleList: [],
     currentIndex: -1,
     _id: '',
-    isLogin: false
+    isLogin: false,
+    token: '',
+    curRoute: '/'
 }
 
 export default state

@@ -3,15 +3,16 @@ import Article from '../database/controllers/article'
 import Label from '../database/controllers/label'
 import Activity from '../database/controllers/activity'
 import User from '../database/controllers/user'
+import { verifyToken } from '../api/user'
 
 export default () => {
 	const router = new Router({ prefix: '/api' })
 
     // article
-	router.post('/article/save', Article.add)
+	router.post('/article/save', verifyToken, Article.add)
     router.get('/article/list', Article.list)
-    router.post('/article/update', Article.update)
-    router.post('/article/delete', Article.delete)
+    router.post('/article/update',verifyToken, Article.update)
+    router.post('/article/delete',verifyToken, Article.delete)
     router.get('/article/read', Article.findOne)
 
     // label
@@ -24,8 +25,8 @@ export default () => {
     router.get('/activity/oneday', Activity.oneDay)
 
     // user
-    // router.post('/user/register', User.register)
     router.post('/login', User.login)
+    router.post('/logout', verifyToken, User.logout)
 
 	return router
 }

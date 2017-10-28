@@ -5,7 +5,10 @@ const state = {
     _id: '',
     isLogin: false,
     token: '',
-    curRoute: '/'
+    curRoute: '/',
+    labels: [],
+    curEdit: -1 //当前显示的label编辑器index
+
 }
 
 export default state

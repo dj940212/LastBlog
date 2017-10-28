@@ -5,3 +5,5 @@ export const _id = state => state._id
 export const isLogin = state => state.isLogin
 export const token = state => state.token
 export const curRoute = state => state.curRoute
+export const labels = state => state.labels
+export const curEdit = state => state.curEdit

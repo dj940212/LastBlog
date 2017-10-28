@@ -1,41 +1,111 @@
 <template>
 	<div v-if="show" class="edit">
-        <v-input width="400px"></v-input>
+        <v-input
+            v-model="name"
+            width="400px"
+            :placeholder="type==='create' ? 'New label name': '' ">
+        </v-input>
         <div class="changeColor">
             <v-button>123</v-button>
-            <v-input width="180px"></v-input> 
+            <v-input v-model="color" width="180px"></v-input>
         </div>
-        
+
         <div class="right">
-            <v-button 
-                background="#f7f9fb" 
+            <v-button
+                background="#f7f9fb"
                 border="1px solid rgba(27,31,35,0.2)"
-                @click.native="clickHandle"
+                @click.native="$emit('hidden')"
             >Cancel</v-button>
-            <v-button 
+            <v-button
                 border="1px solid rgba(27,31,35,0.2)"
-            >Save</v-button>
+                @click.native = "clickHandle"
+            >{{type==="change" ? "Save change" : "Create label"}}</v-button>
         </div>
     </div>
 </template>
-<script type="text/javascript">
+<script>
+import {mapMutations, mapGetters} from 'vuex'
 import vButton from '../../components/vButton'
 import vInput from '../../components/vInput'
+import config from '../../config'
+import axios from 'axios'
 export default {
+	mounted() {
+		if(this.type ==="change") {
+			console.log("change",this.label)
+			this.color = this.label.color,
+			this.name = this.label.name
+		}
+	},
 	props: {
 		show: {
 			type: Boolean,
 			default: false
-		}
+		},
+        type: {
+            type: String,
+            default: "change"
+        },
+		label: {
+			type: Object,
+			default: () => {}
+		},
 	},
+    data() {
+        return {
+            color: "#",
+            name: ""
+        }
+    },
 	components: {
 		vButton,
 		vInput
 	},
 	methods: {
+		...mapMutations({
+            'setLabels': 'SET_LABELS',
+			'setCurEdit': 'SET_CUR_EDIT'
+        }),
 		clickHandle() {
-			this.$emit('hidden')
-		}
+			if (this.type === "create") {
+				return this.newLabel()
+			}
+			this.changeLabel()
+		},
+		async newLabel() {
+			const res = await axios({
+                method: "POST",
+                url: config.api.newLabelUrl,
+                data: {color: this.color, name: this.name},
+            })
+			console.log(res.data);
+			if (res.data.success) {
+				const newLabels = this.labels.slice()
+				newLabels.unshift(res.data.data)
+				this.setCurEdit(-1)
+				return	this.setLabels(newLabels)
+			}
+		},
+		async changeLabel() {
+			const res = await axios({
+                method: "POST",
+                url: config.api.changeLabelUrl,
+                data: {_id: this.label._id, color: this.color, name: this.name},
+            })
+
+			if (res.data.success) {
+				const newLabels = this.labels.slice()
+				newLabels.splice(this.curEdit, 1, res.data.data)
+				this.setLabels(newLabels)
+				this.setCurEdit(-1)
+			}
+		},
+	},
+	computed: {
+		...mapGetters([
+			'labels',
+			'curEdit'
+		])
 	}
 }
 </script>

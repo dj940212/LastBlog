@@ -12,7 +12,7 @@ class Label {
         let label = await LabelMod.findOne({name: name})
 
         if (!label) {
-            const newLabel = await new LabelMod({name:name}).save()
+            const newLabel = await new LabelMod({name: name, color: color}).save()
             ctx.body = {
                 success: true,
                 message: "添加Label成功",
@@ -21,12 +21,12 @@ class Label {
 
             return
         }
-        
+
         ctx.body = {
             success: false,
             message: 'Label已存在',
         }
-        
+
     }
 
     async delete(ctx) {
@@ -40,7 +40,7 @@ class Label {
                 message: e,
             }
         }
-        
+
         ctx.body = {
             success: true,
             message: '删除成功'
@@ -48,16 +48,12 @@ class Label {
     }
 
     async allLabels(ctx) {
-        let labels
-        try{
-            labels = await LabelMod.find({})
-        }catch(e) {
-            ctx.body = {
-                success: false,
-                message: '获取失败',
-                data: e
-            }
-        }
+        const {limit=100, skip=0, sort=1} = ctx.request.query
+        let labels = await LabelMod.find({},['name', 'color', 'artCount'])
+                .limit(parseInt(limit))
+                .skip(parseInt(skip))
+                .sort({'artCount': sort})
+
         ctx.body = {
             success: true,
             data: labels
@@ -70,17 +66,8 @@ class Label {
         let label = await LabelMod.findOne({_id:_id})
         label.name = name
         label.color = color
-
-        try {
-            label = await label.save()
-        }catch(e) {
-            ctx.body = {
-                success: false,
-                data: e
-            }
-        }
+        label = await label.save()
         
-
         ctx.body = {
             success: true,
             message: '修盖label成功',

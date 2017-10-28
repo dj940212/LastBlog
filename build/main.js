@@ -100,7 +100,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'getAllActivityUrl': '/api/activity/all',
         'getOneDayActivityUrl': '/api/activity/oneDay',
         // user
-        'loginUrl': '/api/login'
+        'loginUrl': '/api/login',
+        'newLabelUrl': '/api/label/new',
+        'changeLabelUrl': '/api/label/update',
+        'getLabelsUrl': '/api/labels',
+        'deleteLabelUrl': '/api/label/delete'
     }
 };
 
@@ -490,9 +494,10 @@ var verifyToken = function verifyToken(ctx, next) {
     router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
 
     // label
-    // router.get('/label/list', Babel.list)
+    router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
     router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
-    // router.post('/label/delete', Babel.delete)
+    router.post('/label/update', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].update);
+    router.post('/label/delete', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].delete);
 
     // activity
     router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
@@ -900,7 +905,7 @@ var Label = function () {
             var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ name: name });
 
             if (!label) {
-                var newLabel = await new __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */]({ name: name }).save();
+                var newLabel = await new __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */]({ name: name, color: color }).save();
                 ctx.body = {
                     success: true,
                     message: "添加Label成功",
@@ -937,16 +942,16 @@ var Label = function () {
     }, {
         key: 'allLabels',
         value: async function allLabels(ctx) {
-            var labels = void 0;
-            try {
-                labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({});
-            } catch (e) {
-                ctx.body = {
-                    success: false,
-                    message: '获取失败',
-                    data: e
-                };
-            }
+            var _ctx$request$query = ctx.request.query,
+                _ctx$request$query$li = _ctx$request$query.limit,
+                limit = _ctx$request$query$li === undefined ? 100 : _ctx$request$query$li,
+                _ctx$request$query$sk = _ctx$request$query.skip,
+                skip = _ctx$request$query$sk === undefined ? 0 : _ctx$request$query$sk,
+                _ctx$request$query$so = _ctx$request$query.sort,
+                sort = _ctx$request$query$so === undefined ? 1 : _ctx$request$query$so;
+
+            var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
+
             ctx.body = {
                 success: true,
                 data: labels
@@ -964,15 +969,7 @@ var Label = function () {
             var label = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].findOne({ _id: _id });
             label.name = name;
             label.color = color;
-
-            try {
-                label = await label.save();
-            } catch (e) {
-                ctx.body = {
-                    success: false,
-                    data: e
-                };
-            }
+            label = await label.save();
 
             ctx.body = {
                 success: true,

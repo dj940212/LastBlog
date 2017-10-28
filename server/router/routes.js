@@ -17,9 +17,10 @@ export default () => {
     router.post('/article/addLabel', Article.addLabel)
 
     // label
-    // router.get('/label/list', Babel.list)
+    router.get('/labels', Label.allLabels)
     router.post('/label/new', Label.new)
-    // router.post('/label/delete', Babel.delete)
+    router.post('/label/update', Label.update)
+    router.post('/label/delete', Label.delete)
 
     // activity
     router.get('/activity/all', Activity.all)

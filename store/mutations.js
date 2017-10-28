@@ -21,8 +21,13 @@ const mutations = {
     },
     [types.SET_CUR_ROUTE](state, curRoute) {
         state.curRoute = curRoute
+    },
+    [types.SET_LABELS](state, labels) {
+        state.labels = labels
+    },
+    [types.SET_CUR_EDIT](state, curEdit) {
+        state.curEdit = curEdit
     }
 }
 
 export default mutations
-

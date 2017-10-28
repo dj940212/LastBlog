@@ -18,6 +18,10 @@ export default {
         'getAllActivityUrl': '/api/activity/all',
         'getOneDayActivityUrl': '/api/activity/oneDay',
         // user
-        'loginUrl': '/api/login'
+        'loginUrl': '/api/login',
+        'newLabelUrl': '/api/label/new',
+        'changeLabelUrl': '/api/label/update',
+        'getLabelsUrl': '/api/labels',
+        'deleteLabelUrl': '/api/label/delete'
     }
 }

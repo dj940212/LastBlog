@@ -180,9 +180,11 @@ class Article {
 
     async addLabel(ctx) {
         const {label_id, article_id} = ctx.request.body
-        let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
+        // let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
+        // let label = await LabelMod.findOne({_id: label_id})
+        let article = await ArticleMod.findOne({_id: article_id, label: {$in: [label_id]}})
 
-        if (labelMap) {
+        if (article) {
             ctx.body = {
                 success: false,
                 message: '该标签已存在'
@@ -190,17 +192,14 @@ class Article {
             return
         }
 
-        const article = await ArticleMod.findOne({_id: article_id})
-        const label = await LabelMod.findOne({_id: label_id})
+        article.label.push(label_id)
 
-        labelMap = await new LabelMapMod({
-            article: article,
-            label: label
-        }).save()
+        article.save()
 
         ctx.body = {
             success: true,
-            data: labelMap
+            message: '添加标签成功',
+            data: article.label
         }
     }
 

@@ -27,7 +27,7 @@ export default {
 		},
 		icon: {
 			type: String,
-			default: 'el-icon-edit'
+			default: ''
 		},
 		fontSize: {
 			type: String,

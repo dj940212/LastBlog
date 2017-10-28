@@ -9,8 +9,15 @@ const ArticleSchema = new Schema({
     content: String,
     comment: String,
     description: String,
+    label: [{
+      type: ObjectId,
+      ref: 'Label'
+    }],
     meta: {
-      createAt: String,
+      createAt: {
+        type: Date,
+        default: Date.now()
+      },
       updateAt: {
         type: Date,
         default: Date.now()

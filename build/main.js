@@ -183,6 +183,34 @@ ActivitySchema.pre('save', function (next) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
+
+var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
+var ObjectId = Schema.Types.ObjectId;
+var LabelSchema = new Schema({
+    name: String,
+    color: {
+        default: '#000',
+        type: String
+    },
+    article: [{
+        type: ObjectId,
+        ref: 'Article'
+    }],
+    artCount: {
+        type: Number,
+        default: 0
+    }
+});
+
+/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Label', LabelSchema);
+
+/***/ },
+/* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bcrypt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__ = __webpack_require__(2);
@@ -302,13 +330,13 @@ UserSchema.methods = {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('User', UserSchema);
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 module.exports = require("uuid");
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 module.exports = {
@@ -336,14 +364,14 @@ module.exports = {
 };
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_models_user__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_models_user__ = __webpack_require__(6);
 
 
 
@@ -373,7 +401,7 @@ module.exports = {
 };
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -396,7 +424,7 @@ var addSession = function addSession(app) {
 /* harmony default export */ exports["a"] = addSession;
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -409,7 +437,7 @@ var one = function one(ctx, next) {
 /* unused harmony default export */ var _unused_webpack_default_export = one;
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -432,17 +460,17 @@ var verifyToken = function verifyToken(ctx, next) {
 /* unused harmony default export */ var _unused_webpack_default_export = verifyToken;
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__api_user__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__api_user__ = __webpack_require__(20);
 
 
 
@@ -478,43 +506,43 @@ var verifyToken = function verifyToken(ctx, next) {
 };
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 module.exports = require("koa");
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-bodyparser");
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-cors");
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-logger");
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 module.exports = require("nuxt");
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 module.exports = require("passport");
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -546,7 +574,7 @@ var verifyToken = function verifyToken(ctx, next) {
 };
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -597,19 +625,19 @@ var Activity = function () {
 /* harmony default export */ exports["a"] = new Activity();
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_label__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_label__ = __webpack_require__(5);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -811,10 +839,12 @@ var Article = function () {
             var _ctx$request$body3 = ctx.request.body,
                 label_id = _ctx$request$body3.label_id,
                 article_id = _ctx$request$body3.article_id;
+            // let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
+            // let label = await LabelMod.findOne({_id: label_id})
 
-            var labelMap = await __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */].findOne({ 'article': article_id, 'label': label_id });
+            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id, label: { $in: [label_id] } });
 
-            if (labelMap) {
+            if (article) {
                 ctx.body = {
                     success: false,
                     message: '该标签已存在'
@@ -822,17 +852,14 @@ var Article = function () {
                 return;
             }
 
-            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
-            var label = await __WEBPACK_IMPORTED_MODULE_6__models_label__["a" /* default */].findOne({ _id: label_id });
+            article.label.push(label_id);
 
-            labelMap = await new __WEBPACK_IMPORTED_MODULE_5__models_labelMap__["a" /* default */]({
-                article: article,
-                label: label
-            }).save();
+            article.save();
 
             ctx.body = {
                 success: true,
-                data: labelMap
+                message: '添加标签成功',
+                data: article.label
             };
         }
     }]);
@@ -843,13 +870,13 @@ var Article = function () {
 /* harmony default export */ exports["a"] = new Article();
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_label__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_label__ = __webpack_require__(5);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -949,6 +976,7 @@ var Label = function () {
 
             ctx.body = {
                 success: true,
+                message: '修盖label成功',
                 data: label
             };
         }
@@ -960,17 +988,17 @@ var Label = function () {
 /* harmony default export */ exports["a"] = new Label();
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_user__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__config__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_uuid__);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -1038,7 +1066,7 @@ var User = function () {
 /* harmony default export */ exports["a"] = new User();
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1056,8 +1084,15 @@ var ArticleSchema = new Schema({
   content: String,
   comment: String,
   description: String,
+  label: [{
+    type: ObjectId,
+    ref: 'Label'
+  }],
   meta: {
-    createAt: String,
+    createAt: {
+      type: Date,
+      default: Date.now()
+    },
     updateAt: {
       type: Date,
       default: Date.now()
@@ -1077,26 +1112,6 @@ ArticleSchema.pre('save', function (next) {
 });
 
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Article', ArticleSchema);
-
-/***/ },
-/* 25 */
-/***/ function(module, exports, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-
-var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
-
-var LabelSchema = new Schema({
-    name: String,
-    color: {
-        default: '#000',
-        type: String
-    }
-});
-
-/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Label', LabelSchema);
 
 /***/ },
 /* 26 */
@@ -1120,7 +1135,7 @@ var LabelMapSchema = new Schema({
     }
 });
 
-/* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
+/* unused harmony default export */ var _unused_webpack_default_export = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
 
 /***/ },
 /* 27 */
@@ -1146,25 +1161,25 @@ module.exports = require("koa-session");
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa__ = __webpack_require__(14);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt__ = __webpack_require__(18);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_nuxt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_nuxt__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router_routes__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_koa_logger___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_koa_logger__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_bodyparser__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_bodyparser__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_koa_bodyparser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_koa_bodyparser__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_passport__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_passport__ = __webpack_require__(19);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_passport___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_passport__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_koa_cors___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_koa_cors__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__middlewares_database__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__middlewares_verifyToken__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__middlewares_test__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__middlewares_session__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__middlewares_database__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__middlewares_verifyToken__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__middlewares_test__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__middlewares_session__ = __webpack_require__(10);
 
 
 
@@ -1195,7 +1210,7 @@ app.use(__WEBPACK_IMPORTED_MODULE_7_koa_cors___default()());
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_11__middlewares_session__["a" /* default */])(app);
 
 // Import and Set Nuxt.js options
-var config = __webpack_require__(7);
+var config = __webpack_require__(8);
 config.dev = !(app.env === 'production');
 
 // Instantiate nuxt.js

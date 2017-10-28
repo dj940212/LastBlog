@@ -83,6 +83,7 @@ class Label {
 
         ctx.body = {
             success: true,
+            message: '修盖label成功',
             data: label
         }
 

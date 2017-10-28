@@ -6,12 +6,12 @@
 		<ul class="item-list">
 			<ul>
 				<li class="item" v-for="(item,index) in labels" @click="addLabel(index)">
-					<i class="el-icon-check"></i>
+					<i class="el-icon-check" :style="existLabel(item)"></i>
 					<div class="label">
 						<div class="color-box" :style="{background: item.color}"></div>
 						<span class="label-name">{{item.name}}</span>
 					</div>
-					<i class="el-icon-close"></i>
+					<i class="el-icon-close" :style="existLabel(item)"></i>
 				</li>
 			</ul>
 		</ul>
@@ -26,14 +26,19 @@ export default {
 	props: ['article'],
 	mounted() {
 		this.getLabels()
+		console.log("card",this.article)
 	},
 	data() {
 		return {
-			labels: []
+			labels: [],
+			existStyle: {}
 		}
 	},
 	components: {
 		vInput
+	},
+	computed: {
+
 	},
 	methods: {
 		async getLabels() {
@@ -48,6 +53,29 @@ export default {
 				data: {article_id: this.article._id, label_id: this.labels[index]._id}
 			})
 			console.log(res.data)
+			if (!res.data.success) {
+				this.delLabel(index)
+			}
+		},
+		async delLabel(index) {
+			const res = await axios({
+				url: config.api.delLabelUrl,
+				method: 'POST',
+				data: {article_id: this.article._id, label_id: this.labels[index]._id}
+			})
+			console.log(res.data)
+		},
+		existLabel(item) {
+			// for (var i = 0; i < this.article.label.length; i++) {
+			// 	if (this.article.label[i]._id === item._id) {
+			// 		console.log(item)
+			// 		return {color: item.color}
+			// 	}
+			// }
+			console.log(this.article.label.indexOf(item))
+			if (this.article.label.indexOf(item) > -1) {
+				return {color: item.color}
+			}
 		}
 	}
 }
@@ -84,7 +112,10 @@ export default {
 			i {
 				font-size: 12px;
 				font-weight: 800;
-				color: #c5c0ae;
+				color: rgba(0,0,0,0);
+			}
+			i.el-icon-close {
+				cursor: pointer;
 			}
 			.label {
 				display: inline-block;

@@ -96,12 +96,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'articleDeleteUrl': '/api/article/delete',
         'readArticleUrl': '/api/article/read',
         'addLabelUrl': '/api/article/addLabel',
+        'delLabelUrl': '/api/article/delLabel',
 
         // activity
         'getAllActivityUrl': '/api/activity/all',
         'getOneDayActivityUrl': '/api/activity/oneDay',
         // user
         'loginUrl': '/api/login',
+        // label
         'newLabelUrl': '/api/label/new',
         'changeLabelUrl': '/api/label/update',
         'getLabelsUrl': '/api/labels',
@@ -498,7 +500,7 @@ var verifyToken = function verifyToken(ctx, next) {
     router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
     router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
     router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
-    // router.get('/article/labels', Article.)
+    router.post('/article/delLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delLabel);
     // label
     router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
     router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
@@ -835,7 +837,7 @@ var Article = function () {
             var _id = ctx.request.query._id;
 
             if (_id) {
-                var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: _id });
+                var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: _id }).populate({ path: 'label', select: 'name color artCount' });
                 ctx.body = {
                     message: 'success',
                     data: data
@@ -872,11 +874,26 @@ var Article = function () {
                 data: article.label
             };
         }
+    }, {
+        key: 'delLabel',
+        value: async function delLabel(ctx) {
+            var _ctx$request$body4 = ctx.request.body,
+                article_id = _ctx$request$body4.article_id,
+                label_id = _ctx$request$body4.label_id;
 
-        // async getLabels(ctx) {
-        //   const _id = ctx.request.query._id
-        // }
+            var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
 
+            console.log(article.label);
+            var index = article.label.indexOf(label_id);
+            article.label.splice(index, 1);
+
+            article = await article.save();
+
+            ctx.body = {
+                success: true,
+                data: article.label
+            };
+        }
     }]);
 
     return Article;
@@ -958,7 +975,7 @@ var Label = function () {
                 _ctx$request$query$sk = _ctx$request$query.skip,
                 skip = _ctx$request$query$sk === undefined ? 0 : _ctx$request$query$sk,
                 _ctx$request$query$so = _ctx$request$query.sort,
-                sort = _ctx$request$query$so === undefined ? 1 : _ctx$request$query$so;
+                sort = _ctx$request$query$so === undefined ? -1 : _ctx$request$query$so;
 
             var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
 

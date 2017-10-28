@@ -48,7 +48,7 @@ class Label {
     }
 
     async allLabels(ctx) {
-        const {limit=100, skip=0, sort=1} = ctx.request.query
+        const {limit=100, skip=0, sort=-1} = ctx.request.query
         let labels = await LabelMod.find({},['name', 'color', 'artCount'])
                 .limit(parseInt(limit))
                 .skip(parseInt(skip))
@@ -67,7 +67,7 @@ class Label {
         label.name = name
         label.color = color
         label = await label.save()
-        
+
         ctx.body = {
             success: true,
             message: '修盖label成功',

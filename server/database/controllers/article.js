@@ -169,6 +169,7 @@ class Article {
 
         if (_id) {
             const data = await ArticleMod.findOne({_id:_id})
+               .populate({ path: 'label', select: 'name color artCount' })
             ctx.body = {
                 message: 'success',
                 data: data
@@ -202,9 +203,21 @@ class Article {
         }
     }
 
-    // async getLabels(ctx) {
-    //   const _id = ctx.request.query._id
-    // }
+    async delLabel(ctx) {
+      const {article_id, label_id} = ctx.request.body
+      let article =await ArticleMod.findOne({_id: article_id})
+
+      console.log(article.label)
+      const index = article.label.indexOf(label_id)
+      article.label.splice(index,1)
+
+      article = await article.save()
+
+      ctx.body = {
+        success: true,
+        data: article.label
+      }
+    }
 }
 
 export default new Article()

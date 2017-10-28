@@ -17,4 +17,9 @@ const LabelSchema = new Schema({
     }
 })
 
+LabelSchema.pre('save', function(next) {
+  this.artCount = this.article.length
+  next()
+})
+
 export default mongoose.model('Label', LabelSchema)

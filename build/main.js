@@ -95,6 +95,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
         'articleUpdateUrl': '/api/article/update',
         'articleDeleteUrl': '/api/article/delete',
         'readArticleUrl': '/api/article/read',
+        'addLabelUrl': '/api/article/addLabel',
 
         // activity
         'getAllActivityUrl': '/api/activity/all',
@@ -191,19 +192,24 @@ ActivitySchema.pre('save', function (next) {
 var Schema = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.Schema;
 var ObjectId = Schema.Types.ObjectId;
 var LabelSchema = new Schema({
-    name: String,
-    color: {
-        default: '#000',
-        type: String
-    },
-    article: [{
-        type: ObjectId,
-        ref: 'Article'
-    }],
-    artCount: {
-        type: Number,
-        default: 0
-    }
+  name: String,
+  color: {
+    default: '#000',
+    type: String
+  },
+  article: [{
+    type: ObjectId,
+    ref: 'Article'
+  }],
+  artCount: {
+    type: Number,
+    default: 0
+  }
+});
+
+LabelSchema.pre('save', function (next) {
+  this.artCount = this.article.length;
+  next();
 });
 
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Label', LabelSchema);
@@ -492,7 +498,7 @@ var verifyToken = function verifyToken(ctx, next) {
     router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
     router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
     router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
-
+    // router.get('/article/labels', Article.)
     // label
     router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
     router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
@@ -668,7 +674,6 @@ var Article = function () {
                 title = _ctx$request$body.title,
                 content = _ctx$request$body.content,
                 description = _ctx$request$body.description;
-            // const label  = ctx.request.body.babel.split(',')
 
             var article = void 0;
 
@@ -676,7 +681,6 @@ var Article = function () {
                 article = new __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */]({
                     title: title,
                     content: content,
-                    // babel: babel,
                     description: description
                 });
                 article = await article.save();
@@ -844,11 +848,8 @@ var Article = function () {
             var _ctx$request$body3 = ctx.request.body,
                 label_id = _ctx$request$body3.label_id,
                 article_id = _ctx$request$body3.article_id;
-            // let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
-            // let label = await LabelMod.findOne({_id: label_id})
 
             var article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id, label: { $in: [label_id] } });
-
             if (article) {
                 ctx.body = {
                     success: false,
@@ -857,9 +858,13 @@ var Article = function () {
                 return;
             }
 
-            article.label.push(label_id);
+            article = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].findOne({ _id: article_id });
+            var label = await __WEBPACK_IMPORTED_MODULE_6__models_label__["a" /* default */].findOne({ _id: label_id });
 
-            article.save();
+            article.label.push(label);
+            label.article.push(article);
+            article = await article.save();
+            label = await label.save();
 
             ctx.body = {
                 success: true,
@@ -867,6 +872,11 @@ var Article = function () {
                 data: article.label
             };
         }
+
+        // async getLabels(ctx) {
+        //   const _id = ctx.request.query._id
+        // }
+
     }]);
 
     return Article;

@@ -12,14 +12,12 @@ class Article {
     async new(ctx) {
         const key = uuid.v4()
         const {title, content, description} = ctx.request.body
-        // const label  = ctx.request.body.babel.split(',')
         let article
 
         try {
             article = new ArticleMod({
                 title: title,
                 content: content,
-                // babel: babel,
                 description: description
             })
             article = await article.save()
@@ -57,8 +55,8 @@ class Article {
             success: 'true',
             message: '保存成功',
             data: {
-                _id: article._id, 
-                title: article.title, 
+                _id: article._id,
+                title: article.title,
                 desc: article.description
             }
         }
@@ -73,7 +71,7 @@ class Article {
             .sort({'meta.updateAt': sort})
             .skip(parseInt(skipNum))
             .limit(parseInt(count))
-        
+
         ctx.body = {
             message: 'success',
             data: data
@@ -81,7 +79,7 @@ class Article {
     }
 
     async update(ctx) {
-        
+
         const {content, description, title, _id, babel} = ctx.request.body
 
         let article = await ArticleMod.findOne({_id:_id})
@@ -180,10 +178,7 @@ class Article {
 
     async addLabel(ctx) {
         const {label_id, article_id} = ctx.request.body
-        // let labelMap = await LabelMapMod.findOne({'article': article_id,'label': label_id})
-        // let label = await LabelMod.findOne({_id: label_id})
         let article = await ArticleMod.findOne({_id: article_id, label: {$in: [label_id]}})
-
         if (article) {
             ctx.body = {
                 success: false,
@@ -192,9 +187,13 @@ class Article {
             return
         }
 
-        article.label.push(label_id)
+        article = await ArticleMod.findOne({_id: article_id})
+        let label = await LabelMod.findOne({_id: label_id})
 
-        article.save()
+        article.label.push(label)
+        label.article.push(article)
+        article = await article.save()
+        label = await label.save()
 
         ctx.body = {
             success: true,
@@ -203,6 +202,9 @@ class Article {
         }
     }
 
+    // async getLabels(ctx) {
+    //   const _id = ctx.request.query._id
+    // }
 }
 
 export default new Article()

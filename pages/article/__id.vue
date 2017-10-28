@@ -8,19 +8,14 @@
                     <input ref="updateTitle" v-if="mode=='update'" type="text" placeholder="title of this article" v-model="updateTitle">
                 </div>
                 <div class="tool">
-                    <!-- <i class="iconfont icon-shezhi" @click="publish"></i> -->
+                    <div class="watch"><i class="iconfont icon-liulan"></i></div>
+                    <div class="num">1000</div>
                     <div class="setting" @click="settingsValue = !settingsValue"><i class="iconfont icon-setting"></i>Settings<i class="iconfont icon-xiala"></i></div>
-                    <div class="watch"><i class="iconfont icon-liulan"></i>Watch</div>
+                    <div class="watch"><i class="iconfont icon-liulan"></i></div>
                     <div class="num">1000</div>
                 </div>
-                <div class="setting-panel" v-show="settingsValue">
-                    <div class="setting-item"　@click="deleteArt">Delete article</div>
-                    <hr>
-                    <div class="setting-item">Export HTML</div>
-                    <div class="setting-item" @click="saveAsMarkdown">Export markdown</div>
-                    <hr>
-                    <div class="setting-item">Import markdown</div>
-                    <div class="setting-item">Import HTML</div>
+                <div class="setting-panel">
+                    <card :article="article"></card>
                 </div>
             </div>
         </div>
@@ -41,6 +36,7 @@
             <div class="content-inner">
                 <div id="pen" data-toggle="pen" ref="pen">
                     <p></p>
+                    <p></p>
                 </div>
             </div>
         </div>
@@ -52,8 +48,7 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import axios from 'axios'
 import {mapGetters, mapMutations} from 'vuex'
-import Babel from '../../components/babel'
-
+import card from '../../components/card'
 import config from '../../config'
 
 export default {
@@ -66,8 +61,8 @@ export default {
         }
     },
     mounted() {
-        require('../../static/js/pen.js') 
-        require('../../static/js/markdown.js') 
+        require('../../static/js/pen.js')
+        require('../../static/js/markdown.js')
         console.log(this.articleList)
         console.log("id",this.$route.query._id)
         this.setArticleMode("read")
@@ -87,8 +82,8 @@ export default {
             'token'
         ])
     },
-    componets: {
-        Babel
+    components: {
+        card
     },
     methods: {
         ...mapMutations({
@@ -103,7 +98,6 @@ export default {
         },
         init() {
             const options = {
-                // toolbar: document.getElementById('custom-toolbar'),
                 editor: this.$refs.pen,
                 debug: true,
                 list: [
@@ -123,45 +117,6 @@ export default {
 
             this.updateDesc = this.article.description
             this.updateTitle = this.article.title
-        },
-        tomd() {
-            var text = pen.toMd();
-            document.body.innerHTML = '<a href="javascript:location.reload()">&larr;back to editor</a><br><br><pre>' + text + '</pre>';
-        },
-        // 保存新文章
-        save(code, name){
-          var URL = window.URL || window.webkitURL || window.mozURL || window.msURL;
-          navigator.saveBlob = navigator.saveBlob || navigator.msSaveBlob || navigator.mozSaveBlob || navigator.webkitSaveBlob;
-          window.saveAs = window.saveAs || window.webkitSaveAs || window.mozSaveAs || window.msSaveAs;
-          var blob = new Blob([code], { type: 'text/plain' });
-          if(window.saveAs){
-            window.saveAs(blob, name);
-          }else if(navigator.saveBlob){
-            navigator.saveBlob(blob, name);
-          }else{
-            var url = URL.createObjectURL(blob);
-            var link = document.createElement("a");
-            link.setAttribute("href",url);
-            link.setAttribute("download",name);
-            var event = document.createEvent('MouseEvents');
-            event.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
-            link.dispatchEvent(event);
-          }
-        },
-        saveAsMarkdown() {
-           // console.log(this.pen.toMd())
-           this.save(this.pen.toMd(),'undefined.md')
-        },
-        saveAsHtml() {
-          this.save(document.getElementById('pen').innerHTML, "untitled.html");
-          console.log(typeof document.getElementById('pen').innerHTML)
-        },
-        toString(blob) {
-            var reader = new FileReader();
-            reader.readAsText(blob, 'utf-8');
-            reader.onload = function (e) {
-                console.info(reader.result);
-            }
         },
         // 代码高亮
         codeHighlight() {
@@ -183,7 +138,7 @@ export default {
             !htmlContent && this.$refs.pen.focus()
 
             if (!this.updateDesc || !this.updateTitle || !htmlContent) return alert('信息不完整')
-            if (!this.token) return alert("请登录") 
+            if (!this.token) return alert("请登录")
 
             const res = await axios({
                 url: config.api.articleUpdateUrl,
@@ -197,7 +152,7 @@ export default {
                 headers: {'x-access-token': this.token},
                 withCredentials: true
             })
-            
+
             // 绑定到变量
             this.setArticleMode('read')
             this.article = res.data.data
@@ -313,10 +268,9 @@ export default {
                         font-size: 16px;
                         .iconfont {
                             font-size: 20px;
-                            margin-right: 8px;
                             position: relative;
                             color: #444;
-                            top: 3px;
+                            top: 2px;
                         }
                     }
                     .num {
@@ -342,25 +296,6 @@ export default {
                     z-index: 10;
                     right: 145px;
                     top: 55px;
-                    background-color: #fff;
-                    border-radius: 3px;
-                    border:1px solid @border-color;
-                    .setting-item {
-                        height: 30px;
-                        padding-left: 15px;
-                        cursor: pointer;
-                        line-height: 30px;
-                        &:hover {
-                            background-color: #5248d6;
-                            color: rgba(255, 255, 255, 0.9);
-                        }
-                    }
-                    hr{
-                        // border: 0;
-                        margin: 4px 0;
-                        border-bottom: 0;
-                        border-color: @border-color;
-                    }
                 }
             }
 
@@ -474,7 +409,7 @@ export default {
                                 cursor: pointer;
                             }
                         }
-                    
+
                 }
                 .babel {
                     margin-right: 93px;

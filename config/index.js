@@ -13,6 +13,7 @@ export default {
         'articleUpdateUrl': '/api/article/update',
         'articleDeleteUrl': '/api/article/delete',
         'readArticleUrl': '/api/article/read',
+				'addLabelUrl': '/api/article/addLabel',
 
         // activity
         'getAllActivityUrl': '/api/activity/all',

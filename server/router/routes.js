@@ -15,7 +15,7 @@ export default () => {
     router.post('/article/delete',verifyToken, Article.delete)
     router.get('/article/read', Article.findOne)
     router.post('/article/addLabel', Article.addLabel)
-
+		// router.get('/article/labels', Article.)
     // label
     router.get('/labels', Label.allLabels)
     router.post('/label/new', Label.new)

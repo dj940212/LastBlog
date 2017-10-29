@@ -1,7 +1,7 @@
 <template>
     <div class="label-menu">
         <div class="label">
-            <v-button fontSize="13px" background="#eee"> All {{articleList.length}}</v-button>
+            <v-button fontSize="13px" background="#eee"> All {{artLength}}</v-button>
         </div>
         <div class="label" v-for="(label,index) in labels">
             <v-button
@@ -61,7 +61,8 @@ export default {
     border-bottom: 1px solid @border-color;
     flex-wrap: wrap;
     .label {
-        margin: 3px;
+        margin: 4px;
+        cursor: pointer;
         .artCount {
             // background: red;
             color: #eee;

@@ -67,7 +67,8 @@ class Article {
         const skipNum = ctx.request.query.skipNum || 0
         const sort = ctx.request.query.sort || -1
 
-        const data = await ArticleMod.find({},['title', 'description', 'meta'])
+        const data = await ArticleMod.find({},['title', 'description', 'meta', 'label'])
+            .populate({ path: 'label', select: 'name color artCount' })
             .sort({'meta.updateAt': sort})
             .skip(parseInt(skipNum))
             .limit(parseInt(count))

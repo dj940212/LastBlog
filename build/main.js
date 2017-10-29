@@ -732,7 +732,7 @@ var Article = function () {
             var skipNum = ctx.request.query.skipNum || 0;
             var sort = ctx.request.query.sort || -1;
 
-            var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].find({}, ['title', 'description', 'meta']).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
+            var data = await __WEBPACK_IMPORTED_MODULE_1__models_article__["a" /* default */].find({}, ['title', 'description', 'meta', 'label']).populate({ path: 'label', select: 'name color artCount' }).sort({ 'meta.updateAt': sort }).skip(parseInt(skipNum)).limit(parseInt(count));
 
             ctx.body = {
                 message: 'success',

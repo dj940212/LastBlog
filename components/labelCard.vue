@@ -5,46 +5,50 @@
 		</div>
 		<ul class="item-list">
 			<ul>
-				<li class="item" v-for="(item,index) in labels" @click="addLabel(index)">
-					<i class="el-icon-check" :style="existLabel(item)"></i>
+				<li class="item" v-for="(item,index) in labels" @click="clickHandle(index)">
+					<i class="el-icon-check" :style="iconStyle(item)"></i>
 					<div class="label">
 						<div class="color-box" :style="{background: item.color}"></div>
 						<span class="label-name">{{item.name}}</span>
 					</div>
-					<i class="el-icon-close" :style="existLabel(item)"></i>
+					<i class="el-icon-close" :style="iconStyle(item)"></i>
 				</li>
 			</ul>
 		</ul>
 	</div>
 </template>
 <script type="text/javascript">
+import {mapGetters, mapMutations} from 'vuex'
 import vInput from './vInput'
 import axios from 'axios'
 import config from '../config'
-
 export default {
 	props: ['article'],
 	mounted() {
-		this.getLabels()
-		console.log("card",this.article)
 	},
 	data() {
 		return {
-			labels: [],
-			selectIdx: -1
+			selectIdx: -1,
+			// iconStyle: {color:}
 		}
 	},
 	components: {
 		vInput
 	},
 	computed: {
-
-	},
+        ...mapGetters([
+            'labels'
+        ])
+    },
 	methods: {
-		async getLabels() {
-			const res = await axios.get(config.api.getLabelsUrl)
-			this.labels = res.data.data
-			console.log(this.labels);
+		...mapMutations({
+            setLabels: 'SET_LABELS'
+        }),
+		clickHandle(index) {
+			if (this.labels[index].selected) {
+				return this.delLabel(index)
+			}
+			this.addLabel(index)
 		},
 		async addLabel(index) {
 			const res = await axios({
@@ -52,10 +56,9 @@ export default {
 				method: 'POST',
 				data: {article_id: this.article._id, label_id: this.labels[index]._id}
 			})
-			console.log(res.data)
-			if (!res.data.success) {
-				this.delLabel(index)
-			}
+			const newLabels = this.labels.slice()
+			newLabels[index].selected = true
+			this.setLabels(newLabels)
 		},
 		async delLabel(index) {
 			const res = await axios({
@@ -63,19 +66,20 @@ export default {
 				method: 'POST',
 				data: {article_id: this.article._id, label_id: this.labels[index]._id}
 			})
-			console.log(res.data)
+			const newLabels = this.labels.slice()
+			newLabels[index].selected = false
+			this.setLabels(newLabels)
 		},
-		existLabel(item) {
-			for (var i = 0; i < this.article.label.length; i++) {
-				if (this.article.label[i]._id === item._id) {
-					console.log(item)
-					return {color: item.color}
-				}
-			}
-			// console.log(this.article.label.indexOf(item))
-			// if (this.article.label.indexOf(item) > -1) {
-			// 	return {color: item.color}
+		iconStyle(item) {
+			// for (var i = 0; i < this.article.label.length; i++) {
+			// 	if (this.article.label[i]._id === item._id) {
+			// 		console.log(item)
+			// 		return {color: item.color}
+			// 	}
 			// }
+			if (item.selected) {
+				return {color: item.color}
+			}
 		}
 	}
 }
@@ -119,6 +123,7 @@ export default {
 			}
 			.label {
 				display: inline-block;
+				cursor: pointer;
 				width: 220px;
 				.color-box {
 					display: inline-block;

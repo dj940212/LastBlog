@@ -9,13 +9,13 @@
                 </div>
                 <div class="tool">
                     <div class="watch" @click="deleteArt"><i class="iconfont icon-liulan"></i></div>
-                    <div class="num">1000</div>
-                    <div class="setting" @click="settingsValue = !settingsValue"><i class="iconfont icon-setting"></i>Settings<i class="iconfont icon-xiala"></i></div>
-                    <div class="watch"><i class="iconfont icon-liulan"></i></div>
-                    <div class="num">1000</div>
+                    <div class="num">删除</div>
+                    <div class="setting" @click="openLabelsCard"><i class="iconfont icon-setting"></i>label<i class="iconfont icon-xiala"></i></div>
+                    <!-- <div class="watch"><i class="iconfont icon-liulan"></i></div>
+                    <div class="num">1000</div> -->
                 </div>
-                <div class="setting-panel">
-                    <card :article="article"></card>
+                <div class="setting-panel" v-show="settingsValue">
+                    <label-card :article="article"></label-card>
                 </div>
             </div>
         </div>
@@ -48,7 +48,7 @@ import marked from 'marked'
 import hljs from 'highlight.js'
 import axios from 'axios'
 import {mapGetters, mapMutations} from 'vuex'
-import card from '../../components/card'
+import labelCard from '../../components/labelCard'
 import config from '../../config'
 
 export default {
@@ -57,14 +57,12 @@ export default {
             article : {},
             updateTitle: '',
             updateDesc:'',
-            settingsValue: false
+            settingsValue: false,
         }
     },
     mounted() {
         require('../../static/js/pen.js')
         require('../../static/js/markdown.js')
-        console.log(this.articleList)
-        console.log("id",this.$route.query._id)
         this.setArticleMode("read")
         this.getArticle(this.$route.query._id)
         this.$refs.pen.innerHTML = this.article.content
@@ -83,18 +81,33 @@ export default {
         ])
     },
     components: {
-        card
+        labelCard
     },
     methods: {
         ...mapMutations({
             setArticleList: 'SET_ARTICLE_LIST',
             setArticleMode: 'SET_ARTICLE_MODE',
-            setCurrentIndex: 'SET_CURRENT_INDEX'
+            setCurrentIndex: 'SET_CURRENT_INDEX',
+            setLabels: 'SET_LABELS'
         }),
-        async getList() {
-          const res = await axios.get(config.api.articleListUrl)
-          this.setArticleList(res.data.data)
-          console.log("文章列表",res.data.data)
+        async getLabels() {
+            let sortLabels = []
+            const _id = this.$route.query._id
+            const res = await axios.get(config.api.getLabelsUrl)
+            const result = await axios.get(config.api.readArticleUrl,{params: {_id:_id} })
+            const article = result.data.data
+            console.log("文章",article)
+            // 排序，已添加的标签排在前面
+            res.data.data.forEach((item,index) => {
+                for (var i = 0; i < article.label.length; i++) {
+                    if (article.label[i]._id === item._id) {
+                        item.selected = true
+                        return sortLabels.unshift(item)
+                    }
+                }
+                sortLabels.push(item)
+            })
+            this.setLabels(sortLabels)
         },
         init() {
             const options = {
@@ -117,6 +130,10 @@ export default {
 
             this.updateDesc = this.article.description
             this.updateTitle = this.article.title
+        },
+        openLabelsCard() {
+            this.settingsValue = !this.settingsValue
+            this.getLabels()
         },
         // 代码高亮
         codeHighlight() {

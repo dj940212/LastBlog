@@ -8,7 +8,6 @@
 </template>
 <script>
     export default {
-        name: 'Babel',
         props: ['title','color']
     }
 </script>

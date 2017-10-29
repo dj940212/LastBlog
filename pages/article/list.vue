@@ -1,12 +1,17 @@
 <template>
     <div id="list" class="articleList" ref="articleList">
-        <label-menu @getLabelArts="" :artLength="articleList.length"></label-menu>
+        <label-menu @getLabelArts="" :artLength="allArticleCount"></label-menu>
         <ul class="articleUl">
             <li v-for="(article, index) in articleList">
                 <h5 @click="toReadArticle(index)">{{article.title}}</h5>
                 <p class="desc">{{article.description}}</p>
                 <div class="footer">
-                    <Babel v-for="babel in article.babel" :key="babel.id" :title="babel" :color="getColor"></Babel>
+                    <label-dot
+                        v-for="label in article.label"
+                        :key="label.id"
+                        :title="label.name"
+                        :color="label.color">
+                    </label-dot>
                     <span class="createTime">{{article.meta.createAt}}</span>
                 </div>
             </li>
@@ -16,28 +21,29 @@
 </template>
 <script>
 import axios from 'axios'
-import Babel from '../../components/babel'
+import labelDot from '../../components/labelDot'
 import labelMenu from '../../components/labelMenu'
 import {mapGetters, mapMutations} from 'vuex'
 import config from '../../config'
 export default {
     mounted(){
         this.getList()
+        // console.log(this.allArticleCount)
     },
     data() {
         return {
             babelColor: ["#e99695","#f9d0c4","#fef2c0","#c2e0c6","#bfdadc","#c5def5","#bfd4f2","#d4c5f9"],
-            // articleList: []
+            allArticleCount: 0
         }
     },
     components: {
-        Babel,
+        labelDot,
         labelMenu
     },
     computed: {
         ...mapGetters([
             'articleList',
-            'labels'
+            'labels',
         ]),
         getColor() {
             let index = Math.round(Math.random()*7)
@@ -52,11 +58,9 @@ export default {
             setArticleId: 'SET_ARTICLE_ID'
         }),
         async getList() {
-            // const skipNum = this.articleList.length
             const res = await axios.get(config.api.articleListUrl)
-            // let articles = this.articleList.slice()
-            // articles = articles.concat(res.data.data)
             this.setArticleList(res.data.data)
+            this.allArticleCount = res.data.data.length
             console.log("文章列表",this.articleList)
         },
         toReadArticle(index) {

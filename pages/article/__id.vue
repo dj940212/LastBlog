@@ -8,7 +8,7 @@
                     <input ref="updateTitle" v-if="mode=='update'" type="text" placeholder="title of this article" v-model="updateTitle">
                 </div>
                 <div class="tool">
-                    <div class="watch"><i class="iconfont icon-liulan"></i></div>
+                    <div class="watch" @click="deleteArt"><i class="iconfont icon-liulan"></i></div>
                     <div class="num">1000</div>
                     <div class="setting" @click="settingsValue = !settingsValue"><i class="iconfont icon-setting"></i>Settings<i class="iconfont icon-xiala"></i></div>
                     <div class="watch"><i class="iconfont icon-liulan"></i></div>

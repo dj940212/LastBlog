@@ -52,11 +52,11 @@ export default {
             setArticleId: 'SET_ARTICLE_ID'
         }),
         async getList() {
-            const skipNum = this.articleList.length
-            const res = await axios.get(config.api.articleListUrl, {params: {skipNum: skipNum}})
-            let articles = this.articleList.slice()
-            articles = articles.concat(res.data.data)
-            this.setArticleList(articles)
+            // const skipNum = this.articleList.length
+            const res = await axios.get(config.api.articleListUrl)
+            // let articles = this.articleList.slice()
+            // articles = articles.concat(res.data.data)
+            this.setArticleList(res.data.data)
             console.log("文章列表",this.articleList)
         },
         toReadArticle(index) {
@@ -84,7 +84,7 @@ export default {
             li {
                 list-style: none;
                 border-bottom: 1px solid @border-color;
-                padding: 20px 0;
+                padding: 15px 0;
                 padding-right: 30%;
                 h5 {
                     font-weight: 600;
@@ -94,7 +94,7 @@ export default {
                 .desc {
                     font-size: 13px;
                     color: @desc-color;
-                    margin: 20px 0;
+                    margin: 15px 0;
                 }
                 .footer {
                     font-size: 12px;

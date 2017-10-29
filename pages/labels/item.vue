@@ -3,7 +3,7 @@
         <div class="normal">
             <v-button :background="label.color" icon="el-icon-edit">{{label.name}}</v-button>
             <div class="babel-action">
-                <span class="count">{{label.artCount}} blog</span>
+                <span class="count">{{label.article.length}} blog</span>
                 <v-button
                     background="#fff"
                     fontSize="14px"

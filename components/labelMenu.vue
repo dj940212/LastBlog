@@ -1,10 +1,15 @@
 <template>
     <div class="label-menu">
         <div class="label">
-            <v-button background="#eee"> All {{artLength}}</v-button>
+            <v-button fontSize="13px" background="#eee"> All {{articleList.length}}</v-button>
         </div>
         <div class="label" v-for="(label,index) in labels">
-            <v-button @click.native="getLabelArts(index)" :background="label.color" icon="el-icon-edit">{{label.name}} <span class="artCount">{{label.artCount}}</span></v-button>
+            <v-button
+                @click.native="getLabelArts(index)"
+                :background="label.color"
+                icon="el-icon-edit"
+                fontSize="13px"
+            >{{label.name}} <span class="artCount">{{label.article.length}}</span></v-button>
         </div>
     </div>
 </template>
@@ -52,11 +57,11 @@ export default {
 .label-menu {
     width: 100%;
     display: flex;
-    padding: 20px 0;
+    padding: 15px 0;
     border-bottom: 1px solid @border-color;
     flex-wrap: wrap;
     .label {
-        margin: 5px 8px;
+        margin: 3px;
         .artCount {
             // background: red;
             color: #eee;

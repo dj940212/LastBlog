@@ -40,12 +40,12 @@
                     const res = await axios.post(config.api.loginUrl,{username: this.username, password: this.password})
                     console.log(res.data)
                     if (res.data.success) {
-                        this.$router.push(this.curRoute)
+                        history.go(-1)
                         this.setIsLogin(true)
                         this.setToken(res.data.data.token)
                     }
                 }catch(e) {
-                    console.log(e) 
+                    console.log(e)
                 }
             },
 
@@ -96,7 +96,7 @@
                     border: 1px solid #d8dee2;
                     background-color: #fff;
                     padding: 20px;
-                    border-radius: 5px; 
+                    border-radius: 5px;
                     font-size: 14px;
                     label {
                         display: block;

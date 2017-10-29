@@ -728,7 +728,7 @@ var Article = function () {
     }, {
         key: 'list',
         value: async function list(ctx) {
-            var count = ctx.request.query.count || 10;
+            var count = ctx.request.query.count || 100;
             var skipNum = ctx.request.query.skipNum || 0;
             var sort = ctx.request.query.sort || -1;
 

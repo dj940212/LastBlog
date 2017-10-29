@@ -63,7 +63,7 @@ class Article {
     }
 
     async list(ctx) {
-        const count = ctx.request.query.count || 10
+        const count = ctx.request.query.count || 100
         const skipNum = ctx.request.query.skipNum || 0
         const sort = ctx.request.query.sort || -1
 

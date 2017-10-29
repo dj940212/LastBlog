@@ -6,7 +6,7 @@
             :placeholder="type==='create' ? 'New label name': '' ">
         </v-input>
         <div class="changeColor">
-            <v-button>123</v-button>
+            <v-button :background="color" icon="el-icon-close"></v-button>
             <v-input v-model="color" width="180px"></v-input>
         </div>
 
@@ -21,7 +21,9 @@
                 @click.native = "clickHandle"
             >{{type==="change" ? "Save change" : "Create label"}}</v-button>
         </div>
+		<el-color-picker v-model="color"></el-color-picker>
     </div>
+
 </template>
 <script>
 import {mapMutations, mapGetters} from 'vuex'
@@ -54,12 +56,13 @@ export default {
     data() {
         return {
             color: "#",
-            name: ""
+            name: "",
+			colorCode: ""
         }
     },
 	components: {
 		vButton,
-		vInput
+		vInput,
 	},
 	methods: {
 		...mapMutations({
@@ -104,7 +107,8 @@ export default {
 	computed: {
 		...mapGetters([
 			'labels',
-			'curEdit'
+			'curEdit',
+
 		])
 	}
 }

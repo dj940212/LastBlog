@@ -1,13 +1,33 @@
 <template>
 	<div class="v-button">
-		<button :style="{background, border, fontSize}">
+		<button :style="{background, border, fontSize, color}">
 			<i :class="icon"></i>
 			<slot></slot>
 		</button>
 	</div>
 </template>
 <script>
+import {colorNum} from '../static/js/utils'
 export default {
+	mounted() {
+		this.changeColor()
+	},
+	updated() {
+		this.changeColor()
+	},
+	data() {
+		return {
+			color: "#fff"
+		}
+	},
+	methods: {
+		changeColor() {
+			const num = colorNum(this.background)
+			if (num > 8388607) {
+				this.color = "#333026"
+			}
+		}
+	},
 	props: {
 		background: {
 			type: String,
@@ -32,7 +52,7 @@ export default {
 		fontSize: {
 			type: String,
 			default: '16px'
-		}
+		},
 	},
 }
 </script>
@@ -50,8 +70,8 @@ export default {
             line-height: 2;
             cursor: pointer;
             i {
-            	// margin-right: 4px;
-
+            	padding-right: 5px;
+				font-size: 14px;
             }
 		}
 	}

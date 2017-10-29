@@ -31,7 +31,7 @@ export default {
 	data() {
 		return {
 			labels: [],
-			existStyle: {}
+			selectIdx: -1
 		}
 	},
 	components: {
@@ -66,16 +66,16 @@ export default {
 			console.log(res.data)
 		},
 		existLabel(item) {
-			// for (var i = 0; i < this.article.label.length; i++) {
-			// 	if (this.article.label[i]._id === item._id) {
-			// 		console.log(item)
-			// 		return {color: item.color}
-			// 	}
-			// }
-			console.log(this.article.label.indexOf(item))
-			if (this.article.label.indexOf(item) > -1) {
-				return {color: item.color}
+			for (var i = 0; i < this.article.label.length; i++) {
+				if (this.article.label[i]._id === item._id) {
+					console.log(item)
+					return {color: item.color}
+				}
 			}
+			// console.log(this.article.label.indexOf(item))
+			// if (this.article.label.indexOf(item) > -1) {
+			// 	return {color: item.color}
+			// }
 		}
 	}
 }

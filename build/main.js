@@ -977,7 +977,7 @@ var Label = function () {
                 _ctx$request$query$so = _ctx$request$query.sort,
                 sort = _ctx$request$query$so === undefined ? -1 : _ctx$request$query$so;
 
-            var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
+            var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).populate({ path: 'article', select: 'title description meta' }).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
 
             ctx.body = {
                 success: true,

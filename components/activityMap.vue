@@ -1,6 +1,6 @@
 <template>
 	<div class="map">
-		<div class="title">{{this.activityNum}} contributions in the last year</div>
+		<div class="title">{{this.activityNum}} updates in the last year</div>
 		<div class="map-inner clearfix">
 			<div class="block-box">
 				<div class="week">

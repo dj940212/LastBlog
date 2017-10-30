@@ -6,7 +6,7 @@
             :placeholder="type==='create' ? 'New label name': '' ">
         </v-input>
         <div class="changeColor">
-            <v-button :background="color" icon="el-icon-close"></v-button>
+            <v-button :background="color" icon="iconfont icon-yansexuanze"></v-button>
             <v-input v-model="color" width="180px"></v-input>
         </div>
 
@@ -122,6 +122,9 @@ export default {
         .changeColor {
             display: inline-block;
             margin-left: 30px;
+            .icon-yansexuanze {
+                font-size: 18px !important;
+            }
         }
         .right{
             float: right;

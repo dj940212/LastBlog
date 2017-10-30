@@ -71,7 +71,7 @@ export default {
             cursor: pointer;
             i {
             	padding-right: 5px;
-				font-size: 14px;
+				font-size: 15px;
             }
 		}
 	}

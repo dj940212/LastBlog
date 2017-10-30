@@ -7,7 +7,7 @@
             <v-button
                 @click.native="getLabelArts(index)"
                 :background="label.color"
-                icon="el-icon-edit"
+                icon="iconfont icon-biaoqian"
                 fontSize="13px"
             >{{label.name}} <span class="artCount">{{label.article.length}}</span></v-button>
         </div>

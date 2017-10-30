@@ -6,6 +6,14 @@
                     <svg aria-hidden="true" class="octicon octicon-repo" height="16" version="1.1" viewBox="0 0 12 16" width="12"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
                     <input ref="writeTitle" type="text" placeholder="title of this article" v-model="writeTitle">
                 </div>
+                <div class="tool">
+                    <div class="watch">
+                        <i class="iconfont icon-save_blue" @click="publish"></i>
+                    </div>
+                    <div class="watch" >
+                        <i class="iconfont icon-cross" @click="back"></i>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="description">
@@ -17,9 +25,8 @@
                 </svg>
                 <span>README.md</span>
                 <div class="icon-box">
-                    <i class="iconfont icon-fabu" @click="publish"></i>
                     <div class="upload">
-                        <i class="iconfont icon-ic_daoru"></i>
+                        <i class="iconfont icon-socialmarkdown"></i>
                         <input type="file" @change="importMd" ref="filer">
                     </div>
 
@@ -89,6 +96,9 @@ export default {
                 }
                 reader.readAsText(file);
             }
+        },
+        back() {
+            history.go(-1)
         },
         // 发布新文章
         async publish() {
@@ -197,89 +207,24 @@ export default {
                 .tool {
                     align-self: center;
                     display: flex;
-                    .setting {
-                        cursor: pointer;
-                        // width: 100px;
-                        height: 28px;
-                        background: #f0f4f6;
-                        border: 1px solid rgba(27,31,35,0.2);
-                        border-radius: 3px;
-                        line-height: 28px;
-                        padding: 0 10px;
-                        font-size: 16px;
-                        .icon-setting {
-                            font-size: 16px;
-                            margin-right: 5px;
-                            color: #444;
-                        }
-                        .icon-xiala {
-                            font-size: 6px;
-                            margin-left: 6px;
-                            color: #666;
-                        }
-                    }
                     .watch {
                         cursor: pointer;
-                        margin-left: 10px;
+                        margin-left: 5px;
                         height: 28px;
                         background: #eff3f6;
                         border: 1px solid rgba(27,31,35,0.2);
                         border-radius: 3px;
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                        line-height: 26px;
+                        // line-height: 28px;
                         padding: 0 10px;
                         font-size: 16px;
                         .iconfont {
                             font-size: 20px;
-                            margin-right: 8px;
                             position: relative;
                             color: #444;
                             top: 3px;
                         }
                     }
-                    .num {
-                        display: block;
-                        // width: 20px;
-                        background: #fff;
-                        height: 28px;
-                        border: 1px solid #b5b7b8;
-                        border-left: 0px;
-                        border-radius: 3px;
-                        border-top-left-radius: 0;
-                        border-bottom-left-radius: 0;
-                        line-height: 28px;
-                        text-align: center;
-                        padding:0 5px;
-                    }
 
-
-                }
-                .setting-panel {
-                    position: absolute;
-                    width: 180px;
-                    z-index: 10;
-                    right: 145px;
-                    top: 55px;
-                    background-color: #fff;
-                    border-radius: 3px;
-                    border:1px solid @border-color;
-                    .setting-item {
-                        height: 30px;
-                        padding-left: 15px;
-                        cursor: pointer;
-                        line-height: 30px;
-                        &:hover {
-                            background-color: #5248d6;
-                            color: rgba(255, 255, 255, 0.9);
-                        }
-                    }
-                    hr{
-                        // border: 0;
-                        margin: 4px 0;
-                        border-bottom: 0;
-                        border-color: @border-color;
-                    }
                 }
             }
 
@@ -364,15 +309,6 @@ export default {
                     right: 0;
                     color: #555;
                     cursor: pointer;
-                    .icon-iconziti23 {
-                        font-size: 20px;
-                    }
-                    .icon-fabu {
-                        font-size: 15px;
-                    }
-                    .icon-editnew {
-                        font-size: 18px;
-                    }
                     .upload{
                             display: inline-block;
                             position: relative;
@@ -384,15 +320,18 @@ export default {
                             input {
                                 width: 25px;
                                 position: absolute;
+                                top: 5px;
+                                right: 2px;
                                 opacity: 0;
                                 cursor: pointer;
                             }
-                            .icon-ic_daoru{
+                            .iconfont{
                                 left: 0px;
+                                font-size: 22px;
                                 position: absolute;
                                 cursor: pointer;
                             }
-                        }
+                    }
                     
                 }
                 .babel {

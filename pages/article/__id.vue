@@ -9,17 +9,16 @@
                 </div>
                 <div class="tool">
                     <div class="setting" @click="openLabelsCard">
-                        <i class="iconfont icon-setting"></i>label
-                        <i class="iconfont icon-xiala"></i>
+                        <i class="iconfont icon-biaoqian"></i>
                     </div>
                     <div class="watch">
-                        <i class="iconfont icon-editnew" v-if="mode==='read'"  @click="isEdit">编辑</i>
-                        <i class="iconfont icon-fabu" v-if="mode ==='update'" @click="update"></i>
+                        <i class="iconfont icon-bianji-copy-copy" v-if="mode==='read'"  @click="isEdit"></i>
+                        <i class="iconfont icon-save_blue" v-if="mode ==='update'" @click="update"></i>
                     </div>
                     <div class="watch" v-if="mode ==='update'">
-                        <i  @click="update">x</i>
+                        <i class="iconfont icon-cross" @click="isNotEdit"></i>
                     </div>
-                    <div class="watch" @click="deleteArt"><i class="iconfont icon-liulan">删除</i></div>
+                    <div class="watch" @click="deleteArt"><i class="iconfont icon-shanchu"></i></div>
                 </div>
                 <div class="setting-panel" v-show="settingsValue">
                     <label-card :article="article"></label-card>
@@ -134,6 +133,13 @@ export default {
             this.pen.rebuild()
             this.pen.focus();
             this.setArticleMode('update')
+
+            this.updateDesc = this.article.description
+            this.updateTitle = this.article.title
+        },
+        isNotEdit() {
+            this.pen.destroy();
+            this.setArticleMode('read')
 
             this.updateDesc = this.article.description
             this.updateTitle = this.article.title

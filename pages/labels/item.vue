@@ -1,19 +1,23 @@
 <template>
 	<div class="item" v-if="curEdit !== index">
         <div class="normal">
-            <v-button :background="label.color" icon="el-icon-edit">{{label.name}}</v-button>
+            <v-button 
+                :background="label.color" 
+                icon="iconfont icon-biaoqian"
+                >{{label.name}}
+            </v-button>
             <div class="babel-action">
                 <span class="count">{{label.article.length}} blogs</span>
                 <v-button
                     background="#fff"
                     fontSize="14px"
-                    icon="el-icon-edit"
+                    icon="iconfont icon-bianji-copy-copy"
                     @click.native = "$emit('click')"
                 >Edit</v-button>
                 <v-button
                     background="#fff"
                     fontSize="14px"
-                    icon="el-icon-close"
+                    icon="iconfont icon-cross"
                     @click.native="delLabel"
                 >Delete</v-button>
             </div>

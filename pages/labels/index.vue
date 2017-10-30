@@ -28,9 +28,12 @@
     import config from '../../config'
     import axios from 'axios'
     export default {
-        mounted() {
+        // mounted() {
+        //     this.getLabels()
+        // },
+        beforeCreate () {
             this.getLabels()
-        },
+        }
         data() {
             return {
                 editShow: false,

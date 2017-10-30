@@ -12,3 +12,6 @@ dist
 
 # config
 config
+
+# password
+config/password.js

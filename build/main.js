@@ -65,7 +65,7 @@ module.exports =
 /******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,10 +81,8 @@ module.exports = require("mongoose");
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony default export */ exports["default"] = {
-    db: 'mongodb://blog_runner:dj15155620677@59.110.164.55:27017/blog',
     user: {
         username: '2902273280@qq.com',
-        password: '2902273280',
         avatar: 'http://ovs5x36k4.bkt.clouddn.com/06.jpg'
     },
     secret: 'dingjianblog', // used when we create and verify JSON Web Tokens
@@ -223,7 +221,7 @@ LabelSchema.pre('save', function (next) {
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt__ = __webpack_require__(28);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_bcrypt___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_bcrypt__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_jsonwebtoken__);
@@ -383,7 +381,9 @@ module.exports = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_models_user__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config_password__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_models_user__ = __webpack_require__(6);
+
 
 
 
@@ -391,10 +391,10 @@ module.exports = {
 /* harmony default export */ exports["a"] = function () {
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.set('debug', true);
 
-    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_1__config__["default"].db);
+    __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_2__config_password__["a" /* default */].db);
 
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('disconnected', function () {
-        __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_1__config__["default"].db);
+        __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connect(__WEBPACK_IMPORTED_MODULE_2__config_password__["a" /* default */].db);
     });
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('error', function (err) {
         console.log(err);
@@ -403,10 +403,10 @@ module.exports = {
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('open', async function () {
         console.log('Connected to MongoDB Success');
 
-        var user = await __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */].findOne({ username: __WEBPACK_IMPORTED_MODULE_1__config__["default"].user.username });
+        var user = await __WEBPACK_IMPORTED_MODULE_3__database_models_user__["a" /* default */].findOne({ username: __WEBPACK_IMPORTED_MODULE_1__config__["default"].user.username });
 
         if (!user) {
-            new __WEBPACK_IMPORTED_MODULE_2__database_models_user__["a" /* default */](__WEBPACK_IMPORTED_MODULE_1__config__["default"].user).save();
+            new __WEBPACK_IMPORTED_MODULE_3__database_models_user__["a" /* default */](__WEBPACK_IMPORTED_MODULE_2__config_password__["a" /* default */].user).save();
             console.log("写入管理员数据");
         }
     });
@@ -417,7 +417,7 @@ module.exports = {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session__ = __webpack_require__(30);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_session___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_session__);
 
 var addSession = function addSession(app) {
@@ -476,13 +476,13 @@ var verifyToken = function verifyToken(ctx, next) {
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_koa_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_koa_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__ = __webpack_require__(24);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__api_user__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__api_user__ = __webpack_require__(21);
 
 
 
@@ -559,6 +559,20 @@ module.exports = require("passport");
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
+/* harmony default export */ exports["a"] = {
+       db: 'mongodb://blog_runner:ding15155620677@59.110.164.55:27017/blog',
+       user: {
+              username: '2902273280@qq.com',
+              password: 'ding15155620677',
+              avatar: 'http://ovs5x36k4.bkt.clouddn.com/06.jpg'
+       }
+};
+
+/***/ },
+/* 21 */
+/***/ function(module, exports, __webpack_require__) {
+
+"use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jsonwebtoken__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_jsonwebtoken___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_jsonwebtoken__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__config__ = __webpack_require__(1);
@@ -587,7 +601,7 @@ var verifyToken = function verifyToken(ctx, next) {
 };
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -638,18 +652,18 @@ var Activity = function () {
 /* harmony default export */ exports["a"] = new Activity();
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mongoose___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mongoose__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__models_article__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__models_activity__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid__ = __webpack_require__(7);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_uuid___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_uuid__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__utils_formatTime__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__models_labelMap__ = __webpack_require__(27);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_label__ = __webpack_require__(5);
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -902,7 +916,7 @@ var Article = function () {
 /* harmony default export */ exports["a"] = new Article();
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1019,7 +1033,7 @@ var Label = function () {
 /* harmony default export */ exports["a"] = new Label();
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1097,7 +1111,7 @@ var User = function () {
 /* harmony default export */ exports["a"] = new User();
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1145,7 +1159,7 @@ ArticleSchema.pre('save', function (next) {
 /* harmony default export */ exports["a"] = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('Article', ArticleSchema);
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1169,25 +1183,25 @@ var LabelMapSchema = new Schema({
 /* unused harmony default export */ var _unused_webpack_default_export = __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.model('LabelMap', LabelMapSchema);
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 module.exports = require("bcrypt");
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-router");
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 module.exports = require("koa-session");
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports, __webpack_require__) {
 
 "use strict";

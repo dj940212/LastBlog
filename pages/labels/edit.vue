@@ -23,7 +23,6 @@
         </div>
 		<el-color-picker v-model="color"></el-color-picker>
     </div>
-
 </template>
 <script>
 import {mapMutations, mapGetters} from 'vuex'

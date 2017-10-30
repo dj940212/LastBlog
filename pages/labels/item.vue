@@ -3,7 +3,7 @@
         <div class="normal">
             <v-button :background="label.color" icon="el-icon-edit">{{label.name}}</v-button>
             <div class="babel-action">
-                <span class="count">{{label.article.length}} blog</span>
+                <span class="count">{{label.article.length}} blogs</span>
                 <v-button
                     background="#fff"
                     fontSize="14px"
@@ -69,7 +69,7 @@ export default {
         .babel-action {
             float: right;
             .count {
-                margin-right: 60px;
+                margin-right: 80px;
                 font-size: 14px;
             }
             button {

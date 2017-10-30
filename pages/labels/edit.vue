@@ -55,7 +55,7 @@ export default {
 	},
     data() {
         return {
-            color: "#",
+            color: "",
             name: "",
 			colorCode: ""
         }
@@ -117,9 +117,7 @@ export default {
 	.edit {
 		padding: 8px 10px;
         font-size: 12px;
-        // border-top: 1px solid #eaecef;
-        // border-left: 1px solid #eaecef;
-        // border-right: 1px solid #eaecef;
+        position: relative;
         border: 1px solid #eaecef;
         .changeColor {
             display: inline-block;
@@ -130,6 +128,17 @@ export default {
             .v-button {
                 margin-left: 5px;
             }
+        }
+        .el-color-picker {
+        	position: absolute !important;
+        	top: 7px;
+        	left: 450px;
+        	opacity: 0;
+        	cursor: pointer;
+        	.el-color-picker__trigger {
+        		padding: 0 !important;
+        		margin: 0 !important;
+        	}
         }
     }
 </style>

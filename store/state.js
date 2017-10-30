@@ -1,6 +1,7 @@
 const state = {
     mode: "read",
     articleList: [],
+    allAricles: [],
     currentIndex: -1,
     _id: '',
     isLogin: false,

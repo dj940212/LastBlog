@@ -50,7 +50,7 @@ class Label {
     async allLabels(ctx) {
         const {limit=100, skip=0, sort=-1} = ctx.request.query
         let labels = await LabelMod.find({},['name', 'color', 'artCount'])
-                .populate({ path: 'article', select: 'title description meta' })
+                .populate({ path: 'article',select: 'title description label meta',populate: {path: 'label'} })
                 .limit(parseInt(limit))
                 .skip(parseInt(skip))
                 .sort({'artCount': sort})
@@ -76,6 +76,12 @@ class Label {
         }
 
     }
+
+    // async getLabelArts(ctx) {
+    //     const _id = ctx.request.query._id
+    //     let label = await LabelMod.findOne({_id:_id})
+
+    // }
 }
 
 export default new Label()

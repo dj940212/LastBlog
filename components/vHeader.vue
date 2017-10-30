@@ -25,7 +25,6 @@
                 <div class="login" v-show="!isLogin" @click="login">Login</div>
             </div>
         </div>
-
     </header>
 </template>
 <script>
@@ -109,6 +108,7 @@ export default {
                             color: rgba(255, 255, 255, 0.75);
                             font-size: 14px;
                             font-weight: 600;
+                            cursor: pointer;
                             a {
                                 &:visited {
                                     color: #c8c9cb;

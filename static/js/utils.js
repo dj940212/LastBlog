@@ -89,3 +89,15 @@ export const  colorNum = (code) => {
     }
     return sColor;
 };
+
+// 距离当前时间
+export const fromNow = (dateStr) => {
+      const between = Date.now() / 1000 - Number(new Date(dateStr).getTime()) / 1000;
+      if (between < 3600) {
+          return (~~(between / 60)+' minutes ago');
+      } else if (between < 86400) {
+          return (~~(between / 3600)+' hours ago');
+      } else {
+          return (~~(between / 86400)+' days ago');
+      }
+  }

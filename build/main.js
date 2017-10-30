@@ -491,31 +491,31 @@ var verifyToken = function verifyToken(ctx, next) {
 
 
 /* harmony default export */ exports["a"] = function () {
-    var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
+   var router = new __WEBPACK_IMPORTED_MODULE_0_koa_router___default.a({ prefix: '/api' });
 
-    // article
-    router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].new);
-    router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
-    router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
-    router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
-    router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
-    router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
-    router.post('/article/delLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delLabel);
-    // label
-    router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
-    router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
-    router.post('/label/update', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].update);
-    router.post('/label/delete', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].delete);
+   // article
+   router.post('/article/save', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].new);
+   router.get('/article/list', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].list);
+   router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
+   router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
+   router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
+   router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
+   router.post('/article/delLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delLabel);
+   // label
+   router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
+   router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
+   router.post('/label/update', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].update);
+   router.post('/label/delete', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].delete);
 
-    // activity
-    router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
-    router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].oneDay);
+   // activity
+   router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);
+   router.get('/activity/oneday', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].oneDay);
 
-    // user
-    router.post('/login', __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].login);
-    router.post('/logout', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].logout);
+   // user
+   router.post('/login', __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].login);
+   router.post('/logout', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_4__database_controllers_user__["a" /* default */].logout);
 
-    return router;
+   return router;
 };
 
 /***/ },
@@ -977,7 +977,7 @@ var Label = function () {
                 _ctx$request$query$so = _ctx$request$query.sort,
                 sort = _ctx$request$query$so === undefined ? -1 : _ctx$request$query$so;
 
-            var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).populate({ path: 'article', select: 'title description meta' }).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
+            var labels = await __WEBPACK_IMPORTED_MODULE_1__models_label__["a" /* default */].find({}, ['name', 'color', 'artCount']).populate({ path: 'article', select: 'title description label meta', populate: { path: 'label' } }).limit(parseInt(limit)).skip(parseInt(skip)).sort({ 'artCount': sort });
 
             ctx.body = {
                 success: true,
@@ -1004,6 +1004,13 @@ var Label = function () {
                 data: label
             };
         }
+
+        // async getLabelArts(ctx) {
+        //     const _id = ctx.request.query._id
+        //     let label = await LabelMod.findOne({_id:_id})
+
+        // }
+
     }]);
 
     return Label;

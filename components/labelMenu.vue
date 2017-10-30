@@ -1,7 +1,7 @@
 <template>
     <div class="label-menu">
         <div class="label">
-            <v-button fontSize="13px" background="#eee"> All {{artLength}}</v-button>
+            <v-button @click.native="$emit('getAll')" fontSize="13px" background="#eee"> All {{artLength}}</v-button>
         </div>
         <div class="label" v-for="(label,index) in labels">
             <v-button
@@ -65,7 +65,7 @@ export default {
         cursor: pointer;
         .artCount {
             // background: red;
-            color: #eee;
+            // color: #eee;
         }
     }
 }

@@ -8,11 +8,18 @@
                     <input ref="updateTitle" v-if="mode=='update'" type="text" placeholder="title of this article" v-model="updateTitle">
                 </div>
                 <div class="tool">
-                    <div class="watch" @click="deleteArt"><i class="iconfont icon-liulan"></i></div>
-                    <div class="num">删除</div>
-                    <div class="setting" @click="openLabelsCard"><i class="iconfont icon-setting"></i>label<i class="iconfont icon-xiala"></i></div>
-                    <!-- <div class="watch"><i class="iconfont icon-liulan"></i></div>
-                    <div class="num">1000</div> -->
+                    <div class="setting" @click="openLabelsCard">
+                        <i class="iconfont icon-setting"></i>label
+                        <i class="iconfont icon-xiala"></i>
+                    </div>
+                    <div class="watch">
+                        <i class="iconfont icon-editnew" v-if="mode==='read'"  @click="isEdit">编辑</i>
+                        <i class="iconfont icon-fabu" v-if="mode ==='update'" @click="update"></i>
+                    </div>
+                    <div class="watch" v-if="mode ==='update'">
+                        <i  @click="update">x</i>
+                    </div>
+                    <div class="watch" @click="deleteArt"><i class="iconfont icon-liulan">删除</i></div>
                 </div>
                 <div class="setting-panel" v-show="settingsValue">
                     <label-card :article="article"></label-card>
@@ -273,6 +280,7 @@ export default {
                     }
                     .watch {
                         cursor: pointer;
+                        display: block;
                         margin-left: 10px;
                         height: 28px;
                         background: #eff3f6;

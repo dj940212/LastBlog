@@ -18,20 +18,20 @@
     "production" : {
       "user" : "user_dj",
       // Multi host is possible, just by passing IPs/hostname as an array
-      "host" : ["59.164.110.55"],
+      "host" : ["59.110.164.55"],
       "port" : "22",
       // Branch
       "ref"  : "origin/master",
       // Git repository to clone
       "repo" : "https://github.com/dj940212/last-blog.git",
       // Path of the application on target servers
-      "path" : "/home/user_dj/project",
+      "path" : "/home/user_dj/project/last-blog",
       // Can be used to give options in the format used in the configura-
       // tion file.  This is useful for specifying options for which there
       // is no separate command-line flag, see 'man ssh' 
       // can be either a single string or an array of strings
       "ssh_options": "StrictHostKeyChecking=no",
-
+      "post-deploy": "npm install --registry=https://registry.npm.taobao.org && pm2 startOrRestart ecosystem.json --env production",
       "env"  : {
         "NODE_ENV": "production"
       }

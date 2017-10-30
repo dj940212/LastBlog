@@ -39,6 +39,13 @@ export default {
 			this.name = this.label.name
 		}
 	},
+    beforeUpdate() {
+        if(this.type ==="change") {
+            console.log("change",this.label)
+            this.color = this.label.color,
+            this.name = this.label.name
+        }
+    },
 	props: {
 		show: {
 			type: Boolean,
@@ -76,24 +83,29 @@ export default {
 			this.changeLabel()
 		},
 		async newLabel() {
+            if (!this.token) return alert("请登录!")
 			const res = await axios({
                 method: "POST",
                 url: config.api.newLabelUrl,
                 data: {color: this.color, name: this.name},
+                headers: {'x-access-token': this.token},
             })
 			console.log(res.data);
 			if (res.data.success) {
 				const newLabels = this.labels.slice()
 				newLabels.unshift(res.data.data)
 				this.setCurEdit(-1)
-				return	this.setLabels(newLabels)
+				this.setLabels(newLabels)
+                console.log("newLabels",this.labels)
 			}
 		},
 		async changeLabel() {
+            if (!this.token) return alert("请登录!")
 			const res = await axios({
                 method: "POST",
                 url: config.api.changeLabelUrl,
                 data: {_id: this.label._id, color: this.color, name: this.name},
+                headers: {'x-access-token': this.token},
             })
 
 			if (res.data.success) {
@@ -108,6 +120,7 @@ export default {
 		...mapGetters([
 			'labels',
 			'curEdit',
+            'token'
 
 		])
 	}

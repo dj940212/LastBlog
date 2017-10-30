@@ -37,7 +37,8 @@ export default {
 	},
 	computed: {
         ...mapGetters([
-            'labels'
+            'labels',
+            'token'
         ])
     },
 	methods: {
@@ -51,32 +52,30 @@ export default {
 			this.addLabel(index)
 		},
 		async addLabel(index) {
+			if (!this.token) return alert("请登录!")
 			const res = await axios({
 				url: config.api.addLabelUrl,
 				method: 'POST',
-				data: {article_id: this.article._id, label_id: this.labels[index]._id}
+				data: {article_id: this.article._id, label_id: this.labels[index]._id},
+				headers: {'x-access-token': this.token},
 			})
 			const newLabels = this.labels.slice()
 			newLabels[index].selected = true
 			this.setLabels(newLabels)
 		},
 		async delLabel(index) {
+			if (!this.token) return alert("请登录!")
 			const res = await axios({
 				url: config.api.delLabelUrl,
 				method: 'POST',
-				data: {article_id: this.article._id, label_id: this.labels[index]._id}
+				data: {article_id: this.article._id, label_id: this.labels[index]._id},
+				headers: {'x-access-token': this.token},
 			})
 			const newLabels = this.labels.slice()
 			newLabels[index].selected = false
 			this.setLabels(newLabels)
 		},
 		iconStyle(item) {
-			// for (var i = 0; i < this.article.label.length; i++) {
-			// 	if (this.article.label[i]._id === item._id) {
-			// 		console.log(item)
-			// 		return {color: item.color}
-			// 	}
-			// }
 			if (item.selected) {
 				return {color: item.color}
 			}

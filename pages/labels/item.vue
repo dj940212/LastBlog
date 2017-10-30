@@ -42,10 +42,12 @@ export default {
             'setLabels': 'SET_LABELS'
         }),
         async delLabel() {
+            if (!this.token) return alert("请登录!")
             const res = await axios({
                 url: config.api.deleteLabelUrl,
                 method: 'POST',
-                data: {_id: this.label._id}
+                data: {_id: this.label._id},
+                headers: {'x-access-token': this.token},
             })
             if (res.data.success === true) {
 				const newLabels = this.labels.slice()
@@ -57,7 +59,8 @@ export default {
     computed: {
         ...mapGetters([
             'labels',
-			'curEdit'
+			'curEdit',
+            'token'
         ])
     }
 }

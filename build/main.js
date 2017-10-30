@@ -499,13 +499,13 @@ var verifyToken = function verifyToken(ctx, next) {
    router.post('/article/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].update);
    router.post('/article/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delete);
    router.get('/article/read', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].findOne);
-   router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
-   router.post('/article/delLabel', __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delLabel);
+   router.post('/article/addLabel', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].addLabel);
+   router.post('/article/delLabel', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_1__database_controllers_article__["a" /* default */].delLabel);
    // label
    router.get('/labels', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].allLabels);
-   router.post('/label/new', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
-   router.post('/label/update', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].update);
-   router.post('/label/delete', __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].delete);
+   router.post('/label/new', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].new);
+   router.post('/label/update', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].update);
+   router.post('/label/delete', __WEBPACK_IMPORTED_MODULE_5__api_user__["a" /* verifyToken */], __WEBPACK_IMPORTED_MODULE_2__database_controllers_label__["a" /* default */].delete);
 
    // activity
    router.get('/activity/all', __WEBPACK_IMPORTED_MODULE_3__database_controllers_activity__["a" /* default */].all);

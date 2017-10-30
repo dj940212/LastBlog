@@ -14,13 +14,13 @@ export default () => {
     router.post('/article/update',verifyToken, Article.update)
     router.post('/article/delete',verifyToken, Article.delete)
     router.get('/article/read', Article.findOne)
-    router.post('/article/addLabel', Article.addLabel)
-		router.post('/article/delLabel', Article.delLabel)
+    router.post('/article/addLabel',verifyToken, Article.addLabel)
+	router.post('/article/delLabel',verifyToken, Article.delLabel)
     // label
     router.get('/labels', Label.allLabels)
-    router.post('/label/new', Label.new)
-    router.post('/label/update', Label.update)
-    router.post('/label/delete', Label.delete)
+    router.post('/label/new',verifyToken, Label.new)
+    router.post('/label/update',verifyToken, Label.update)
+    router.post('/label/delete',verifyToken, Label.delete)
 
     // activity
     router.get('/activity/all', Activity.all)

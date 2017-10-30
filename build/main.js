@@ -81,10 +81,6 @@ module.exports = require("mongoose");
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /* harmony default export */ exports["default"] = {
-    user: {
-        username: '2902273280@qq.com',
-        avatar: 'http://ovs5x36k4.bkt.clouddn.com/06.jpg'
-    },
     secret: 'dingjianblog', // used when we create and verify JSON Web Tokens
     api: {
         // article
@@ -403,7 +399,7 @@ module.exports = {
     __WEBPACK_IMPORTED_MODULE_0_mongoose___default.a.connection.on('open', async function () {
         console.log('Connected to MongoDB Success');
 
-        var user = await __WEBPACK_IMPORTED_MODULE_3__database_models_user__["a" /* default */].findOne({ username: __WEBPACK_IMPORTED_MODULE_1__config__["default"].user.username });
+        var user = await __WEBPACK_IMPORTED_MODULE_3__database_models_user__["a" /* default */].findOne({ username: __WEBPACK_IMPORTED_MODULE_2__config_password__["a" /* default */].user.username });
 
         if (!user) {
             new __WEBPACK_IMPORTED_MODULE_3__database_models_user__["a" /* default */](__WEBPACK_IMPORTED_MODULE_2__config_password__["a" /* default */].user).save();

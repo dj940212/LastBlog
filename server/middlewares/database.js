@@ -19,7 +19,7 @@ export default () => {
     mongoose.connection.on('open', async ()=> {
         console.log('Connected to MongoDB Success')
 
-        let user = await User.findOne({username: config.user.username})
+        let user = await User.findOne({username: password.user.username})
 
         if (!user) {
             new User(password.user).save()

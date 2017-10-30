@@ -2,7 +2,7 @@
   // Applications part
   "apps" : [{
     "name"      : "last-blog",
-    "script"    : "npm run dev",
+    "script"    : "npm run start",
     "env": {
       "COMMON_VARIABLE": "true"
     },

@@ -8,8 +8,9 @@ const state = {
     token: '',
     curRoute: '/',
     labels: [],
-    curEdit: -1 //当前显示的label编辑器index
-
+    curEdit: -1, //当前显示的label编辑器index
+    popularArts: [],
+    activitys: []
 }
 
 export default state

@@ -33,7 +33,7 @@
         // },
         beforeCreate () {
             this.getLabels()
-        }
+        },
         data() {
             return {
                 editShow: false,

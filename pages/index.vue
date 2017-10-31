@@ -3,7 +3,7 @@
         <div class="popular">
             <p class="name">Popular articles</p>
             <div class="article-box">
-                <li class="article" v-for="(item, index) in popularArticle">
+                <li class="article" v-for="(item, index) in popularArts">
                     <h5 class="title" @click="toReadArticle(index)">{{item.title}}</h5>
                     <div class="description">{{item.description}}</div>
                     <div class="footer">
@@ -25,7 +25,7 @@
 </template>
 <script>
 import axios from 'axios'
-import {mapGetters, mapMutations} from 'vuex'
+import {mapGetters, mapMutations, mapState} from 'vuex'
 import activityMap from '../components/activityMap'
 import labelDot from '../components/labelDot'
 import { fromNow } from '../static/js/utils'
@@ -36,7 +36,7 @@ export default {
     //     this.getList()
     // },
     beforeCreate() {
-        this.getList()
+        this.$store.dispatch('getPopularArts')
     },
     data() {
         return {
@@ -47,7 +47,8 @@ export default {
         ...mapGetters([
             'articleList',
             'mode',
-            'currentIndex'
+            'currentIndex',
+            'popularArts'
         ])
     },
     methods: {

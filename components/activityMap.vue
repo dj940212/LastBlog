@@ -32,16 +32,24 @@
 </template>
 <script>
 import axios from 'axios'
+import {mapMutations, mapGetters} from 'vuex'
 import {formatTime, monthStr} from '../static/js/utils'
 import config from '../config'
 export default {
 	name: 'activityMap',
+	beforeCreate() {
+		this.$store.dispatch('getActivitys')
+	},
 	mounted() {
-		this.getActivity()
-		console.log(this.calMonth(1))
+		// this.getActivity()
+		// console.log(this.calMonth(1))
+		this.colorful(this.activitys)
+		this.activitys.forEach((item, index)=>{
+			this.activityNum += parseInt(item.logLen)
+		})
 	},
 	created() {
-		this.calDayNum()
+		// this.calDayNum()
 		
 	},
 	data() {
@@ -110,6 +118,9 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters([
+			'activitys'
+		])
 	}
 }
 </script>

@@ -28,10 +28,13 @@ import { fromNow } from '../../static/js/utils'
 import {mapGetters, mapMutations} from 'vuex'
 import config from '../../config'
 export default {
-    mounted(){
-        this.getList()
-        // console.log(this.allArticleCount)
+    // mounted(){
+    //     this.getList()
+    //     // console.log(this.allArticleCount)
         
+    // },
+    beforeCreate() {
+        this.getList()
     },
     data() {
         return {

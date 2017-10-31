@@ -8,3 +8,5 @@ export const curRoute = state => state.curRoute
 export const labels = state => state.labels
 export const curEdit = state => state.curEdit
 export const allAricles = state => state.allAricles
+export const popularArts = state => state.popularArts
+export const activitys = state => state.activitys

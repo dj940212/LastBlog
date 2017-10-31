@@ -32,7 +32,10 @@ import { fromNow } from '../static/js/utils'
 import {formatTimeAll} from '../static/js/utils'
 import config from '../config'
 export default {
-    mounted() {
+    // mounted() {
+    //     this.getList()
+    // },
+    beforeCreate() {
         this.getList()
     },
     data() {

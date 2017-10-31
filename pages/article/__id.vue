@@ -76,6 +76,13 @@ export default {
         this.pen.destroy();
     },
     beforeUpdate() {
+        require('../../static/js/pen.js')
+        require('../../static/js/markdown.js')
+        this.setArticleMode("read")
+        this.getArticle(this.$route.query._id)
+        this.$refs.pen.innerHTML = this.article.content
+        this.init()
+        this.pen.destroy();
     },
     computed: {
         ...mapGetters([
